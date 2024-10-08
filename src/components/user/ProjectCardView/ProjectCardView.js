@@ -37,7 +37,7 @@ const ProjectCardView = ({infomation}) => {
           <h4>{infomation.salary}</h4>
         </div>
         <div className="left">
-            <span>4 Days Left</span>
+            <span>{infomation.lastest}</span>
         </div>
         <button className="view-profile">View project</button>
       </div>

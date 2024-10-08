@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import BreadCrumb from "../../../components/user/BreadCrumb/BreadCrumb";
@@ -7,26 +8,19 @@ import ProjectCardView from "../../../components/user/ProjectCardView/ProjectCar
 import "./Project.css";
 
 const Project = () => {
-  const [projects, setProjects] = useState([]);
+  const [projects, setProjects] = useState([]); // All projects
+  const [filteredProjects, setFilteredProjects] = useState([]); // Filtered projects
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const options = [
-    { value: "option0", label: "All" },
-    { value: "option1", label: "Popular" },
-    { value: "option2", label: "Relevance" },
-    { value: "option3", label: "Rating" },
-    { value: "option4", label: "Latest" },
-    { value: "option5", label: "Free" },
-  ];
-
-  // Fetching data from API
+  // Fetch data from API
   useEffect(() => {
     const fetchProjects = async () => {
       try {
         const response = await axios.get("http://localhost:5052/api/Post/getAllPosts"); // Replace with your actual API endpoint
         if (response.data.success) {
           setProjects(response.data.data);
+          setFilteredProjects(response.data.data); // Initially, all projects are displayed
         } else {
           setError("Failed to load projects.");
         }
@@ -39,6 +33,43 @@ const Project = () => {
 
     fetchProjects();
   }, []);
+
+  // Handle filter change
+  const handleFilterChange = (selectedFilters) => {
+    let newFilteredProjects = projects;
+
+    // Filter by locations
+    if (selectedFilters.locations.length > 0) {
+      newFilteredProjects = newFilteredProjects.filter((project) =>
+        selectedFilters.locations.includes(project.location) // Adjust based on your API response
+      );
+    }
+
+    // Filter by skills
+    if (selectedFilters.skills.length > 0) {
+      newFilteredProjects = newFilteredProjects.filter((project) =>
+        selectedFilters.skills.some((skill) => project.skills.includes(skill)) // Adjust based on your API response
+      );
+    }
+
+    // Filter by categories
+    if (selectedFilters.categories.length > 0) {
+      newFilteredProjects = newFilteredProjects.filter((project) =>
+        selectedFilters.categories.includes(project.title) // Adjust based on your API response
+      );
+    }
+
+    // If no filters are selected, show all projects
+    if (
+      selectedFilters.locations.length === 0 &&
+      selectedFilters.skills.length === 0 &&
+      selectedFilters.categories.length === 0
+    ) {
+      newFilteredProjects = projects;
+    }
+
+    setFilteredProjects(newFilteredProjects);
+  };
 
   if (loading) {
     return <p>Loading...</p>;
@@ -61,28 +92,27 @@ const Project = () => {
           <div className="main-flex">
             {/* Filter sidebar */}
             <div className="filter-side">
-              <FilterSide />
+              <FilterSide onFilterChange={handleFilterChange} />
             </div>
             <div className="dev-list">
               {/* Filter-top */}
               <div className="dev-list-filter">
-                <span>Found {projects.length} Results</span>
-                <CustomSelect options={options} placeholder="Sort By" />
+                <span>Found {filteredProjects.length} Results</span>
               </div>
 
               {/* List-render */}
               <div className="dev-list-inner">
-                {projects.map((project, index) => (
+                {filteredProjects.map((project, index) => (
                   <div className="dev-card" key={project.postId}>
                     <ProjectCardView
                       infomation={{
                         name: project.title,
                         position: project.status === "open" ? "Open" : "Closed",
                         vote: 5, // Dummy data as no vote in API
+                        lastest: project.createdAt,
                         tags: project.skills.split(", "), // Convert skills string to array
                         salary: `$${project.budgetOrSalary}`,
-                        // Using randomuser.me API for human avatars, alternating between male and female
-                        avatar: `https://randomuser.me/api/portraits/${index % 2 === 0 ? 'men' : 'women'}/${(index % 100)}.jpg`, 
+                        avatar: `https://randomuser.me/api/portraits/${index % 2 === 0 ? "men" : "women"}/${index}.jpg`, // Random avatar
                       }}
                     />
                   </div>
