@@ -1,0 +1,361 @@
+.Profile {
+    width: 100%;
+}
+
+
+.Profile .section-bread-crumb {
+    background-color: #FFF5F3;
+}
+
+
+.Profile .section-user-detail {
+    padding: 80px 0 30px;
+}
+
+.Profile .section-user-detail .main-flex {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 30px;
+}
+
+.Profile .section-user-detail .filter-side {
+    flex-basis: 32%;
+    flex-shrink: 1;
+    min-width: 32%;
+    position: relative;
+
+}
+
+.Profile .section-user-detail .filter-side .filter-sticky {
+    height: 100%;
+    width: 100%;
+    height: auto;
+    position: sticky;
+    top: 12%;
+}
+
+
+.Profile .section-user-detail .main-flex .user-content {
+    flex-grow: 1;
+    max-width: 75%;
+    flex-basis: 75%;
+
+}
+
+.Profile .section-user-detail .main-flex .user-content .user-info {
+    display: flex;
+    gap: 18px;
+    margin-bottom: 15px;
+}
+
+.Profile .section-user-detail .main-flex .user-content .user-info .avatar {
+    width: 80px;
+    height: 80px;
+    border: 1px solid #CED4E6;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.Profile .section-user-detail .main-flex .user-content .user-info .avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+/* User Infomation  ------------------------*/ 
+
+.Profile .section-user-detail .main-flex .user-content .user-info .info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.Profile .section-user-detail .main-flex .user-content .user-info .info h4 {
+    margin: 0;
+    color: #2B2B2B;
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.Profile .section-user-detail .main-flex .user-content .user-info .info p {
+    margin-bottom: 0;
+    color: #6B7385;
+}
+
+/* User Review  ------------------------*/ 
+
+.Profile .section-user-detail .main-flex .user-content .user-reviews ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 0;
+}
+
+.Profile .section-user-detail .main-flex .user-content .user-reviews ul li {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    color: #6B7385;
+}
+
+.Profile .section-user-detail .main-flex .user-content .user-reviews ul li i {
+    font-size: 14px;
+}
+
+.Profile .section-user-detail .main-flex .user-content .user-reviews ul li.line {
+    height: 16px;
+    width: 1px;
+    transform: translateY(2px);
+    background-color: #CED4E6;
+}
+
+
+/* Proposal  ------------------------*/ 
+
+.Profile .section-user-detail .main-flex .user-content .user-proposal {
+    padding: 30px 0;
+    border-bottom: 1px solid #CED4E6;
+} 
+
+.Profile .section-user-detail .main-flex .user-content .user-proposal ul {
+    display: flex;
+    list-style: none;
+    align-items: center;
+    flex-wrap: wrap;
+    row-gap: 24px;
+    margin-bottom: 0;
+    padding: 0;
+}
+
+.Profile .section-user-detail .main-flex .user-content .user-proposal ul li {
+    flex-basis: 33.3333%;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.Profile .section-user-detail .main-flex .user-content .user-proposal ul li .proposal-detail-img {
+    height: 52px;
+    width: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #FFF6F1;
+    border-radius: 50%;
+}
+
+.Profile .section-user-detail .main-flex .user-content .user-proposal ul li .proposal-detail span{
+    color: #6B7385;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.Profile .section-user-detail .main-flex .user-content .user-proposal ul li .proposal-detail p{
+    font-weight: 600;
+    font-size: 18px;
+}
+
+/* Description  ------------------------*/ 
+
+.Profile .section-user-detail .main-flex .user-content  .user-description {
+    padding: 30px 0;
+    border-bottom: 1px solid #CED4E6;
+}
+
+.Profile .section-user-detail .main-flex .user-content  .user-description h4{
+    font-size: 22px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.Profile .section-user-detail .main-flex .user-content  .user-description p {
+    color: #6B7385;
+    margin-bottom: 10px;
+    line-height: 26px;
+}
+
+/* Experience  ------------------------*/ 
+
+.Profile .section-user-detail .main-flex .user-content  .user-experience {
+    padding: 30px 0;
+    border-bottom: 1px solid #CED4E6;
+}
+
+.Profile .section-user-detail .main-flex .user-content  .user-experience h4{
+    font-size: 22px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.Profile .section-user-detail .main-flex .user-content  .user-experience .experience-list .e-item {
+    margin-bottom: 15px;
+}
+
+/* Education ------------------------*/ 
+
+.Profile .section-user-detail .main-flex .user-content  .user-education {
+    padding: 30px 0;
+    border-bottom: 1px solid #CED4E6;
+}
+
+
+.Profile .section-user-detail .main-flex .user-content  .user-education h4{
+    font-size: 22px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.Profile .section-user-detail .main-flex .user-content  .user-education .education-list .e-item {
+    margin-bottom: 15px;
+}
+
+
+/* Orther review ------------------------*/ 
+
+.Profile .section-user-detail .main-flex .user-content  .orther-reviews {
+    padding: 30px 0;
+}
+
+.Profile .section-user-detail .main-flex .user-content  .orther-reviews h4 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+
+/* ECard Local Component */
+.Profile .ECard {
+    display: flex;
+    gap: 15px;
+}
+
+.Profile .ECard .e-image{
+    width: 54px;
+    flex-basis: 54px;
+}
+
+.Profile .ECard h5{
+    font-size: 18px;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.Profile .ECard h5 span{
+    color: #6B7385;
+    font-size: 14px;
+    font-weight: 400;
+    margin-left: 10px;
+    display: inline-block;
+}
+
+.Profile .ECard .sub-title {
+    color: #6B7385;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.Profile .ECard p {
+    margin: 0;
+    color: #6B7385;
+    line-height: 26px;
+}
+
+
+/* RCard Local Component */
+
+.Profile .RCard {
+    border-radius: 10px;
+    border: 1px solid #CED4E6;
+    padding: 20px;
+    background: #fff;
+    display: flex;
+    gap: 22px;
+    margin-bottom: 14px;
+}
+
+.Profile .RCard ul {
+    list-style: none;
+    padding: 0;
+}
+
+.Profile .RCard .info {
+    flex-grow: 1;
+}
+
+.Profile .RCard .info .title {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.Profile .RCard .info .title .title-top h5 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1B1B1B;
+}
+
+.Profile .RCard .info .title .title-top .proposals-user-review span {
+    color: #808080;
+    display: flex;
+    gap: 4px;
+}
+
+.Profile .RCard .info .title .title-top ul {
+    display: flex;
+    align-items: center;
+    display: flex;
+    gap: 14px;
+}
+
+.Profile .RCard .info .title .title-top ul li.line {
+    height: 20px;
+    width: 0.5px;
+    background-color: #8080809b;
+    transform: translateY(1px);
+}
+
+.Profile .RCard .info .title .title-top  span i {
+    color: #FF9C07!important;
+}
+
+.Profile .RCard .info .title .pricing {
+    height: fit-content;
+}
+
+.Profile .RCard .info .title .pricing h4 {
+    font-size: 22px;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.Profile .RCard .info .title .pricing span {
+    color: #6B7385;
+}
+
+.Profile .RCard .info .desc p {
+    line-height: 24px;
+    color: #6B7385;
+}
+
+.Profile .RCard .avatar {
+    width: 80px;
+    height: 80px;
+    flex-basis: 80px;
+    max-width: 80px;
+    min-width: 80px;
+    background-color: red;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.Profile .RCard .avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

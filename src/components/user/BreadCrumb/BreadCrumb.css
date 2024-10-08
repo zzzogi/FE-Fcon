@@ -1,0 +1,42 @@
+.BreadCrumb {
+    background: url("../../../assets/images/bg/breadcrumb-bg.png");
+    background-size: cover;
+    height: calc(77px + 60px * 2);
+    display: flex;
+    align-items: center;
+    justify-content: center;  
+    flex-direction: column;
+}
+
+.BreadCrumb h2 {
+    color: #1B1B1B;
+    font-size: 40px;
+    font-weight: 700;
+    text-transform: capitalize;
+}
+
+
+.BreadCrumb .current-route {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.BreadCrumb .current-route i {
+    color: #6B7385;
+    opacity: 0.6;
+}
+
+.BreadCrumb .current-route span{
+    font-size: 14px;
+    color: #6B7385;
+}
+
+.BreadCrumb .current-route span:hover {
+    color: #E65425;
+    cursor: pointer;
+}
+
+.BreadCrumb .current-route span.active {
+    color: black;
+}

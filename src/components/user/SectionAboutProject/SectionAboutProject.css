@@ -1,0 +1,66 @@
+.SectionAboutProject {
+    height: fit-content;
+}
+
+.SectionAboutProject .section-title {
+    margin-bottom: 50px;
+}
+
+.SectionAboutProject .section-content {
+
+}
+
+
+.SectionAboutProject .section-content .project-list {
+    display: flex;
+    gap: 20px;
+}
+
+.SectionAboutProject .section-content .project-item {
+    flex-basis: 25%;
+    height: 240px;
+    background-color: rgb(255, 255, 255);
+    margin-bottom: 30px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0px 4px 48px rgba(160, 160, 160, 0.1);
+    padding: 24px;
+}
+
+
+.SectionAboutProject .section-content .project-item .feature-icon {
+    background-color: red;
+    width: 60px;
+    height: 60px;
+    background-color: #FFF6F1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.SectionAboutProject .section-content .project-item .feature-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.SectionAboutProject .section-content .project-item .feature-content .counter-up {
+    font-weight: 600;
+    font-size: 22px;
+    color: #1B1B1B;
+    margin-bottom: 8px;
+}
+
+.SectionAboutProject .section-content .project-item .feature-content p {
+    font-size: 14px;
+    color: #6B7385;
+    margin: 0;
+    text-align: center;
+}

@@ -1,0 +1,202 @@
+.Login {
+    min-height: 100vh;
+    /* background-image: url("../../../assets/images/login-bg.png");
+    background-size: contain;
+    background-repeat: no-repeat; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding-top: 35px;
+}
+
+
+.Login .login-content{
+    min-height: 133px;
+    width: 480px;
+    border-radius: 10px;
+    padding: 30px;
+    background-color: white;
+    box-shadow: 0px 8px 16px 0px rgba(142, 141, 208, 0.12);
+    border: 1px solid #ddd;
+}
+
+.Login .login-header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.Login .login-header p {
+    font-weight: 600;
+    font-size: 18px;
+}
+
+
+
+.Login .login-header .logo {
+    width: 36%;
+    margin-bottom: 20px;
+}
+
+.Login .login-header .logo img {
+    width: 100%;
+    object-fit: contain;
+}
+
+
+.Login .login-form .label-star {
+
+}
+
+.Login .login-form .focus-label {
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #131135;
+    font-size: 14px;
+}
+
+.Login .login-form .login-button {
+    margin-bottom: 10px;
+}
+
+
+.Login .login-form .login-button button {
+    border: none;
+    outline: none;
+    width: 100%;
+    padding: 10px;
+    border: 0.8px solid white;
+    color: white;
+    background-color: #E65425;
+    border-radius: 6px;
+    font-size: 18px;
+    text-transform: capitalize;
+    font-weight: 500;
+}
+
+.Login .login-form .login-button button:hover {
+    border: 0.8px solid #E65425!important;
+    color: #E65425 !important;
+    background-color: white !important;
+}
+
+
+.Login .login-form .input-block {
+    margin-bottom: 20px;
+}
+
+.Login .login-form .actions {
+
+}
+
+.Login .login-form .actions .action-line {
+    position: relative;
+    height: fit-content;
+
+    
+}
+
+.Login .login-form .actions .action-line::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 0.5px;
+    background-color: #ddd;
+    top: calc(50% - 0.25px);
+}
+
+.Login .login-form .actions .action-line span {
+    background-color: white;
+    width: 65px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+    font-size: 18px;
+    opacity: 0.8;
+}
+
+.Login .login-form .actions .action-socials {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.Login .login-form .actions .action-socials .social-btn {
+    flex-grow: 1;
+    flex-basis: 33.3333%;
+    flex-shrink: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 10px;
+    gap: 10px;
+    cursor: pointer;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.Login .login-form .actions .action-socials .social-btn .social-icon {
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.Login .login-form .actions .action-socials .social-btn .social-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.Login .login-form .actions .action-options {
+    display: flex;
+    justify-content: space-between;
+}
+
+.Login .login-form .actions .action-options .signup-link {
+    color: #E65425;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.Login .login-form .actions .action-options .forgot-password span {
+    cursor: pointer;
+    font-weight: 600;
+    opacity: 0.8;
+}
+.Login .login-form .actions .action-options .forgot-password span:hover {
+    opacity: 1;
+}
+
+.Login .login-form .form-input .input-block .password-icon {
+    position: absolute;
+    top: calc(50% - 15px);
+    width: 30px;
+    height: 30px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+
+.Login .login-form .form-input .input-block .password-icon:hover {
+    opacity: 1;
+}
+
+.Login .login-form .form-input .input-block .password-icon i {
+    font-size: 20px;
+}
+
+
+
+

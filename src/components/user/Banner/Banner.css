@@ -1,0 +1,165 @@
+:root {
+    /* light theme */
+    --dropdown-background: #fff;
+    --dropdown-text-color: #000;
+    --dropdown-hover-color: #eee;
+    --dropdown-border-color: #caced1;
+    --dropdown-border-radius: 0.25em;
+    --dropdown-icon-color: #000;
+    --background-color: #eee;
+    --text-color: #000;
+}
+
+
+.Banner {
+    width: 100%;
+    height: 100%;
+
+}
+
+.Banner .banner-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.Banner .banner-wrapper .banner-content {
+    flex-basis: 58.33333%;
+    flex-shrink: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.Banner .banner-wrapper .banner-content .rating {
+    display: flex;
+    background-color: white;
+    width: fit-content;
+    box-shadow: 0px 4px 8px 0px #8E8DD029;
+    display: inline-flex;
+    padding: 20px;
+    border-radius: 50px;
+    margin-bottom: 20px;
+    gap: 16px;
+    align-items: center;
+}
+
+.Banner .banner-wrapper .banner-content .rating span {
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+.Banner .banner-wrapper .banner-content .rating .star {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.Banner .banner-wrapper .banner-content .rating .star i {
+    font-size: 14px;
+    color: #FF9C07;
+}
+
+.Banner .banner-wrapper .banner-content .typho-hero {
+    margin-bottom: 20px;
+}
+
+.Banner .banner-wrapper .banner-content .typho-hero h2 {
+    font-weight: bold;
+    font-size: 48px;
+    color: #1B1B1B;
+    margin-bottom: 20px;
+    margin-bottom: 0;
+}
+
+.Banner .banner-wrapper .banner-content .typho-hero h2.orange-text {
+    color: #E65425;
+}
+
+.Banner .banner-wrapper .banner-content .short-desc {
+    margin-bottom: 20px;
+}
+
+.Banner .banner-wrapper .banner-content .short-desc span {
+    font-size: 18px;
+    color: #6B7385;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
+.Banner .banner-wrapper .banner-content .search-bar {
+    background-color: white;
+    display: flex;
+    height: 65px;
+    align-items: center;
+    padding: 2px 25px;
+    padding-left: 0px;
+    border-radius: 4px;
+    border: 1px solid #CED4E6;
+    position: relative;
+}
+
+.Banner .banner-wrapper .banner-content .search-bar .select-drop {
+    width: 20%;
+    height: 40px;
+}
+
+.Banner .banner-wrapper .banner-content .search-bar .select-drop select {
+
+    height: 100%;
+    outline: none;
+    border: none;
+}
+
+.Banner .banner-wrapper .banner-content .search-bar .select-drop select {
+    height: 100%;
+    outline: none;
+    border: none;
+    width: 100%;
+}
+
+
+.Banner .banner-wrapper .banner-content .search-bar .input-keywords {
+    height: 40px;
+    border-left: 1px solid #ddd;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.Banner .banner-wrapper .banner-content .search-bar .input-keywords  input {
+    height: 60%;
+    border: none;
+    outline: none;
+    padding: 0px 20px;
+}
+
+.Banner .banner-wrapper .banner-content .search-bar  .search-btn {
+    background: #E65425;
+    border-radius: 5px !important;
+    font-weight: bold;
+    border: 1px solid #E65425;
+    height: 40px;
+    margin: 10px;
+    font-size: 16px;
+    line-height: 18px;
+    padding: 5px;
+    text-transform: capitalize;
+    color: #fff;
+    min-width: 96px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+}
+
+.Banner .banner-wrapper .banner-content .search-bar  .search-btn:hover {
+    filter: brightness(90%);
+}
+
+.Banner .banner-wrapper .banner-vector {
+    padding: 10px;
+}

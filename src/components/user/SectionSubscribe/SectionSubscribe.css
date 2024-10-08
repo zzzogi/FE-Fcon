@@ -1,0 +1,48 @@
+.SectionSubscribe .section-title {
+    margin-bottom: 50px;
+}
+
+.SectionSubscribe .section-title h2 {
+    color: white!important;
+}
+
+.SectionSubscribe .section-title p {
+    color: white!important;
+ 
+}
+
+.SectionSubscribe .section-content {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.SectionSubscribe .section-content .subscribe-mail {
+    width: 60%;
+    position: relative;
+    z-index: 100;
+}
+
+.SectionSubscribe .section-content .subscribe-mail input {
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    height: 60px;
+    padding: 10px 15px;
+    outline: none;
+}
+
+.SectionSubscribe .section-content .subscribe-mail button {
+    position: absolute;
+    right: 20px;
+    background: #E65425;
+    padding: 8px 17px;
+    top: 10px;
+    color: #fff;
+    border: 1px solid #E65425;
+    border-radius: 5px;
+}
+
+.SectionSubscribe .section-content .subscribe-mail button:hover {
+    filter: brightness(90%);
+}

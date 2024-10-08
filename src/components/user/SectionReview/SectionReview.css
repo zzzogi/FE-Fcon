@@ -1,0 +1,98 @@
+.SectionReview {
+    display: flex;
+    gap: 80px;
+}
+
+.SectionReview .section-images {
+    flex-basis: 45%;
+    min-width: 45%;
+}
+
+.SectionReview .work-set-image {
+    display: flex;
+    gap: 10px;
+}
+
+.SectionReview .work-set-image .work-set img {
+    height: 100%;
+    object-fit: cover;
+}
+
+.SectionReview .work-set-image .mutil-img{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    flex-grow: 1;
+    gap: 20px;
+}
+
+.SectionReview .work-set-image .mutil-img img {
+    background-color: rebeccapurple;
+    flex-grow: 1;
+    margin: 0!important;
+    border-radius: 6px;
+}
+
+.SectionReview .section-content {
+
+}
+
+.SectionReview .section-content h2{
+    color: #2E2E2E;
+    font-size: 40px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+.SectionReview .section-content p{
+    color: #515151;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+.SectionReview .section-content .demand-list{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.SectionReview .section-content .demand-list .demand-item {
+    width: 100%;
+    display: flex;
+}
+
+.SectionReview .section-content .demand-list .demand-content p{
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 0;
+    color: #6B7385;
+}
+
+.SectionReview .section-content .demand-list .demand-content h6{
+    color: #000000;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+
+}
+
+.SectionReview .section-content .demand-list .demand-image {
+    margin-right: 20px;
+    flex-shrink: 0;
+    width: 45px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    justify-content: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+}
+
+
+
+
+
+
+
+

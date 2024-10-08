@@ -1,0 +1,29 @@
+.FilterSide {
+    width: 100%;
+    height: auto;
+    position: sticky;
+    top: -45%;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    padding-bottom: 40px;
+}
+
+.FilterSide .filter-container {
+
+}
+
+.FilterSide .filter-container .filter-title {
+    background: #FFF8F5;
+    align-items: center;
+    -webkit-align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 30px;
+}
+
+.FilterSide .filter-container .filter-title h4{
+    font-weight: 600;
+    font-size: 22px;
+}

@@ -1,0 +1,37 @@
+.SectionJob {
+    position: relative;
+   
+}
+
+.SectionJob .section-title .CustomTitle h2 {
+    color: white!important;
+    font-size: 30px;
+}
+.SectionJob .section-title .CustomTitle p {
+    color: white!important;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 0;
+}
+
+.SectionJob .section-image {
+    position: absolute;
+    height: 100%;
+    width: 40%;
+    position: absolute;
+    bottom: -30px;
+    right: 0;
+}
+
+.SectionJob .section-content button{
+    margin: 30px 0 40px;
+    background: #FFF6F1;
+    color: #EE6E33;
+    border: 1px solid #EE6E33;
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 16px;
+    text-transform: capitalize;
+}
+

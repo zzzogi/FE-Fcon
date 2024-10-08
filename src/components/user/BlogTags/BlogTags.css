@@ -1,0 +1,59 @@
+.BlogTags {
+    background-color: blue;
+    width: 100%;
+    background: #fff;
+    margin-bottom: 30px;
+    border: 1px solid #e8e8e8;
+    padding: 20px;
+}
+
+
+.BlogTags .widget-main .title h4 {
+    font-weight: bold;
+    font-size: 20px;
+    position: relative;
+    color: #161c2d;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+
+.BlogTags .widget-main .content .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.BlogTags .widget-main .content .tag-list .tag-item {
+    background-color: #F4F7FF;
+    padding: 3px 15px;
+    text-transform: capitalize;
+    display: inline-block;
+    background-color: #F4F7FF;
+    border-radius: 5px;
+    font-size: 15px;
+    color: #6e727d;
+    margin: 0 10px 10px 0;
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.BlogTags .widget-main .content .tag-list .more {
+    padding: 3px 15px;
+    color: #E65425;
+    cursor: pointer;
+    opacity: 0.6;
+    user-select: none;
+    text-transform: capitalize;
+}
+
+.BlogTags .widget-main .content .tag-list .more:hover {
+    opacity: 1;
+}
+
+.BlogTags .widget-main .content .tag-list .tag-item:hover {
+    background-color: #E65425;
+    color: white;
+}
+

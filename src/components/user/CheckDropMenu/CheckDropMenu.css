@@ -1,0 +1,90 @@
+.CheckDropMenu {
+    padding: 0px 20px;
+}
+
+.CheckDropMenu .title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    height: 48px;
+}
+
+.CheckDropMenu .title p {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+
+}
+
+.CheckDropMenu .drop-menu {
+
+}
+
+.CheckDropMenu .drop-menu .layer-1 {
+    overflow: hidden;
+    transition: 0.24s;
+}
+
+.CheckDropMenu .drop-menu .layer-2 {
+    overflow: hidden;
+    transition: 0.24s;
+    position: relative;
+}
+
+.CheckDropMenu .drop-menu ul {
+    list-style: none;
+    padding: 0;
+    transition: 0.21s;
+    overflow: hidden;
+    position: relative;
+    margin: 0;
+
+}
+
+
+
+.CheckDropMenu .drop-menu ul li {
+    height: 35px;
+    display: flex;
+    align-items: center;
+    line-height: normal;
+    color: #6B7385;
+    font-weight: 400;
+    text-transform: capitalize;
+}
+
+.CheckDropMenu .drop-menu ul li input {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+
+.drop-closed {
+    max-height: 0px;
+}
+
+.drop-actived {
+    max-height: calc(35px * 5);
+}
+
+
+.toggle-detail {
+    width: 100%;
+    height: 35px;
+    background-color: rgb(255, 255, 255);
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #E65425;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.21s;
+    bottom: 0;
+}
+
+.toggle-detail i {
+    font-size: 24px;
+}

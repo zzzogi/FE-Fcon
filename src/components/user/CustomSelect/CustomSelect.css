@@ -1,0 +1,50 @@
+/* CustomSelect.css */
+.custom-select-container {
+
+    position: relative;
+    font-family: Arial, sans-serif;
+    height: 100%;
+}
+
+.custom-select-header {
+    background-color: white;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    font-size: 14px;
+    padding: 0px 20px;
+}
+
+.custom-select-header .arrow {
+    transition: transform 0.3s;
+}
+
+.custom-select-header .arrow.open {
+    transform: rotate(180deg);
+    /* Quay mũi tên khi mở dropdown */
+}
+
+.custom-select-options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    z-index: 100;
+    overflow-y: auto;
+    /* Hiển thị thanh cuộn nếu có nhiều mục */
+}
+
+.custom-select-option {
+    padding: 10px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.custom-select-option:hover {
+    background-color: black;
+    color: white;
+}

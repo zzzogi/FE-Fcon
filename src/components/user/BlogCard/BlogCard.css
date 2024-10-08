@@ -1,0 +1,102 @@
+.BlogCard {
+    cursor: pointer;
+}
+
+.BlogCard:hover .info h3 {
+    color: #E65425;
+}
+
+.BlogCard .image {
+    height: 280px;
+    background-color: red;
+    margin-bottom: 20px;
+}
+
+.BlogCard .image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.BlogCard .author {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 0px;
+    padding: 0px 18px;
+    margin-bottom: 8px;
+}
+
+.BlogCard .author p {
+    color: #6b7385c5;
+    display: flex;
+    gap: 10px;
+}
+
+.BlogCard .author p i {
+    color: #E65425;
+}
+
+.BlogCard .author .author-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+}
+
+.BlogCard .author .author-container .avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+}
+
+.BlogCard .author .author-container .avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.BlogCard .author p {
+    margin: 0;
+}
+
+.BlogCard .info {
+    padding: 0px 18px;
+}
+
+.BlogCard .info h3 {
+    font-size: 22px;
+    margin: 5px 0;
+    color: #2e2e2e;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 12px 0px;
+}
+
+.BlogCard .info p {
+    font-size: 15px;
+    line-height: 1.7;
+    font-weight: 500;
+    margin: 0 0 15px;
+    color: #6B7385;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.BlogCard a {
+    padding: 0px 18px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    color: #E65425;
+    text-transform: capitalize;
+    font-weight: 600;
+    font-size: 14px;
+}

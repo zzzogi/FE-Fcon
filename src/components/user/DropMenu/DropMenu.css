@@ -1,0 +1,127 @@
+.DropMenu {
+    height: 100%;
+}
+
+.DropMenu .nav-list {
+    display: flex;
+    height: 100%;
+}
+
+.DropMenu .nav-list .nav-item {
+    flex-grow: 1;
+    margin-right: 24px;
+    height: 100%;
+    gap: 6px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    text-transform: capitalize;
+    transition: 0.26s ease-in-out;
+    position: relative;
+    user-select: none;
+}
+
+
+
+.DropMenu .nav-list .nav-item i {
+    display: flex;
+    align-items: center;
+    height: 12px;
+    font-weight: 900;
+    font-size: 14px;
+    transform: translateY(3px);
+    font-weight: bold;
+}
+
+.DropMenu .nav-list .nav-item:hover span{
+    color: #E65425;
+}
+
+.DropMenu .nav-list .nav-item:hover .bi-chevron-down{
+    color: #E65425;
+}
+
+
+
+.DropMenu .nav-list .nav-item:hover .nav-menu-container {
+    visibility: visible!important;
+    transform: translateY(0);
+    opacity: 1;
+}
+
+
+
+.DropMenu .nav-list .nav-item:hover .nav-menu-container .sub-nav-item {
+    opacity: 1!important;
+    position: relative;
+}
+
+.DropMenu .nav-list  .nav-menu-container .sub-nav-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    height: 43px;
+    transition: 0.18s ease-in-out;
+    font-size: 15px;
+    justify-content: space-between;
+    text-transform: capitalize;
+}
+.DropMenu .nav-list  .nav-menu-container .sub-nav-item i {
+    width: fit-content;
+    transform: translateY(2px);
+}
+
+.DropMenu .nav-list  .nav-menu-container .sub-nav-item:hover {
+    color: white;
+    background-color: #E65425;
+}
+
+
+.DropMenu .nav-list .nav-item .nav-menu-container {
+    background-color: white;
+    width: 200px;
+    position: absolute;
+
+    left: 0;
+    top: calc(100% - 1px);
+    border-radius: 6px;
+    z-index: 99999999999;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    transform: translateY(20px);
+    visibility: hidden;
+    transition: 0.22s ease-in-out;
+    opacity: 0;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+}
+
+.DropMenu .nav-list .nav-item .sub-nav-item .nav-ref-container {
+    background-color: white;
+    width: 200px;
+    position: absolute;
+    left: calc(100% - 2px);
+    top: calc(0% - 2px);
+    border-radius: 6px;
+    z-index: 999999999999;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    visibility: hidden;
+    transition: 0.22s ease-in-out;
+    opacity: 0;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+    transform: translateY(20px);
+    border-radius: 0px!important;
+}
+
+.DropMenu .nav-list .nav-item .sub-nav-item  {
+    color: black;
+    border-radius: 0px!important;
+}
+
+.DropMenu .nav-list .nav-item .sub-nav-drop:hover .nav-ref-container {
+    visibility: visible!important;
+    transform: translateY(0);
+    opacity: 1;
+}

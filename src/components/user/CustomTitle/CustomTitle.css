@@ -1,0 +1,31 @@
+.CustomTitle {
+
+}
+
+.CustomTitle p {
+    font-weight: 600;
+    font-size: 16px;
+    color: #6B7385;
+    margin-bottom: 0;
+}
+.CustomTitle h2 {
+    color: #1B1B1B;
+    font-weight: 700;
+    position: relative;
+    margin-bottom: 10px;
+    font-size: 40px;
+    text-transform: capitalize;
+}
+
+.CustomTitle .middle {
+
+}
+
+.CustomTitle.middle h2 {
+    text-align: center;
+}
+
+.CustomTitle.middle p {
+    text-align: center;
+}
+
