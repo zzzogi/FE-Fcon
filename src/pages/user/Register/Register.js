@@ -69,7 +69,7 @@ const Register = () => {
           Username: formData.username,
           Email: formData.email,
           PasswordHash: formData.password,
-          UserType: "random", // or assign as needed
+          UserType: formType, // or assign as needed
           ContactInfo: "random", // or assign as needed
           CreatedAt: new Date().toISOString(), // Assign current timestamp
           UpdatedAt: new Date().toISOString() // Assign current timestamp
