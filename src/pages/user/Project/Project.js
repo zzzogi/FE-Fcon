@@ -1,8 +1,6 @@
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import BreadCrumb from "../../../components/user/BreadCrumb/BreadCrumb";
-import CustomSelect from "../../../components/user/CustomSelect/CustomSelect";
 import FilterSide from "../../../components/user/FilterSide/FilterSide";
 import ProjectCardView from "../../../components/user/ProjectCardView/ProjectCardView";
 import "./Project.css";
@@ -34,49 +32,35 @@ const Project = () => {
     fetchProjects();
   }, []);
 
-  // Handle filter change
   const handleFilterChange = (selectedFilters) => {
-    let newFilteredProjects = projects;
+    let newFilteredProjects = [...projects];
 
     // Filter by locations
     if (selectedFilters.locations.length > 0) {
       newFilteredProjects = newFilteredProjects.filter((project) =>
-        selectedFilters.locations.includes(project.location) // Adjust based on your API response
+        selectedFilters.locations.includes(project.location)
       );
     }
 
     // Filter by skills
     if (selectedFilters.skills.length > 0) {
       newFilteredProjects = newFilteredProjects.filter((project) =>
-        selectedFilters.skills.some((skill) => project.skills.includes(skill)) // Adjust based on your API response
+        selectedFilters.skills.some((skill) => project.skills.includes(skill))
       );
     }
 
     // Filter by categories
     if (selectedFilters.categories.length > 0) {
       newFilteredProjects = newFilteredProjects.filter((project) =>
-        selectedFilters.categories.includes(project.title) // Adjust based on your API response
+        selectedFilters.categories.includes(project.title)
       );
-    }
-
-    // If no filters are selected, show all projects
-    if (
-      selectedFilters.locations.length === 0 &&
-      selectedFilters.skills.length === 0 &&
-      selectedFilters.categories.length === 0
-    ) {
-      newFilteredProjects = projects;
     }
 
     setFilteredProjects(newFilteredProjects);
   };
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-  if (error) {
-    return <p>{error}</p>;
-  }
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>{error}</p>;
 
   return (
     <div className="Project">
@@ -94,6 +78,7 @@ const Project = () => {
             <div className="filter-side">
               <FilterSide onFilterChange={handleFilterChange} />
             </div>
+
             <div className="dev-list">
               {/* Filter-top */}
               <div className="dev-list-filter">
@@ -101,25 +86,25 @@ const Project = () => {
               </div>
 
               {/* List-render */}
-              <div className="dev-list-inner">
-                {filteredProjects.map((project, index) => (
-                  <div className="dev-card" key={project.postId}>
+              <div className="project-list">
+                {filteredProjects.length > 0 ? (
+                  filteredProjects.map((project) => (
                     <ProjectCardView
+                      key={project.postId}
                       infomation={{
                         name: project.title,
-                        position: project.status === "open" ? "Open" : "Closed",
-                        vote: 5, // Dummy data as no vote in API
-                        lastest: project.createdAt,
-                        tags: project.skills.split(", "), // Convert skills string to array
+                        tags: project.skills.split(", "),
                         salary: `$${project.budgetOrSalary}`,
-                        avatar: `https://randomuser.me/api/portraits/${index % 2 === 0 ? "men" : "women"}/${index}.jpg`, // Random avatar
+                        avatar: `https://randomuser.me/api/portraits/men/${project.postId % 10}.jpg`,
                       }}
                     />
-                  </div>
-                ))}
+                  ))
+                ) : (
+                  <p>No projects found based on your filters.</p>
+                )}
               </div>
 
-              {/* Navigator */}
+              {/* Pagination can be handled here */}
               <div className="dev-list-navigator">
                 <div className="arrow arrow-left">
                   <i className="bi bi-chevron-left"></i>

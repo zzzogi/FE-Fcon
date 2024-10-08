@@ -1,90 +1,48 @@
-.CheckDropMenu {
-    padding: 0px 20px;
-}
-
-.CheckDropMenu .title {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    cursor: pointer;
-    height: 48px;
-}
-
-.CheckDropMenu .title p {
-    margin: 0;
-    font-size: 16px;
-    font-weight: 600;
-
-}
-
-.CheckDropMenu .drop-menu {
-
-}
-
-.CheckDropMenu .drop-menu .layer-1 {
-    overflow: hidden;
-    transition: 0.24s;
-}
-
-.CheckDropMenu .drop-menu .layer-2 {
-    overflow: hidden;
-    transition: 0.24s;
+.check-drop-menu {
     position: relative;
+    margin-bottom: 20px; /* Space between filters */
 }
 
-.CheckDropMenu .drop-menu ul {
-    list-style: none;
+.dropdown-title {
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 18px;
+    background-color: #FFF8F5; /* Light background for the title */
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: 1px solid #ddd; /* Border for the dropdown */
+    transition: background-color 0.3s;
+}
+
+.dropdown-title:hover {
+    background-color: #F4E0DD; /* Slightly darker on hover */
+}
+
+.dropdown-list {
+    list-style-type: none;
+    margin: 0;
     padding: 0;
-    transition: 0.21s;
-    overflow: hidden;
-    position: relative;
-    margin: 0;
-
+    border: 1px solid #ddd; /* Border for the list */
+    border-radius: 5px;
+    max-height: 200px; /* Limit the height */
+    overflow-y: auto; /* Scroll if overflow */
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+    position: absolute; /* Position it below the title */
+    width: 100%; /* Full width */
+    z-index: 1000; /* Ensure it's on top */
 }
 
-
-
-.CheckDropMenu .drop-menu ul li {
-    height: 35px;
+.dropdown-item {
+    padding: 10px 15px; /* Space around items */
     display: flex;
-    align-items: center;
-    line-height: normal;
-    color: #6B7385;
-    font-weight: 400;
-    text-transform: capitalize;
+    align-items: center; /* Center items vertically */
 }
 
-.CheckDropMenu .drop-menu ul li input {
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
+.dropdown-item:hover {
+    background-color: #f0f0f0; /* Highlight on hover */
 }
 
-
-.drop-closed {
-    max-height: 0px;
-}
-
-.drop-actived {
-    max-height: calc(35px * 5);
-}
-
-
-.toggle-detail {
-    width: 100%;
-    height: 35px;
-    background-color: rgb(255, 255, 255);
-    position: absolute;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    color: #E65425;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.21s;
-    bottom: 0;
-}
-
-.toggle-detail i {
-    font-size: 24px;
+.dropdown-item input {
+    margin-right: 10px; /* Space between checkbox and label */
 }

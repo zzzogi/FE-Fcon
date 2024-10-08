@@ -2,28 +2,44 @@
     width: 100%;
     height: auto;
     position: sticky;
-    top: -45%;
+    top: 20px; /* Adjusted for better positioning */
     background-color: white;
     border: 1px solid #ddd;
     border-radius: 10px;
     overflow: hidden;
-    padding-bottom: 40px;
+    padding: 20px; /* Added padding for better spacing */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Added shadow for depth */
 }
 
 .FilterSide .filter-container {
-
+    display: flex;
+    flex-direction: column;
 }
 
-.FilterSide .filter-container .filter-title {
-    background: #FFF8F5;
+.FilterSide .filter-title {
+    display: flex;
+    justify-content: space-between; /* Aligns the title and button */
     align-items: center;
-    -webkit-align-items: center;
+    background: #FFF8F5;
     padding: 15px 20px;
     border-bottom: 1px solid #ddd;
-    margin-bottom: 30px;
 }
 
-.FilterSide .filter-container .filter-title h4{
+.FilterSide .filter-title h4 {
     font-weight: 600;
     font-size: 22px;
 }
+
+.reset-filters {
+    background-color: transparent;
+    border: none;
+    color: #E65425;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.reset-filters:hover {
+    text-decoration: underline;
+}
+
+/* Add styles for CheckDropMenu components if necessary */

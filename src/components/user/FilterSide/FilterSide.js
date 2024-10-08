@@ -7,83 +7,98 @@ const FilterSide = ({ onFilterChange }) => {
   const [selectedSkills, setSelectedSkills] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
 
-  const option1 = [
-    { isChecked: false, label: "US" },
-    { isChecked: false, label: "UK" },
-    { isChecked: false, label: "Ho Chi Minh" },
-    { isChecked: false, label: "Vietnam" },
-    { isChecked: false, label: "DE" },
-    { isChecked: false, label: "JP" },
-    { isChecked: false, label: "CA" },
+  const locations = [
+    { label: "US" },
+    { label: "UK" },
+    { label: "Ho Chi Minh" },
+    { label: "Vietnam" },
+    { label: "DE" },
+    { label: "JP" },
+    { label: "CA" },
   ];
 
-  const option2 = [
-    { isChecked: false, label: "HTML" },
-    { isChecked: false, label: "CSS" },
-    { isChecked: false, label: "Copywriting" },
-    { isChecked: false, label: "Node.js" },
-    { isChecked: false, label: "Android Studio" },
-    { isChecked: false, label: "PostgreSQL" },
-    { isChecked: false, label: "Data Visualization" },
+  const skills = [
+    { label: "HTML" },
+    { label: "CSS" },
+    { label: "Copywriting" },
+    { label: "Node.js" },
+    { label: "Android Studio" },
+    { label: "PostgreSQL" },
+    { label: "Data Visualization" },
   ];
 
-  const option3 = [
-    { isChecked: false, label: "Developer" },
-    { isChecked: false, label: "Designer" },
-    { isChecked: false, label: "Tester" },
+  const categories = [
+    { label: "Web Developer Needed" },
+    { label: "Designer" },
+    { label: "Tester" },
+    { label: "Data Analyst" },
+    { label: "Graphic Designer" },
+    { label: "Backend Developer" },
+    { label: "UI/UX Designer" },
+    { label: "Full Stack Developer" },
+    { label: "Business Analyst" },
+    { label: "Marketing Specialist" },
   ];
 
-  const handleLocationChange = (selectedOptions) => {
-    setSelectedLocations(selectedOptions);
+  const handleLocationChange = (selected) => {
+    setSelectedLocations(selected);
     onFilterChange({
-      locations: selectedOptions,
+      locations: selected,
       skills: selectedSkills,
       categories: selectedCategories,
     });
   };
 
-  const handleSkillChange = (selectedOptions) => {
-    setSelectedSkills(selectedOptions);
+  const handleSkillChange = (selected) => {
+    setSelectedSkills(selected);
     onFilterChange({
       locations: selectedLocations,
-      skills: selectedOptions,
+      skills: selected,
       categories: selectedCategories,
     });
   };
 
-  const handleCategoryChange = (selectedOptions) => {
-    setSelectedCategories(selectedOptions);
+  const handleCategoryChange = (selected) => {
+    setSelectedCategories(selected);
     onFilterChange({
       locations: selectedLocations,
       skills: selectedSkills,
-      categories: selectedOptions,
+      categories: selected,
     });
+  };
+
+  const resetFilters = () => {
+    setSelectedLocations([]);
+    setSelectedSkills([]);
+    setSelectedCategories([]);
+    onFilterChange({ locations: [], skills: [], categories: [] });
   };
 
   return (
     <div className="FilterSide">
       <div className="filter-container">
         <div className="filter-title">
-          <h4 className="card-title">Search Filter</h4>
+          <h4>Filters</h4>
+          <button className="reset-filters" onClick={resetFilters}>Reset Filters</button>
         </div>
-        <div className="filter-content">
-          <CheckDropMenu
-            title="Location"
-            options={option1}
-            onChange={handleLocationChange}
-          />
-          <CheckDropMenu
-            title="Skills"
-            options={option2}
-            onChange={handleSkillChange}
-          />
-          <CheckDropMenu
-            title="Categories"
-            options={option3}
-            onChange={handleCategoryChange}
-          />
-          {/* You can add more CheckDropMenu for other filters */}
-        </div>
+        <CheckDropMenu
+          title="Location"
+          options={locations}
+          selectedOptions={selectedLocations}
+          onChange={handleLocationChange}
+        />
+        <CheckDropMenu
+          title="Skills"
+          options={skills}
+          selectedOptions={selectedSkills}
+          onChange={handleSkillChange}
+        />
+        <CheckDropMenu
+          title="Categories"
+          options={categories}
+          selectedOptions={selectedCategories}
+          onChange={handleCategoryChange}
+        />
       </div>
     </div>
   );

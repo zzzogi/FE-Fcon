@@ -1,65 +1,53 @@
-import React, { useState } from "react";
-import "./CheckDropMenu.css";
+import React, { useState, useEffect } from "react";
+import "./CheckDropMenu.css"; // Import the CSS file for styling
 
-const CheckDropMenu = ({ title = "", max = 4, options = [] }) => {
-  const [isDetailed, setIsDetailed] = useState(true);
-  const [isSummary, setIsSummary] = useState(false);
+const CheckDropMenu = ({ title, options, selectedOptions, onChange }) => {
+  const [isOpen, setIsOpen] = useState(false);
 
-  // Handle menu drop
-  const onDropMenu = () => {
-    setIsDetailed((isDetailed) => (isDetailed = !isDetailed));
+  const handleCheckboxChange = (label) => {
+    let updatedSelections = [...selectedOptions];
+    if (updatedSelections.includes(label)) {
+      updatedSelections = updatedSelections.filter((option) => option !== label);
+    } else {
+      updatedSelections.push(label);
+    }
+    onChange(updatedSelections); // Send selected options back to parent
   };
 
-  // Handle sub-menu drop
-  const onSubDropMenu = () => {
-    setIsSummary((isSummary) => (isSummary = !isSummary));
-  };
+  // Close the dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (!event.target.closest('.check-drop-menu')) {
+        setIsOpen(false);
+      }
+    };
+    
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
 
   return (
-    <div className="CheckDropMenu">
-      <div className="title" onClick={onDropMenu}>
-        <p>{title}</p>
-        <i className="bi bi-chevron-down"></i>
-      </div>
-      <div className="drop-menu">
-        <div
-          className="layer-1"
-          style={
-            isDetailed
-              ? {
-                  maxHeight:
-                    35 * (isSummary ? options.length + 1 : (max < options.length) ? (max + 1) : max) + "px",
-                }
-              : { maxHeight: 0 + "px" }
-          }
-        >
-          <div
-            className="layer-2"
-            style={{
-              maxHeight: isSummary
-                ? 35 * (options.length + 1) + "px"
-                : ((max < options.length) ? max : (max + 1)) * 35 + "px",
-            }}
-            data-summary={isSummary}
-          >
-            <ul className="check-list">
-              {options.map((opt) => {
-                return (
-                  <li key={opt}>
-                    <input type="checkbox" className="checkmark" />
-                    {opt.label}
-                  </li>
-                );
-              })}
-            </ul>
-            {max < options.length && (
-              <div className="toggle-detail" onClick={onSubDropMenu}>
-                <i class="bi bi-plus"></i>show more
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
+    <div className="check-drop-menu">
+      <h5 onClick={() => setIsOpen(!isOpen)} className="dropdown-title">
+        {title}
+      </h5>
+      {isOpen && (
+        <ul className="dropdown-list">
+          {options.map((option, index) => (
+            <li key={index} className="dropdown-item">
+              <input
+                type="checkbox"
+                id={`checkbox-${index}`}
+                checked={selectedOptions.includes(option.label)}
+                onChange={() => handleCheckboxChange(option.label)}
+              />
+              <label htmlFor={`checkbox-${index}`}>{option.label}</label>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
