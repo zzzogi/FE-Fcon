@@ -3,7 +3,9 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
-
+In terminal, run these syntax if you get error package:
+### npm install
+### npm install react-scripts
 In the project directory, you can run:
 
 ### `npm start`
