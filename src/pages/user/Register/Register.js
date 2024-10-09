@@ -106,10 +106,10 @@ const Register = () => {
               Freelancer
             </button>
             <button
-              onClick={() => onChangeFormType("company")}
-              className={formType === "company" ? "form-active" : ""}
+              onClick={() => onChangeFormType("employee")}
+              className={formType === "employee" ? "form-active" : ""}
             >
-              Company
+              Employee
             </button>
           </div>
         </div>

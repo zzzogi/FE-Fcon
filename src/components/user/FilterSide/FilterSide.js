@@ -8,13 +8,14 @@ const FilterSide = ({ onFilterChange }) => {
   const [selectedCategories, setSelectedCategories] = useState([]);
 
   const locations = [
-    { label: "US" },
-    { label: "UK" },
-    { label: "Ho Chi Minh" },
-    { label: "Vietnam" },
-    { label: "DE" },
-    { label: "JP" },
-    { label: "CA" },
+    { label: "Hải Phòng" },
+    { label: "Hồ Chí Minh" },
+    { label: "Thủ Đức" },
+    { label: "Hòa Lạc" },
+    { label: "Đà Nẵng" },
+    { label: "Japan" },
+    { label: "Hà Nội" },
+    
   ];
 
   const skills = [
@@ -29,8 +30,8 @@ const FilterSide = ({ onFilterChange }) => {
 
   const categories = [
     { label: "Web Developer Needed" },
-    { label: "Designer" },
-    { label: "Tester" },
+    { label: "Mobile App Developer" },
+    { label: "Content Writer" },
     { label: "Data Analyst" },
     { label: "Graphic Designer" },
     { label: "Backend Developer" },

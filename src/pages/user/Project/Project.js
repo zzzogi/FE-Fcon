@@ -17,8 +17,21 @@ const Project = () => {
       try {
         const response = await axios.get("http://localhost:5052/api/Post/getAllPosts"); // Replace with your actual API endpoint
         if (response.data.success) {
-          setProjects(response.data.data);
-          setFilteredProjects(response.data.data); // Initially, all projects are displayed
+          const filteredByType = response.data.data.filter(
+            (project) => project.postTypeId === 1
+          );
+      
+          // Adding random locations for each project for filtering
+          const locations = ["Hà Nội", "Đà Nẵng", "Hồ Chí Minh", "Hải Phòng", "Japan", "Thủ Đức", "Hòa Lạc"];
+      
+          const projectsWithLocations = filteredByType.map((project, index) => ({
+            ...project,
+            // Assign a location by cycling through the locations array
+            position: locations[index % locations.length],
+          }));
+      
+          setProjects(projectsWithLocations);
+          setFilteredProjects(projectsWithLocations); // Initially, all projects with postTypeId = 1 are displayed
         } else {
           setError("Failed to load projects.");
         }
@@ -27,8 +40,8 @@ const Project = () => {
       } finally {
         setLoading(false);
       }
+      
     };
-
     fetchProjects();
   }, []);
 
@@ -38,7 +51,7 @@ const Project = () => {
     // Filter by locations
     if (selectedFilters.locations.length > 0) {
       newFilteredProjects = newFilteredProjects.filter((project) =>
-        selectedFilters.locations.includes(project.location)
+        selectedFilters.locations.includes(project.position)
       );
     }
 
@@ -93,6 +106,7 @@ const Project = () => {
                       key={project.postId}
                       infomation={{
                         name: project.title,
+                        position:  project.position,
                         tags: project.skills.split(", "),
                         salary: `$${project.budgetOrSalary}`,
                         avatar: `https://randomuser.me/api/portraits/men/${project.postId % 10}.jpg`,
