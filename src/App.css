@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
 
 * {
   margin: 0;
@@ -13,7 +13,7 @@ html {
 }
 
 input[type="checkbox"] {
-  accent-color: #E65425;
+  accent-color: #e65425;
 }
 
 .App {
@@ -21,7 +21,6 @@ input[type="checkbox"] {
   height: 100%;
   font-family: "Lato", sans-serif;
   position: relative;
-
 }
 
 .app-layout {
@@ -33,7 +32,7 @@ input[type="checkbox"] {
 .app-header {
   position: sticky;
   width: 100%;
-  z-index: 9999;
+  z-index: 999;
   top: 0;
   background-color: white;
   box-shadow: 0px 8px 16px 0px rgba(142, 141, 208, 0.12);
@@ -44,11 +43,11 @@ input[type="checkbox"] {
 }
 
 .app-footer {
-  background-color: #FBFBFB;
+  background-color: #fbfbfb;
   width: 100%;
   min-height: 200px;
 }
 
 .container {
-  min-width: 1300px!important;
+  min-width: 1300px !important;
 }

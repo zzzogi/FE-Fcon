@@ -1,7 +1,10 @@
 import React from "react";
 import "./ProjectCardView.css";
+import { useNavigate } from "react-router-dom";
 
-const ProjectCardView = ({infomation}) => {
+const ProjectCardView = ({ infomation }) => {
+  const navigate = useNavigate();
+
   return (
     <div className="ProjectCardView">
       <div className="dev-card-container">
@@ -37,9 +40,14 @@ const ProjectCardView = ({infomation}) => {
           <h4>{infomation.salary}</h4>
         </div>
         <div className="left">
-            <span>{infomation.lastest}</span>
+          <span>{infomation.lastest}</span>
         </div>
-        <button className="view-profile">View project</button>
+        <button
+          className="view-profile"
+          onClick={() => navigate("/projects/123")}
+        >
+          View project
+        </button>
       </div>
     </div>
   );

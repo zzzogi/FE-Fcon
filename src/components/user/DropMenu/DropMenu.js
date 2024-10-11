@@ -16,11 +16,8 @@ const DropMenu = () => {
       ],
     },
     {
-      sub: "Dashboard",
-      ref: [],
-    },
-    {
       sub: "My profile",
+      href: "/company-profile",
       ref: [],
     },
     {
@@ -29,19 +26,7 @@ const DropMenu = () => {
       ref: [],
     },
     {
-      sub: "Membership",
-      ref: [],
-    },
-    {
-      sub: "Milestones",
-      ref: [],
-    },
-    {
       sub: "Payments",
-      ref: [],
-    },
-    {
-      sub: "Setting",
       ref: [],
     },
   ];
@@ -50,35 +35,19 @@ const DropMenu = () => {
   const freelancer = [
     {
       sub: "Projects",
-      ref: [],
       href: "/projects",
-    },
-    {
-      sub: "Dashboard",
       ref: [],
     },
     {
       sub: "My profile",
-      ref: [],
-    },
-    {
-      sub: "Membership",
-      ref: [],
-    },
-    {
-      sub: "Change Password",
+      href: "/developer-profile",
       ref: [],
     },
     {
       sub: "Payments",
       ref: [],
     },
-    {
-      sub: "Setting",
-      ref: [],
-    },
   ];
-
 
   // Pages data
   const pages = [
@@ -96,13 +65,14 @@ const DropMenu = () => {
       sub: "Register",
       ref: [],
       href: "/register",
-    }
+    },
   ];
 
   const navigate = useNavigate();
 
   /* NAVIGATE TO PAGE  ------------------- */
   const onNavRoute = (endpoint) => {
+    console.log(endpoint);
     navigate(endpoint);
   };
 
@@ -122,9 +92,64 @@ const DropMenu = () => {
               return (
                 <div
                   className={
-                    "sub-nav-item" + (item.ref.length > 0 ? " sub-nav-drop" : "")
+                    "sub-nav-item" +
+                    (item.ref.length > 0 ? " sub-nav-drop" : "")
                   }
                   key={item.sub}
+                  onClick={() => {
+                    if (item.ref.length === 0) {
+                      onNavRoute(item.href ? item.href : "#");
+                    }
+                    return;
+                  }}
+                >
+                  {item.sub}
+                  {item.ref.length > 0 && (
+                    <i className="bi bi-chevron-right"></i>
+                  )}
+                  {item.ref.length > 0 && (
+                    <div className="nav-ref-container">
+                      {item.ref.map((refer) => {
+                        return (
+                          <div
+                            className="sub-nav-item"
+                            key={refer.sub}
+                            onClick={() => {
+                              console.log(refer.href);
+                              onNavRoute(refer.href);
+                            }}
+                          >
+                            {refer.sub}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Freelancer */}
+        <div className="nav-item nav-dropmenu">
+          <span>For freelancer</span>
+          <i className="bi bi-chevron-down"></i>
+          <div className="nav-menu-container">
+            {freelancer.map((item) => {
+              return (
+                <div
+                  className={
+                    "sub-nav-item" +
+                    (item.ref.length > 0 ? " sub-nav-drop" : "")
+                  }
+                  key={item.sub}
+                  onClick={() => {
+                    if (item.ref.length === 0) {
+                      onNavRoute(item.href ? item.href : "#");
+                    }
+                    return;
+                  }}
                 >
                   {item.sub}
                   {item.ref.length > 0 && (
@@ -151,45 +176,6 @@ const DropMenu = () => {
           </div>
         </div>
 
-        {/* Freelancer */}
-        <div className="nav-item nav-dropmenu">
-          <span>For freelancer</span>
-          <i className="bi bi-chevron-down"></i>
-          <div className="nav-menu-container">
-            {freelancer.map((item) => {
-              return (
-                <div
-                  className={
-                    "sub-nav-item" + (item.ref.length > 0 ? " sub-nav-drop" : "")
-                  }
-                  key={item.sub}
-                  onClick={() => onNavRoute(item.href ? item.href : "")}
-                >
-                  {item.sub}
-                  {item.ref.length > 0 && (
-                    <i className="bi bi-chevron-right"></i>
-                  )}
-                  {item.ref.length > 0 && (
-                    <div className="nav-ref-container">
-                      {item.ref.map((refer) => {
-                        return (
-                          <div
-                            className="sub-nav-item"
-                            key={refer.sub}
-                            onClick={onNavRoute(refer.href)}
-                          >
-                            {refer.sub}
-                          </div>
-                        );
-                      })}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
         {/* Pages */}
         <div className="nav-item nav-dropmenu">
           <span>Pages</span>
@@ -199,10 +185,11 @@ const DropMenu = () => {
               return (
                 <div
                   className={
-                    "sub-nav-item" + (item.ref.length > 0 ? " sub-nav-drop" : "")
+                    "sub-nav-item" +
+                    (item.ref.length > 0 ? " sub-nav-drop" : "")
                   }
                   key={item.sub}
-                  onClick={() => onNavRoute(item.href ? item.href : "")}
+                  onClick={() => onNavRoute(item.href ? item.href : "#")}
                 >
                   {item.sub}
                   {item.ref.length > 0 && (
@@ -215,7 +202,7 @@ const DropMenu = () => {
                           <div
                             className="sub-nav-item"
                             key={refer.sub}
-                            onClick={onNavRoute(refer.href)}
+                            onClick={() => onNavRoute(refer.href)}
                           >
                             {refer.sub}
                           </div>
@@ -229,8 +216,19 @@ const DropMenu = () => {
           </div>
         </div>
 
+        {/* Membership */}
+        <div
+          className="nav-item nav-dropmenu"
+          onClick={() => onNavRoute("/membership")}
+        >
+          <span>Membership</span>
+        </div>
+
         {/* Blogs */}
-        <div className="nav-item nav-dropmenu" onClick={() => onNavRoute("/blogs")}>
+        <div
+          className="nav-item nav-dropmenu"
+          onClick={() => onNavRoute("/blogs")}
+        >
           <span>Blogs</span>
         </div>
 

@@ -98,8 +98,8 @@ const SectionCategory = () => {
                   Get the perfect Developed project for your budget from our
                   creative community.
                 </p>
+                <div className="brown">Browse</div>
               </div>
-              <div className="brown">Brown</div>
             </div>
           </div>
           <div className="work-card bg-2">
@@ -107,10 +107,11 @@ const SectionCategory = () => {
               <div className="text">
                 <h2>Find Your Next Great Job Opportunity!</h2>
                 <p>
-                Do you want to earn money, find unlimited clients and build your freelance career?
+                  Do you want to earn money, find unlimited clients and build
+                  your freelance career?
                 </p>
+                <div className="brown">Browse</div>
               </div>
-              <div className="brown">Brown</div>
             </div>
           </div>
         </div>
