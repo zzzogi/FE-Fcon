@@ -12,203 +12,77 @@ import TranslateTwo from "../../../../assets/images/icon/translate-2.svg";
 import TranslateOne from "../../../../assets/images/icon/translate.svg";
 import "../layout.css";
 
-const Detail = ({ userData, page = "developers" }) => {
+const Detail = ({ data }) => {
+  const info = data || {};
+  const reviews = info.reviews || [];  // Ensure reviews is always an array
+
   return (
     <div>
-      <div class="company-detail-block">
-        <div class="company-detail">
-          <div class="company-detail-image">
-            <img src={userData.image} class="img-fluid" alt="logo" />
+      <div className="company-detail-block">
+        <div className="company-detail">
+          <div className="company-detail-image">
+            <img src={info.imgUrl || ""} className="img-fluid" alt="project" />
           </div>
-          <div class="company-title">
-            {page === "employers" || page === "project-detail" ? (
-              <>
-                <p>{userData.name}</p>
-                <h4>{userData.description}</h4>
-              </>
-            ) : (
-              <>
-                <h4>{userData.name}</h4>
-                <p>{userData.description}</p>
-              </>
-            )}
+          <div className="company-title">
+            <h4>{info.title || "No Title Provided"}</h4>
+            <p>{info.description || "No Description Provided"}</p>
           </div>
         </div>
-        <div class="company-address">
+        <div className="company-address">
           <ul>
             <li>
-              <img src={MapPin} alt="icons" class="icon" />
-              {userData.info.address}
+              <img src={MapPin} alt="icons" className="icon" />
+              {"Location not provided"} {/* Placeholder since location is missing in the API */}
             </li>
             <li>
-              <img src={Calendar} alt="icons" class="icon" />
-              {userData.info.createdDate}
+              <img src={Calendar} alt="icons" className="icon" />
+              {new Date(info.createdAt).toLocaleDateString() || "Date not available"}
             </li>
-            {page === "employers" || page === "project-detail" ? (
-              <>
-                <li>
-                  <img src={Eye} alt="icons" class="icon" />
-                  {userData.info.numsOfViews + " reviews"}
-                </li>
-                <li>
-                  <img src={Pen} alt="icons" class="icon" />
-                  {userData.info.numsOfProposals + " Proposal"}
-                </li>
-              </>
-            ) : (
-              <>
-                <li>
-                  <img src={Star} alt="icons" class="icon" />
-                  {userData.info.rating + " "},
-                  {userData.info.numsOfReviews + " reviews"}
-                </li>
-              </>
-            )}
+            <li>
+              <img src={Pen} alt="icons" className="icon" />
+              {info.status || "Status not available"}
+            </li>
+            <li>
+              <img src={Eye} alt="icons" className="icon" />
+              {reviews.length + " reviews"} {/* Safely accessing length */}
+            </li>
           </ul>
         </div>
-        <div class="project-proposal-detail">
+        <div className="project-proposal-detail">
           <ul>
-            {page === "employers" || page === "project-detail" ? (
-              <>
-                <li>
-                  <div class="proposal-detail-img">
-                    <img src={ComputerLine} alt="icons" />
-                  </div>
-                  <div class="proposal-detail text-capitalize">
-                    <span style={{ display: "block" }}>Freelancer Type</span>
-                    <p style={{ marginBottom: 0 }}>
-                      {userData.info.freelancer_type}
-                    </p>
-                  </div>
-                </li>
-                <li>
-                  <div class="proposal-detail-img">
-                    <img src={TimeLine} alt="icons" />
-                  </div>
-                  <div class="proposal-detail text-capitalize">
-                    <span style={{ display: "block" }}>Project Type</span>
-                    <p style={{ marginBottom: 0 }}>
-                      {userData.info.project_type}
-                    </p>
-                  </div>
-                </li>
-                <li>
-                  <div class="proposal-detail-img">
-                    <img src={TimeLine} alt="icons" />
-                  </div>
-                  <div class="proposal-detail text-capitalize">
-                    <span style={{ display: "block" }}>Project Duration</span>
-                    <p style={{ marginBottom: 0 }}>
-                      {userData.info.project_duration}
-                    </p>
-                  </div>
-                </li>
-                <li>
-                  <div class="proposal-detail-img">
-                    <img src={UserHeartLine} alt="icons" />
-                  </div>
-                  <div class="proposal-detail text-capitalize">
-                    <span style={{ display: "block" }}>Experience</span>
-                    <p style={{ marginBottom: 0 }}>
-                      {userData.info.experience}
-                    </p>
-                  </div>
-                </li>
-                <li>
-                  <div class="proposal-detail-img">
-                    <img src={TranslateTwo} alt="icons" />
-                  </div>
-                  <div class="proposal-detail text-capitalize">
-                    <span style={{ display: "block" }}>Languages</span>
-                    <p style={{ marginBottom: 0 }}>
-                      {userData.info.languages.join(", ")}
-                    </p>
-                  </div>
-                </li>
-                <li>
-                  <div class="proposal-detail-img">
-                    <img src={TranslateOne} alt="icons" />
-                  </div>
-                  <div class="proposal-detail text-capitalize">
-                    <span style={{ display: "block" }}>Language Fluency</span>
-                    <p style={{ marginBottom: 0 }}>
-                      {userData.info.language_fluency}
-                    </p>
-                  </div>
-                </li>
-              </>
-            ) : (
-              <>
-                <li>
-                  <div class="proposal-detail-img">
-                    <img src={ComputerLine} alt="icons" />
-                  </div>
-                  <div class="proposal-detail text-capitalize">
-                    <span style={{ display: "block" }}>Recommended</span>
-                    <p style={{ marginBottom: 0 }}>
-                      {userData.info.recommended}%
-                    </p>
-                  </div>
-                </li>
-                <li>
-                  <div class="proposal-detail-img">
-                    <img src={TimeLine} alt="icons" />
-                  </div>
-                  <div class="proposal-detail text-capitalize">
-                    <span style={{ display: "block" }}>Completed Projects</span>
-                    <p style={{ marginBottom: 0 }}>
-                      {userData.info.completed_project}
-                    </p>
-                  </div>
-                </li>
-                <li>
-                  <div class="proposal-detail-img">
-                    <img src={TimeLine} alt="icons" />
-                  </div>
-                  <div class="proposal-detail text-capitalize">
-                    <span style={{ display: "block" }}>Ongoing Projects</span>
-                    <p style={{ marginBottom: 0 }}>
-                      {userData.info.ongoing_project}
-                    </p>
-                  </div>
-                </li>
-                <li>
-                  <div class="proposal-detail-img">
-                    <img src={UserHeartLine} alt="icons" />
-                  </div>
-                  <div class="proposal-detail text-capitalize">
-                    <span style={{ display: "block" }}>Feedbacks</span>
-                    <p style={{ marginBottom: 0 }}>{userData.info.feedbacks}</p>
-                  </div>
-                </li>
-                <li>
-                  <div class="proposal-detail-img">
-                    <img src={TranslateTwo} alt="icons" />
-                  </div>
-                  <div class="proposal-detail text-capitalize">
-                    <span style={{ display: "block" }}>Rehired</span>
-                    <p style={{ marginBottom: 0 }}>{userData.info.rehied}</p>
-                  </div>
-                </li>
-                <li>
-                  <div class="proposal-detail-img">
-                    <img src={TranslateOne} alt="icons" />
-                  </div>
-                  <div class="proposal-detail text-capitalize">
-                    <span style={{ display: "block" }}>Response Times</span>
-                    <p style={{ marginBottom: 0 }}>
-                      ~{convertMinsToHrsMins(userData.info.response_time)}
-                    </p>
-                  </div>
-                </li>
-              </>
-            )}
+            <li>
+              <div className="proposal-detail-img">
+                <img src={ComputerLine} alt="icons" />
+              </div>
+              <div className="proposal-detail text-capitalize">
+                <span style={{ display: "block" }}>Skills Required</span>
+                <p style={{ marginBottom: 0 }}>{info.skills || "Not specified"}</p>
+              </div>
+            </li>
+            <li>
+              <div className="proposal-detail-img">
+                <img src={TimeLine} alt="icons" />
+              </div>
+              <div className="proposal-detail text-capitalize">
+                <span style={{ display: "block" }}>Budget</span>
+                <p style={{ marginBottom: 0 }}>${info.budgetOrSalary || "Not specified"}</p>
+              </div>
+            </li>
+            <li>
+              <div className="proposal-detail-img">
+                <img src={UserHeartLine} alt="icons" />
+              </div>
+              <div className="proposal-detail text-capitalize">
+                <span style={{ display: "block" }}>Post Type</span>
+                <p style={{ marginBottom: 0 }}>{info.postType || "Not specified"}</p>
+              </div>
+            </li>
           </ul>
         </div>
       </div>
-      <div class="company-detail-block company-description">
-        <h4 class="company-detail-title">Description</h4>
-        <p>{userData.about}</p>
+      <div className="company-detail-block company-description">
+        <h4 className="company-detail-title">Description</h4>
+        <p>{info.description || "No additional description available"}</p>
       </div>
     </div>
   );

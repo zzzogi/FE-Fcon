@@ -238,11 +238,13 @@ export const ProjectDetail = () => {
     // Fetch project details by ID
     const fetchProject = async () => {
       try {
-        const response = await axios.get(`/api/getById/${id}`); // Adjust API URL if needed
-        setProjectData(response.data);
-        setLoading(false);
+        const response = await axios.get(`http://localhost:5052/api/Post/getById/${id}`);
+        console.log("Fetched project data:", response.data); // Log the project data for debugging
+        setProjectData(response.data.data); // Ensure we are setting the correct structure (response.data.data)
       } catch (err) {
+        console.error("Error fetching project:", err); // Log error for debugging
         setError("Project not found");
+      } finally {
         setLoading(false);
       }
     };
@@ -264,14 +266,29 @@ export const ProjectDetail = () => {
         <div className="container">
           <div className="row">
             <div className="col-lg-8 col-md-12">
-              <Detail userData={projectData} page="employers" />
-              <ChipList title={"Skills Required"} chips={projectData.chips} />
-              <Attachments attachments={projectData.attachments} />
-              <ChipList title={"Tags"} chips={projectData.tags} />
-              <Reviews
-                reviews={projectData.project_proposals}
-                title={"Project Proposals"}
-              />
+              {projectData ? (
+                <>
+                  {/* Pass projectData to the Detail component as 'data' */}
+                  <Detail data={projectData} page="employers" />
+                  {projectData.chips && (
+                    <ChipList title={"Skills Required"} chips={projectData.chips} />
+                  )}
+                  {projectData.attachments && (
+                    <Attachments attachments={projectData.attachments} />
+                  )}
+                  {projectData.tags && (
+                    <ChipList title={"Tags"} chips={projectData.tags} />
+                  )}
+                  {projectData.project_proposals && (
+                    <Reviews
+                      reviews={projectData.project_proposals}
+                      title={"Project Proposals"}
+                    />
+                  )}
+                </>
+              ) : (
+                <div>No project data available</div>
+              )}
             </div>
             <Sidebar />
           </div>

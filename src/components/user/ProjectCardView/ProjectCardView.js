@@ -29,13 +29,11 @@ const ProjectCardView = ({ infomation }) => {
           <i className="bi bi-star-fill grey"></i>
         </div>
         <div className="tags">
-          {infomation.tags.map((tag) => {
-            return (
-              <div className="tag" key={infomation.name + tag}>
-                {tag}
-              </div>
-            );
-          })}
+          {infomation.tags.map((tag) => (
+            <div className="tag" key={infomation.name + tag}>
+              {tag}
+            </div>
+          ))}
         </div>
         <div className="salary">
           <h4>{infomation.salary}</h4>
@@ -45,7 +43,7 @@ const ProjectCardView = ({ infomation }) => {
         </div>
         <button
           className="view-profile"
-          onClick={() => navigate(`/projects/${infomation.id}`)}
+          onClick={() => navigate(`/projects/${infomation.id}`)} // Navigates to the project details page
         >
           View project
         </button>
