@@ -105,6 +105,7 @@ const Project = () => {
                     <ProjectCardView
                       key={project.postId}
                       infomation={{
+                        id: project.postId,
                         name: project.title,
                         position:  project.position,
                         tags: project.skills.split(", "),

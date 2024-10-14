@@ -16,6 +16,7 @@ const ProjectCardView = ({ infomation }) => {
           <img src={infomation.avatar} alt="avatar" />
         </div>
         <div className="info">
+          <p>{infomation.id}</p>
           <p>{infomation.name}</p>
           <p>{infomation.position}</p>
           <p>Ho Chi Minh, Viet Nam</p>
@@ -44,7 +45,7 @@ const ProjectCardView = ({ infomation }) => {
         </div>
         <button
           className="view-profile"
-          onClick={() => navigate("/projects/123")}
+          onClick={() => navigate(`/projects/${infomation.id}`)}
         >
           View project
         </button>

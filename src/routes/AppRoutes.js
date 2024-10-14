@@ -14,6 +14,8 @@ import { Employers } from "../pages/user/MyProfile/Employers/Employers";
 import { ProjectDetail } from "../pages/user/ProjectDetail/ProjectDetail";
 import MembershipPage from "../pages/user/Membership";
 import PostProject from "../pages/user/PostProject";
+import Admin from "../pages/admin";
+import BlogReview from "../pages/user/BlogReview";
 
 const AppRoutes = () => {
   return (
@@ -50,9 +52,13 @@ const AppRoutes = () => {
 
       {/* Blog Detail Router */}
       <Route path="/blog/:slug" element={<BlogDetail />} />
+      <Route path="/my-blogs" element={<BlogReview />} />
 
       {/* Blog Detail Router */}
       {/* <Routes path="/profile/:userType/:slug" element={<Profile />} /> */}
+
+      {/* Admin */}
+      <Route path="/admin" element={<Admin />} />
     </Routes>
   );
 };

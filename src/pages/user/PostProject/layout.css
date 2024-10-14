@@ -150,13 +150,6 @@
   position: relative;
 }
 
-.success-check {
-  display: none;
-  position: absolute;
-  right: 10px;
-  top: 10px;
-}
-
 .hours-rate-img {
   border: 1px solid #ced4e6;
   margin-right: 10px;
@@ -170,6 +163,21 @@
 }
 .customize-radio input {
   display: none;
+}
+.success-check {
+  display: none;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+.active .hours-rate-img {
+  border: 1px solid #34c759;
+}
+.active .success-check {
+  display: block;
+}
+.hours-rate-img img {
+  margin-bottom: 5px;
 }
 
 .attach-file {

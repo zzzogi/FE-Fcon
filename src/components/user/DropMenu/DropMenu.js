@@ -68,6 +68,20 @@ const DropMenu = () => {
     },
   ];
 
+  // Blogs data
+  const blogs = [
+    {
+      sub: "Blog List",
+      ref: [],
+      href: "/blogs",
+    },
+    {
+      sub: "My blogs",
+      ref: [],
+      href: "/my-blogs",
+    },
+  ];
+
   const navigate = useNavigate();
 
   /* NAVIGATE TO PAGE  ------------------- */
@@ -225,14 +239,54 @@ const DropMenu = () => {
         </div>
 
         {/* Blogs */}
-        <div
-          className="nav-item nav-dropmenu"
-          onClick={() => onNavRoute("/blogs")}
-        >
+        <div className="nav-item nav-dropmenu">
           <span>Blogs</span>
+          <i className="bi bi-chevron-down"></i>
+          <div className="nav-menu-container">
+            {blogs.map((item) => {
+              return (
+                <div
+                  className={
+                    "sub-nav-item" +
+                    (item.ref.length > 0 ? " sub-nav-drop" : "")
+                  }
+                  key={item.sub}
+                  onClick={() => {
+                    if (item.ref.length === 0) {
+                      onNavRoute(item.href ? item.href : "#");
+                    }
+                    return;
+                  }}
+                >
+                  {item.sub}
+                  {item.ref.length > 0 && (
+                    <i className="bi bi-chevron-right"></i>
+                  )}
+                  {item.ref.length > 0 && (
+                    <div className="nav-ref-container">
+                      {item.ref.map((refer) => {
+                        return (
+                          <div
+                            className="sub-nav-item"
+                            key={refer.sub}
+                            onClick={() => onNavRoute(refer.href)}
+                          >
+                            {refer.sub}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
         </div>
 
-        <div className="nav-item nav-dropmenu">
+        <div
+          className="nav-item nav-dropmenu"
+          onClick={() => (window.location.href = "/admin")}
+        >
           <span>Admin console</span>
         </div>
       </div>

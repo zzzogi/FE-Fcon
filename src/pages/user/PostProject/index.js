@@ -2,16 +2,38 @@ import React from "react";
 import "./layout.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import CheckSuccess from "../../../assets/images/icon/check-success.svg";
+import Hourly from "../../../assets/images/icon/hourly.svg";
 import Fixed from "../../../assets/images/icon/fixed.svg";
+import { useForm } from "react-hook-form";
+import Documents from "./components/Documents";
+import clsx from "clsx";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const PostProject = () => {
+  const { register, handleSubmit, control, watch } = useForm();
+  const budget = watch("budget");
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
   return (
     <div class="content">
       <div class="container">
         <div class="row">
           <div class="col-md-12">
             <div class="select-project mb-4">
-              <form action="https://kofejob.dreamstechnologies.com/html/template/project-conformation.html">
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  toast("Đăng thành công, bài của bạn sẽ sớm được duyệt!", {
+                    type: "success",
+                    position: "top-center",
+                  });
+                  handleSubmit(onSubmit);
+                }}
+              >
                 <div class="title-box widget-box">
                   <div class="row">
                     <div class="col-lg-12">
@@ -20,13 +42,20 @@ const PostProject = () => {
                     <div class="col-lg-12 col-md-12">
                       <div class="mb-3">
                         <label class="focus-label">Project Title</label>
-                        <input type="text" class="form-control" />
+                        <input
+                          type="text"
+                          class="form-control"
+                          {...register("project_title")}
+                        />
                       </div>
                     </div>
                     <div class="col-lg-4 col-md-12">
                       <div class="mb-3">
                         <label class="focus-label">Project Category</label>
-                        <select class="form-control select">
+                        <select
+                          class="form-control select"
+                          {...register("project_category")}
+                        >
                           <option value="0">Select</option>
                           <option value="1">Category</option>
                           <option value="2">Project</option>
@@ -36,7 +65,10 @@ const PostProject = () => {
                     <div class="col-lg-4 col-md-12">
                       <div class="mb-3">
                         <label class="focus-label">Project Duration</label>
-                        <select class="form-control select">
+                        <select
+                          class="form-control select"
+                          {...register("project_duration")}
+                        >
                           <option>1-3 Week</option>
                           <option>1 Month</option>
                           <option>Less then a month</option>
@@ -52,6 +84,7 @@ const PostProject = () => {
                             type="date"
                             class="form-control "
                             placeholder="Choose"
+                            {...register("deadline_date")}
                           />
                         </div>
                       </div>
@@ -59,7 +92,10 @@ const PostProject = () => {
                     <div class="col-lg-6 col-md-12">
                       <div class="mb-3">
                         <label class="focus-label">Freelancer Type</label>
-                        <select class="form-control ">
+                        <select
+                          class="form-control "
+                          {...register("freelancer_type")}
+                        >
                           <option value="0">Select</option>
                           <option value="1">Full Time</option>
                           <option value="2">Part Time</option>
@@ -70,7 +106,10 @@ const PostProject = () => {
                     <div class="col-lg-6 col-md-12">
                       <div class="mb-3">
                         <label class="focus-label">Freelancer Level</label>
-                        <select class="form-control select">
+                        <select
+                          class="form-control select"
+                          {...register("freelancer_level")}
+                        >
                           <option>Basic</option>
                           <option>Intermediate</option>
                           <option>Professional</option>
@@ -80,26 +119,26 @@ const PostProject = () => {
                     <div class="col-lg-12 col-md-12">
                       <div class="mb-3">
                         <label class="focus-label">Tags</label>
-                        <input type="text" class="form-control" />
+                        <input
+                          type="text"
+                          class="form-control"
+                          {...register("tags")}
+                        />
                       </div>
-                    </div>
-                    <div class="col-lg-12 my-3">
-                      <h4>Skills</h4>
                     </div>
 
                     <div class="col-lg-12 col-md-12">
                       <div class="title-content p-0">
                         <div class="title-detail">
-                          <h3>Skill Set</h3>
+                          <h4>Skill Set</h4>
                           <div class="mb-3">
                             <input
                               type="text"
-                              data-role="tagsinput"
                               class="input-tags form-control"
-                              name="services"
-                              value="Web Design"
                               id="services"
                               placeholder="UX, UI, App Design, Wireframing, Branding"
+                              {...register("skill_sets")}
+                              onKeyDown={(e) => {}}
                             />
                             <p class="text-muted mb-0">
                               Enter skills for needed for project, for best
@@ -115,37 +154,47 @@ const PostProject = () => {
                     <div class="buget-img">
                       <ul>
                         <li>
-                          <div class="hours-rate active">
+                          <div
+                            class={clsx(
+                              `hours-rate ${
+                                budget === "hourly_rate" ? "active" : null
+                              }`
+                            )}
+                          >
                             <div class="hours-rate-img">
                               <label class="customize-radio">
                                 <input
                                   type="radio"
                                   name="fixed"
-                                  class="hoursradio"
-                                  checked
+                                  {...register("budget")}
+                                  value="hourly_rate"
                                 />
                                 <img
-                                  src="assets/img/icon/check-success.svg"
+                                  src={CheckSuccess}
                                   alt="img"
                                   class="success-check"
                                 />
-                                <img
-                                  src="assets/img/icon/hourly.svg"
-                                  alt="img"
-                                />
+                                <img src={Hourly} alt="img" />
                                 <span class="d-block">Hourly Rate</span>
                               </label>
                             </div>
                           </div>
                         </li>
                         <li>
-                          <div class="fixed-rate">
+                          <div
+                            class={clsx(
+                              `fixed-rate ${
+                                budget === "fixed_rate" ? "active" : null
+                              }`
+                            )}
+                          >
                             <div class="hours-rate-img">
                               <label class="customize-radio">
                                 <input
                                   type="radio"
                                   name="fixed"
-                                  class="fixedradio"
+                                  {...register("budget")}
+                                  value="fixed_rate"
                                 />
                                 <img
                                   src={CheckSuccess}
@@ -160,7 +209,13 @@ const PostProject = () => {
                         </li>
                       </ul>
                     </div>
-                    <div class="hours-rates">
+                    <div
+                      class={clsx(
+                        `hours-rates ${
+                          budget === "hourly_rate" ? "d-block" : "d-none"
+                        }`
+                      )}
+                    >
                       <div class="row">
                         <div class="col-lg-3 col-md-12">
                           <div class="mb-3">
@@ -169,6 +224,7 @@ const PostProject = () => {
                               type="text"
                               class="form-control"
                               placeholder="15"
+                              {...register("price_from")}
                             />
                           </div>
                         </div>
@@ -179,12 +235,19 @@ const PostProject = () => {
                               type="text"
                               class="form-control"
                               placeholder="250"
+                              {...register("price_to")}
                             />
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div class="fixed-rates d-none">
+                    <div
+                      class={clsx(
+                        `fixed-rates ${
+                          budget === "fixed_rate" ? "d-block" : "d-none"
+                        }`
+                      )}
+                    >
                       <div class="row">
                         <div class="col-lg-6 col-md-12">
                           <div class="mb-3">
@@ -193,6 +256,7 @@ const PostProject = () => {
                               type="text"
                               class="form-control"
                               placeholder="15"
+                              {...register("price")}
                             />
                           </div>
                         </div>
@@ -206,39 +270,7 @@ const PostProject = () => {
                       </p>
                     </div>
                     <div class="col-lg-12">
-                      <div class="attach-file">
-                        <i class="fa fa-pdf"></i>
-                        Attach file
-                        <input type="file" />
-                      </div>
-                      <div class="filename">
-                        {/* <ul>
-                          <li>
-                            <h6>
-                              Filename 1
-                              <a href="javascript:void(0);" class="file-close">
-                                <i class="fa fa-close"></i>
-                              </a>
-                            </h6>
-                          </li>
-                          <li>
-                            <h6>
-                              Filename 2
-                              <a href="javascript:void(0);" class="file-close">
-                                <i class="fa fa-close"></i>
-                              </a>
-                            </h6>
-                          </li>
-                          <li>
-                            <h6>
-                              Filename 3
-                              <a href="javascript:void(0);" class="file-close">
-                                <i class="fa fa-close"></i>
-                              </a>
-                            </h6>
-                          </li>
-                        </ul> */}
-                      </div>
+                      <Documents control={control} />
                     </div>
                     <div class="col-lg-12 my-3">
                       <h4>Other Requirement</h4>
@@ -246,13 +278,20 @@ const PostProject = () => {
                     <div class="col-lg-6 col-md-12">
                       <div class="mb-3">
                         <label class="focus-label">Languages</label>
-                        <input type="text" class="form-control" />
+                        <input
+                          type="text"
+                          class="form-control"
+                          {...register("languages")}
+                        />
                       </div>
                     </div>
                     <div class="col-lg-6 col-md-12">
                       <div class="mb-3">
                         <label class="focus-label">Language Fluency</label>
-                        <select class="form-control select">
+                        <select
+                          class="form-control select"
+                          {...register("language_fluency")}
+                        >
                           <option>Basic</option>
                           <option>Intermediate</option>
                           <option>Professional</option>
@@ -271,9 +310,6 @@ const PostProject = () => {
                   <div class="row">
                     <div class="col-md-12 text-end">
                       <div class="btn-item">
-                        <button type="submit" class="btn reset-btn">
-                          Reset
-                        </button>
                         <button type="submit" class="btn next-btn">
                           Post a Job
                         </button>
@@ -282,6 +318,7 @@ const PostProject = () => {
                   </div>
                 </div>
               </form>
+              <ToastContainer />
             </div>
           </div>
         </div>
