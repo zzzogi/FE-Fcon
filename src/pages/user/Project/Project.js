@@ -110,7 +110,7 @@ const Project = () => {
                         position:  project.position,
                         tags: project.skills.split(", "),
                         salary: `$${project.budgetOrSalary}`,
-                        avatar: `https://randomuser.me/api/portraits/men/${project.postId % 10}.jpg`,
+                        avatar: project.imgUrl,
                       }}
                     />
                   ))

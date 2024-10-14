@@ -7,12 +7,12 @@ const DropMenu = () => {
   const employers = [
     {
       sub: "Freelancer",
-      href: "/",
+      href: "/members",
       ref: [
-        {
-          sub: "Freelancer List",
-          href: "/members",
-        },
+        // {
+        //   sub: "Freelancer List",
+        //   href: "/members",
+        // },
       ],
     },
     {

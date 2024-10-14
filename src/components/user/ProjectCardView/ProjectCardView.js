@@ -16,7 +16,7 @@ const ProjectCardView = ({ infomation }) => {
           <img src={infomation.avatar} alt="avatar" />
         </div>
         <div className="info">
-          <p>{infomation.id}</p>
+          <p hidden>{infomation.id}</p>
           <p>{infomation.name}</p>
           <p>{infomation.position}</p>
           <p>Ho Chi Minh, Viet Nam</p>
