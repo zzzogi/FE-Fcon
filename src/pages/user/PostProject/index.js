@@ -1,323 +1,189 @@
+
 import React from "react";
 import "./layout.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import CheckSuccess from "../../../assets/images/icon/check-success.svg";
 import Hourly from "../../../assets/images/icon/hourly.svg";
 import Fixed from "../../../assets/images/icon/fixed.svg";
+
+// Import useForm from react-hook-form
 import { useForm } from "react-hook-form";
-import Documents from "./components/Documents";
-import clsx from "clsx";
+
+// Import toast and ToastContainer from react-toastify for notifications
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+import clsx from "clsx";
 
 const PostProject = () => {
   const { register, handleSubmit, control, watch } = useForm();
   const budget = watch("budget");
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    const userId = 7; // Hardcoded userId
+    const postTypeId = 1; // Hardcoded postTypeId
+
+    const postData = {
+      userId: userId,
+      postTypeId: postTypeId,
+      title: data.project_title,
+      description: data.description, // Ensure you get the value from the textarea
+      budgetOrSalary: data.price, // Set budget or salary based on selection
+      skills: data.skill_sets,
+      status: "active", // Set this as per your business logic
+      createdAt: new Date().toISOString(), // Current date in ISO format
+      updatedAt: new Date().toISOString(), // Current date in ISO format
+      imgUrl : "",
+    };
+
+    try {
+      const response = await fetch("http://103.179.184.83:7979/api/Post/AddNewPost", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFjY3Rlc3QiLCJyb2xlIjoic3RyaW5nIiwibmJmIjoxNzI5MTUzMTI5LCJleHAiOjE3MjkxNTY3MjksImlhdCI6MTcyOTE1MzEyOX0.bU1CYXkYiVjYLfU5qGD28t0wO1mhtz8d0ko06TAzgWo', // Replace wdaith the actual token if necessary
+        },
+        body: JSON.stringify(postData),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      console.log("Post API response:", result); // Log the response
+
+      if (result.success) {
+        toast("Post created successfully!", {
+          type: "success",
+          position: "top-center",
+        });
+      } else {
+        toast("Failed to create post: " + result.message, {
+          type: "error",
+          position: "top-center",
+        });
+      }
+    } catch (error) {
+      console.error("Error creating post:", error);
+      toast("An error occurred while creating the post.", {
+        type: "error",
+        position: "top-center",
+      });
+    }
   };
 
   return (
-    <div class="content">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="select-project mb-4">
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  toast("Đăng thành công, bài của bạn sẽ sớm được duyệt!", {
-                    type: "success",
-                    position: "top-center",
-                  });
-                  handleSubmit(onSubmit);
-                }}
-              >
-                <div class="title-box widget-box">
-                  <div class="row">
-                    <div class="col-lg-12">
+    <div className="content">
+      <div className="container">
+        <div className="row">
+          <div className="col-md-12">
+            <div className="select-project mb-4">
+              <form onSubmit={handleSubmit(onSubmit)}> {/* Handle form submit correctly */}
+                <div className="title-box widget-box">
+                  <div className="row">
+                    <div className="col-lg-12">
                       <h4>Basic Details</h4>
                     </div>
-                    <div class="col-lg-12 col-md-12">
-                      <div class="mb-3">
-                        <label class="focus-label">Project Title</label>
+                    <div className="col-lg-12 col-md-12">
+                      <div className="mb-3">
+                        <label className="focus-label">Project Title</label>
                         <input
                           type="text"
-                          class="form-control"
-                          {...register("project_title")}
+                          className="form-control"
+                          {...register("project_title", { required: true })} // Add validation if needed
                         />
                       </div>
                     </div>
-                    <div class="col-lg-4 col-md-12">
-                      <div class="mb-3">
-                        <label class="focus-label">Project Category</label>
-                        <select
-                          class="form-control select"
-                          {...register("project_category")}
-                        >
-                          <option value="0">Select</option>
-                          <option value="1">Category</option>
-                          <option value="2">Project</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-md-12">
-                      <div class="mb-3">
-                        <label class="focus-label">Project Duration</label>
-                        <select
-                          class="form-control select"
-                          {...register("project_duration")}
-                        >
+
+                    <div className="col-lg-4 col-md-12">
+                      <div className="mb-3">
+                        <label className="focus-label">Project Duration</label>
+                        <select className="form-control select">
                           <option>1-3 Week</option>
                           <option>1 Month</option>
-                          <option>Less then a month</option>
-                          <option>More then a month</option>
+                          <option>Less than a month</option>
+                          <option>More than a month</option>
                         </select>
                       </div>
                     </div>
-                    <div class="col-lg-4 col-md-6">
-                      <div class="mb-3">
-                        <label class="focus-label">Deadline Date</label>
-                        <div class="cal-icon">
+
+                    <div className="col-lg-4 col-md-6">
+                      <div className="mb-3">
+                        <label className="focus-label">Deadline Date</label>
+                        <div className="cal-icon">
                           <input
                             type="date"
-                            class="form-control "
+                            className="form-control"
                             placeholder="Choose"
-                            {...register("deadline_date")}
                           />
                         </div>
                       </div>
                     </div>
-                    <div class="col-lg-6 col-md-12">
-                      <div class="mb-3">
-                        <label class="focus-label">Freelancer Type</label>
-                        <select
-                          class="form-control "
-                          {...register("freelancer_type")}
-                        >
-                          <option value="0">Select</option>
-                          <option value="1">Full Time</option>
-                          <option value="2">Part Time</option>
-                          <option value="3">Project Based</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-lg-6 col-md-12">
-                      <div class="mb-3">
-                        <label class="focus-label">Freelancer Level</label>
-                        <select
-                          class="form-control select"
-                          {...register("freelancer_level")}
-                        >
+
+                    <div className="col-lg-6 col-md-12">
+                      <div className="mb-3">
+                        <label className="focus-label">Freelancer Level</label>
+                        <select className="form-control select">
                           <option>Basic</option>
                           <option>Intermediate</option>
                           <option>Professional</option>
                         </select>
                       </div>
                     </div>
-                    <div class="col-lg-12 col-md-12">
-                      <div class="mb-3">
-                        <label class="focus-label">Tags</label>
-                        <input
-                          type="text"
-                          class="form-control"
-                          {...register("tags")}
-                        />
+
+                    <div className="col-lg-12 col-md-12">
+                      <div className="mb-3">
+                        <label className="focus-label">Tags</label>
+                        <input type="text" className="form-control" />
                       </div>
                     </div>
 
-                    <div class="col-lg-12 col-md-12">
-                      <div class="title-content p-0">
-                        <div class="title-detail">
+                    <div className="col-lg-12 col-md-12">
+                      <div className="title-content p-0">
+                        <div className="title-detail">
                           <h4>Skill Set</h4>
-                          <div class="mb-3">
+                          <div className="mb-3">
                             <input
                               type="text"
-                              class="input-tags form-control"
+                              className="input-tags form-control"
                               id="services"
                               placeholder="UX, UI, App Design, Wireframing, Branding"
-                              {...register("skill_sets")}
-                              onKeyDown={(e) => {}}
+                              {...register("skill_sets", { required: true })} // Add validation if needed
                             />
-                            <p class="text-muted mb-0">
-                              Enter skills for needed for project, for best
-                              result add 5 or more Skills
+                            <p className="text-muted mb-0">
+                              Enter skills needed for the project, for best results add 5 or more skills.
                             </p>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div class="col-lg-12 my-3">
+
+                    <div className="col-lg-12 my-3">
                       <h4>Budget</h4>
                     </div>
-                    <div class="buget-img">
-                      <ul>
-                        <li>
-                          <div
-                            class={clsx(
-                              `hours-rate ${
-                                budget === "hourly_rate" ? "active" : null
-                              }`
-                            )}
-                          >
-                            <div class="hours-rate-img">
-                              <label class="customize-radio">
-                                <input
-                                  type="radio"
-                                  name="fixed"
-                                  {...register("budget")}
-                                  value="hourly_rate"
-                                />
-                                <img
-                                  src={CheckSuccess}
-                                  alt="img"
-                                  class="success-check"
-                                />
-                                <img src={Hourly} alt="img" />
-                                <span class="d-block">Hourly Rate</span>
-                              </label>
-                            </div>
-                          </div>
-                        </li>
-                        <li>
-                          <div
-                            class={clsx(
-                              `fixed-rate ${
-                                budget === "fixed_rate" ? "active" : null
-                              }`
-                            )}
-                          >
-                            <div class="hours-rate-img">
-                              <label class="customize-radio">
-                                <input
-                                  type="radio"
-                                  name="fixed"
-                                  {...register("budget")}
-                                  value="fixed_rate"
-                                />
-                                <img
-                                  src={CheckSuccess}
-                                  alt="img"
-                                  class="success-check"
-                                />
-                                <img src={Fixed} alt="img" />
-                                <span class="d-block">Fixed budget</span>
-                              </label>
-                            </div>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-                    <div
-                      class={clsx(
-                        `hours-rates ${
-                          budget === "hourly_rate" ? "d-block" : "d-none"
-                        }`
-                      )}
-                    >
-                      <div class="row">
-                        <div class="col-lg-3 col-md-12">
-                          <div class="mb-3">
-                            <label class="focus-label">From ($)</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              placeholder="15"
-                              {...register("price_from")}
-                            />
+                    <div className="col-lg-6 col-md-12">
+                          <div className="mb-3">
+                            <label className="focus-label">Enter Price ($)</label>
+                            <input type="text" className="form-control" placeholder="15" {...register("price")} />
                           </div>
                         </div>
-                        <div class="col-lg-3 col-md-6">
-                          <div class="mb-3">
-                            <label class="focus-label">To ($)</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              placeholder="250"
-                              {...register("price_to")}
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div
-                      class={clsx(
-                        `fixed-rates ${
-                          budget === "fixed_rate" ? "d-block" : "d-none"
-                        }`
-                      )}
-                    >
-                      <div class="row">
-                        <div class="col-lg-6 col-md-12">
-                          <div class="mb-3">
-                            <label class="focus-label">Enter Price ($)</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              placeholder="15"
-                              {...register("price")}
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-12 my-3">
-                      <h4>Attachment</h4>
-                      <p>
-                        You can attach more than 1 files to 10 files, Size of
-                        the Document should be Below 2MB
-                      </p>
-                    </div>
-                    <div class="col-lg-12">
-                      <Documents control={control} />
-                    </div>
-                    <div class="col-lg-12 my-3">
-                      <h4>Other Requirement</h4>
-                    </div>
-                    <div class="col-lg-6 col-md-12">
-                      <div class="mb-3">
-                        <label class="focus-label">Languages</label>
-                        <input
-                          type="text"
-                          class="form-control"
-                          {...register("languages")}
-                        />
-                      </div>
-                    </div>
-                    <div class="col-lg-6 col-md-12">
-                      <div class="mb-3">
-                        <label class="focus-label">Language Fluency</label>
-                        <select
-                          class="form-control select"
-                          {...register("language_fluency")}
-                        >
-                          <option>Basic</option>
-                          <option>Intermediate</option>
-                          <option>Professional</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-lg-12">
-                      <div class="mb-3">
-                        <label class="focus-label">
-                          Write Description of Projects
-                        </label>
-                        <textarea class="form-control"></textarea>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-12 text-end">
-                      <div class="btn-item">
-                        <button type="submit" class="btn next-btn">
-                          Post a Job
-                        </button>
+                    <div className="col-lg-12 col-md-12">
+                      <div className="mb-3">
+                        <label className="focus-label">Description</label>
+                        <textarea
+                          className="form-control"
+                          rows="5"
+                          placeholder="Place project descriptions"
+                          {...register("description")}
+                        ></textarea>
                       </div>
                     </div>
                   </div>
                 </div>
+                <button type="submit" className="btn btn-primary">Post Project</button>
               </form>
+              {/* Include the ToastContainer for showing notifications */}
               <ToastContainer />
             </div>
           </div>
