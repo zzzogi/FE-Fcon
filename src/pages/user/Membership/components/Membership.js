@@ -1,101 +1,138 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../layout.css";
 
 const Membership = () => {
+  const [plans, setPlans] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchMembershipPlans = async () => {
+      try {
+        const response = await fetch("http://103.179.184.83:7979/api/MembershipPlan/getAllMembershipPlans");
+    
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+    
+        const data = await response.json();
+    
+        console.log("Raw API response:", data);  // Log full response
+    
+        // Extract the membership plans from the 'data' field in the response
+        const plansData = Array.isArray(data.data) ? data.data : [];
+    
+        console.log("Parsed plans data:", plansData);  // Log parsed data
+    
+        setPlans(plansData);
+    
+      } catch (error) {
+        console.error("Error fetching membership plans:", error);
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMembershipPlans();
+  }, []);
+
+//**fetching payment api */
+const handleSelectPlan = async (plan) => {
+  const accountId = "fwe"; // Generate or fetch the actual account ID here
+  const amount = plan.price; // Use the plan price
+
+  try {
+    const response = await fetch(`http://103.179.184.83:7979/api/Payment/request-top-up-wallet-with-payos?accountId=${accountId}&amount=${amount}`, {
+      method: 'POST', // or GET based on your API requirements
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const data = await response.json();
+    console.log("Payment API response:", data); // Log the payment response
+
+    if (data) {
+      // Redirect to the payment URL
+      window.location.href = data.data; // Navigate to the payment URL
+    } else {
+      // Handle the error case (e.g., show a message to the user)
+      alert(data.message || "Failed to create payment URL.");
+    }
+  } catch (error) {
+    console.error("Error during payment request:", error);
+    alert("An error occurred while processing the payment.");
+  }
+};
+
+
+
+  if (loading) {
+    return <p>Loading membership plans...</p>;
+  }
+
+  if (error) {
+    return <p>{error}</p>;
+  }
+
   return (
-    <div class="col-xl-12" style={{ marginTop: "24px" }}>
-      <div class="dashboard-sec payout-section freelancer-statements plan-billing">
-        <div class="page-title portfolio-title">
-          <h3 class="mb-0">Plan & Billing</h3>
+    <div className="col-xl-12" style={{ marginTop: "24px" }}>
+      <div className="dashboard-sec payout-section freelancer-statements plan-billing">
+        <div className="page-title portfolio-title">
+          <h3 className="mb-0">Plan & Billing</h3>
         </div>
-        <div class="plan-billing-section">
-          <div class="row row-gap">
-            <div class="col-xl-4 col-md-6">
-              <div class="package-detail">
-                <h4>Basic Plan</h4>
-                <p>Go Pro, Best for the individuals</p>
-                <h3 class="package-price">
-                  $19.00 <span>/ Month</span>
-                </h3>
-                <div class="package-feature">
-                  <ul>
-                    <li>12 Project Credits</li>
-                    <li>10 Allowed Services</li>
-                    <li>20 Days visibility</li>
-                    <li>5 Featured Services</li>
-                    <li>20 Days visibility</li>
-                    <li>30 Days Package Expiry</li>
-                    <li class="non-check">Profile Featured</li>
-                  </ul>
+        <div className="plan-billing-section">
+          <div className="row row-gap">
+            {plans.length > 0 ? (
+              plans.map((plan) => (
+                <div className="col-xl-4 col-md-6" key={plan.planId}>
+                  <div className="package-detail">
+                    <h4>{plan.name}</h4>
+                    <p>{plan.description}</p>
+                    <h3 className="package-price">
+                      ${plan.price} <span>/ Month</span>
+                    </h3>
+                    <div className="package-feature">
+                      <ul>
+                        {plan.features.split(", ").map((feature, index) => (
+                          <li key={index}>{feature}</li>
+                        ))}
+                      </ul>
+                    </div>
+                    <button
+                      onClick={() => handleSelectPlan(plan)} // Trigger the payment request
+                      className="btn btn-outline-primary btn-block"
+                    >
+                      Select Plan
+                    </button>
+                    {/* <a
+                      href="#payout_modal"
+                      data-bs-toggle="modal"
+                      className="btn btn-outline-primary btn-block"
+                    >
+                      Select Plan
+                    </a> */}
+                  </div>
                 </div>
-                <a
-                  href="#payout_modal"
-                  data-bs-toggle="modal"
-                  class="btn btn-outline-primary btn-block"
-                >
-                  Select Plan
-                </a>
-              </div>
-            </div>
-            <div class="col-xl-4 col-md-6">
-              <div class="package-detail">
-                <h4>Business</h4>
-                <p>Highest selling package features</p>
-                <h3 class="package-price">
-                  $29.00<span>/ Month</span>
-                </h3>
-                <div class="package-feature">
-                  <ul>
-                    <li>15 Project Credits</li>
-                    <li>12 Allowed Services</li>
-                    <li>25 Days visibility</li>
-                    <li>10 Featured Services</li>
-                    <li>30 Days visibility</li>
-                    <li>40 Days Package Expiry</li>
-                    <li>Profile Featured</li>
-                  </ul>
-                </div>
-                <a
-                  href="#payout_modal"
-                  data-bs-toggle="modal"
-                  class="btn btn-outline-primary btn-block"
-                >
-                  Select Plan
-                </a>
-              </div>
-            </div>
-            <div class="col-xl-4 col-md-6">
-              <div class="package-detail">
-                <h4>The Unlimited</h4>
-                <p>Drive crazy, unlimited on the go</p>
-                <h3 class="package-price">
-                  $79.00<span>/ Month</span>
-                </h3>
-                <div class="package-feature">
-                  <ul>
-                    <li>Unlimited Project Credits</li>
-                    <li>Unlimited Services</li>
-                    <li>Services Never Expire</li>
-                    <li>20 Featured Services</li>
-                    <li>Services Never Expire</li>
-                    <li>Package Never Expire</li>
-                    <li>Profile Featured</li>
-                  </ul>
-                </div>
-                <a
-                  href="#payout_modal"
-                  data-bs-toggle="modal"
-                  class="btn btn-outline-primary btn-block"
-                >
-                  Select Plan
-                </a>
-              </div>
-            </div>
+              ))
+            ) : (
+              <p>No plans available</p>
+            )}
           </div>
         </div>
-        <div class="page-title">
+      </div>
+    </div>
+  );
+};
+
+export default Membership;
+
+
+        
+        {/* <div class="page-title">
           <h3>Current Plan</h3>
         </div>
         <div class="row">
@@ -255,10 +292,10 @@ const Membership = () => {
               </tr>
             </tbody>
           </table>
-        </div>
-      </div>
+        </div> */}
+      {/* </div>
     </div>
   );
 };
 
-export default Membership;
+export default Membership; */}

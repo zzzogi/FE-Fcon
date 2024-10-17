@@ -18,8 +18,7 @@ const ProjectCardView = ({ infomation }) => {
         <div className="info">
           <p hidden>{infomation.id}</p>
           <p>{infomation.name}</p>
-          <p>{infomation.position}</p>
-          <p>Ho Chi Minh, Viet Nam</p>
+          <p>{infomation.position}</p>         
         </div>
         <div className="voting">
           <i className="bi bi-star-fill"></i>

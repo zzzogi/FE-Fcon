@@ -25,14 +25,14 @@ const Detail = ({ data }) => {
           </div>
           <div className="company-title">
             <h4>{info.title || "No Title Provided"}</h4>
-            <p>{info.description || "No Description Provided"}</p>
+            {/* <p>{info.description || "No Description Provided"}</p> */}
           </div>
         </div>
         <div className="company-address">
           <ul>
             <li>
               <img src={MapPin} alt="icons" className="icon" />
-              {"Location not provided"} {/* Placeholder since location is missing in the API */}
+              {info.position} {/* Placeholder since location is missing in the API */}
             </li>
             <li>
               <img src={Calendar} alt="icons" className="icon" />
