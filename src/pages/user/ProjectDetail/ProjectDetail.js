@@ -50,7 +50,7 @@ export const ProjectDetail = () => {
               {projectData ? (
                 <>
                   {/* Pass projectData to the Detail component as 'data' */}
-                  <div>Location: {projectData.position}</div>
+                 
                   <Detail data={projectData} page="employers" />
                   {projectData.chips && (
                     <ChipList title={"Skills Required"} chips={projectData.chips} />

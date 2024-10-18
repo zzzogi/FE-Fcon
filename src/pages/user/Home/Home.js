@@ -1,4 +1,6 @@
 import React from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./Home.css";
 import Banner from "../../../components/user/Banner/Banner";
 import SectionCategory from "../../../components/user/SectionCategory/SectionCategory";
@@ -13,9 +15,10 @@ import BgImage from "../../../assets/images/bg/bg3.png"
 import SectionBlog from "../../../components/user/SectionBlog/SectionBlog";
 import SectionJob from "../../../components/user/SectionJob/SectionJob";
 const Home = () => {
+
   return (
     <div className="Home">
-      {/* Section Banner */}
+      {/* Section Banner */}    
       <div className="section-banner">
         <div className="container">
           <Banner />

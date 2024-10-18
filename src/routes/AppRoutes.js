@@ -26,6 +26,9 @@ const AppRoutes = () => {
       {/* Login Router */}
       <Route path="/login" element={<Login />} />
 
+       {/* Logout Router
+       <Route path="/logout" element={<Logout />} /> */}
+
       {/* Register Router */}
       <Route path="/register" element={<Register />} />
 

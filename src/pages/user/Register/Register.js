@@ -72,7 +72,12 @@ const Register = () => {
           UserType: formType, // or assign as needed
           ContactInfo: "random", // or assign as needed
           CreatedAt: new Date().toISOString(), // Assign current timestamp
-          UpdatedAt: new Date().toISOString() // Assign current timestamp
+          UpdatedAt: new Date().toISOString(), // Assign current timestamp
+          NumberJobDone: 4,
+          Location: "string",
+          DeliveryTime: "string",
+          LanguageLevel: "string",
+          imgUrl: "string"
           // role: formType, // e.g., "freelancer" or "company"
         }),
       });
@@ -106,10 +111,10 @@ const Register = () => {
               Freelancer
             </button>
             <button
-              onClick={() => onChangeFormType("employee")}
-              className={formType === "employee" ? "form-active" : ""}
+              onClick={() => onChangeFormType("company")}
+              className={formType === "company" ? "form-active" : ""}
             >
-              Employee
+              Company
             </button>
           </div>
         </div>

@@ -45,7 +45,7 @@ const handleSelectPlan = async (plan) => {
   const amount = plan.price; // Use the plan price
 
   try {
-    const response = await fetch(`http://103.179.184.83:7979/api/Payment/request-top-up-wallet-with-payos?accountId=${accountId}&amount=${amount}`, {
+    const response = await fetch(`http://103.179.184.83:7979/api/Payment/request-top-up-wallet-with-payos?userId=${accountId}&amount=${amount}`, {
       method: 'POST', // or GET based on your API requirements
       headers: {
         'Content-Type': 'application/json',

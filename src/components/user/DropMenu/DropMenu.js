@@ -1,19 +1,16 @@
 import React from "react";
 import "./DropMenu.css";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie"; // Import js-cookie to access cookies
 
 const DropMenu = () => {
+  const userType = Cookies.get('userType');
   // Employers Data
   const employers = [
     {
       sub: "Freelancer",
       href: "/members",
-      ref: [
-        // {
-        //   sub: "Freelancer List",
-        //   href: "/members",
-        // },
-      ],
+      ref: [],
     },
     {
       sub: "My profile",
@@ -98,6 +95,8 @@ const DropMenu = () => {
         </div>
 
         {/* Employees */}
+      {userType === "company" && (
+        <>
         <div className="nav-item nav-dropmenu">
           <span>For employers</span>
           <i className="bi bi-chevron-down"></i>
@@ -144,8 +143,13 @@ const DropMenu = () => {
             })}
           </div>
         </div>
+        </>
+      )}
+        
 
         {/* Freelancer */}
+        {userType === "freelancer" && (
+        <>
         <div className="nav-item nav-dropmenu">
           <span>For freelancer</span>
           <i className="bi bi-chevron-down"></i>
@@ -189,6 +193,9 @@ const DropMenu = () => {
             })}
           </div>
         </div>
+        </>
+      )}
+        
 
         {/* Pages */}
         <div className="nav-item nav-dropmenu">
@@ -282,13 +289,16 @@ const DropMenu = () => {
             })}
           </div>
         </div>
-
-        <div
-          className="nav-item nav-dropmenu"
-          onClick={() => (window.location.href = "/admin")}
-        >
-          <span>Admin console</span>
-        </div>
+        {userType === "admin" && (
+          <>
+            <div
+              className="nav-item nav-dropmenu"
+              onClick={() => (window.location.href = "/admin")}
+            >
+              <span>Admin console</span>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
