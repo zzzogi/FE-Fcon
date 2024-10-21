@@ -11,6 +11,7 @@ const Register = () => {
     password: true,
     confirm: true,
   });
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   const [formData, setFormData] = useState({
     username: '',
@@ -60,7 +61,7 @@ const Register = () => {
     }
 
     try {
-      const response = await fetch("http://103.179.184.83:7979/api/Auth/register", {
+      const response = await fetch(`${apiUrl}/api/Auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

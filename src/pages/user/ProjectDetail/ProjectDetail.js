@@ -14,12 +14,13 @@ export const ProjectDetail = () => {
   const [projectData, setProjectData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     // Fetch project details by ID
     const fetchProject = async () => {
       try {
-        const response = await axios.get(`http://103.179.184.83:7979/api/Post/getById/${id}`);        
+        const response = await axios.get(`${apiUrl}/Post/getById/${id}`);        
         console.log("Fetched project data:", response.data); // Log the project data for debugging
         setProjectData(response.data.data); // Ensure we are setting the correct structure (response.data.data)
       } catch (err) {

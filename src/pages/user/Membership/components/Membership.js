@@ -7,11 +7,12 @@ const Membership = () => {
   const [plans, setPlans] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     const fetchMembershipPlans = async () => {
       try {
-        const response = await fetch("http://103.179.184.83:7979/api/MembershipPlan/getAllMembershipPlans");
+        const response = await fetch(`${apiUrl}/MembershipPlan/getAllMembershipPlans`);
     
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);

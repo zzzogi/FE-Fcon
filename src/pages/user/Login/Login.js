@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie"; // Import js-cookie for handling cookies
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+const apiUrl = process.env.REACT_APP_API_URL;
 
 const Login = () => {
   const [inputTypeHidden, setInputTypeHidden] = useState({
@@ -37,7 +38,7 @@ const Login = () => {
   /* FETCH CURRENT USER AFTER LOGIN ------------------- */
   const fetchCurrentUser = async (token) => {
     try {
-      const response = await fetch("http://103.179.184.83:7979/api/User/getCurrentUser", {
+      const response = await fetch(`${apiUrl}/User/getCurrentUser`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -61,7 +62,7 @@ const Login = () => {
   /* HANDLE LOGIN API CALL ------------------- */
   const handleLogin = async () => {
     try {
-      const response = await fetch("http://103.179.184.83:7979/api/Auth/login", {
+      const response = await fetch(`${apiUrl}/Auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

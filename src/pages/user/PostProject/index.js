@@ -215,6 +215,7 @@ import clsx from "clsx";
 const PostProject = () => {
   const { register, handleSubmit, watch } = useForm();
   const budget = watch("budget");
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   const onSubmit = async (data) => {
     const userId = Cookies.get("userId"); // Hardcoded userId for now
@@ -251,7 +252,7 @@ const PostProject = () => {
     };
 
     try {
-      const response = await fetch("http://103.179.184.83:7979/api/Post/AddNewPost", {
+      const response = await fetch(`${apiUrl}/Post/AddNewPost`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
