@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Cookies from "js-cookie"; // Import js-cookie for handling cookies
 import "../layout.css";
 
 const Membership = () => {
@@ -12,7 +13,7 @@ const Membership = () => {
   useEffect(() => {
     const fetchMembershipPlans = async () => {
       try {
-        const response = await fetch(`${apiUrl}/MembershipPlan/getAllMembershipPlans`);
+        const response = await fetch("https://103.179.184.83:7979/api/MembershipPlan/getAllMembershipPlans");
     
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -42,7 +43,7 @@ const Membership = () => {
 
 //**fetching payment api */
 const handleSelectPlan = async (plan) => {
-  const accountId = "fwe"; // Generate or fetch the actual account ID here
+  const accountId = Cookies.get("userId"); // Generate or fetch the actual account ID here
   const amount = plan.price; // Use the plan price
 
   try {

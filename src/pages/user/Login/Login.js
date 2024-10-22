@@ -8,12 +8,14 @@ import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie"; // Import js-cookie for handling cookies
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-const apiUrl = process.env.REACT_APP_API_URL;
+
+
 
 const Login = () => {
   const [inputTypeHidden, setInputTypeHidden] = useState({
     password: true,
   });
+  const apiUrl = process.env.REACT_APP_API_URL;
   
   const [formData, setFormData] = useState({
     email: "",
@@ -62,7 +64,8 @@ const Login = () => {
   /* HANDLE LOGIN API CALL ------------------- */
   const handleLogin = async () => {
     try {
-      const response = await fetch(`${apiUrl}/Auth/login`, {
+      // const response = await fetch(`${apiUrl}/Auth/login`, {
+        const response = await fetch("http://103.179.184.83:7979/api/Auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
