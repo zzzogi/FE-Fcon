@@ -16,7 +16,7 @@ const Membership = () => {
     const fetchMembershipPlans = async () => {
       try {
         const response = await fetch(
-          `${apiUrl}/MembershipPlan/getAllMembershipPlans`
+          `http://103.179.184.83:7979/api/MembershipPlan/getAllMembershipPlans`
         );
 
         if (!response.ok) {
