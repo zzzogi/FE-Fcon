@@ -61,27 +61,30 @@ const Register = () => {
     }
 
     try {
-      const response = await fetch(`${apiUrl}/Auth/register`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          Username: formData.username,
-          Email: formData.email,
-          PasswordHash: formData.password,
-          UserType: formType, // or assign as needed
-          ContactInfo: "random", // or assign as needed
-          CreatedAt: new Date().toISOString(), // Assign current timestamp
-          UpdatedAt: new Date().toISOString(), // Assign current timestamp
-          NumberJobDone: 4,
-          Location: "string",
-          DeliveryTime: "string",
-          LanguageLevel: "string",
-          imgUrl: "string",
-          // role: formType, // e.g., "freelancer" or "company"
-        }),
-      });
+      const response = await fetch(
+        `https://103.179.184.83:7979/api/Auth/register`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            Username: formData.username,
+            Email: formData.email,
+            PasswordHash: formData.password,
+            UserType: formType, // or assign as needed
+            ContactInfo: "random", // or assign as needed
+            CreatedAt: new Date().toISOString(), // Assign current timestamp
+            UpdatedAt: new Date().toISOString(), // Assign current timestamp
+            NumberJobDone: 4,
+            Location: "string",
+            DeliveryTime: "string",
+            LanguageLevel: "string",
+            imgUrl: "string",
+            // role: formType, // e.g., "freelancer" or "company"
+          }),
+        }
+      );
 
       if (response.ok) {
         navigate("/login"); // Redirect on successful registration

@@ -249,14 +249,17 @@ const PostProject = () => {
     };
 
     try {
-      const response = await fetch(`${apiUrl}/Post/AddNewPost`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`, // Use the token retrieved from cookies
-        },
-        body: JSON.stringify(postData),
-      });
+      const response = await fetch(
+        `https://103.179.184.83:7979/api/Post/AddNewPost`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, // Use the token retrieved from cookies
+          },
+          body: JSON.stringify(postData),
+        }
+      );
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);

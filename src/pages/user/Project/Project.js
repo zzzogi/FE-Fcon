@@ -16,7 +16,9 @@ const Project = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await axios.get(`${apiUrl}/Post/getAllPosts`); // Replace with your actual API endpoint
+        const response = await axios.get(
+          `https://103.179.184.83:7979/api/Post/getAllPosts`
+        ); // Replace with your actual API endpoint
         if (response.data.success) {
           const filteredByType = response.data.data.filter(
             (project) => project.postTypeId === 1

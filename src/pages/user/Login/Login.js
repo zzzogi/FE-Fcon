@@ -9,19 +9,17 @@ import Cookies from "js-cookie"; // Import js-cookie for handling cookies
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-
-
 const Login = () => {
   const [inputTypeHidden, setInputTypeHidden] = useState({
     password: true,
   });
   const apiUrl = process.env.REACT_APP_API_URL;
-  
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-  
+
   const navigate = useNavigate();
 
   /* PASSWORD TYPE INPUT TOGGLE ------------------- */
@@ -40,13 +38,16 @@ const Login = () => {
   /* FETCH CURRENT USER AFTER LOGIN ------------------- */
   const fetchCurrentUser = async (token) => {
     try {
-      const response = await fetch(`${apiUrl}/User/getCurrentUser`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          accept: "*/*",
-        },
-      });
+      const response = await fetch(
+        `https://103.179.184.83:7979/api/User/getCurrentUser`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            accept: "*/*",
+          },
+        }
+      );
 
       if (response.ok) {
         const result = await response.json();
@@ -65,16 +66,19 @@ const Login = () => {
   const handleLogin = async () => {
     try {
       // const response = await fetch(`${apiUrl}/Auth/login`, {
-        const response = await fetch("http://103.179.184.83:7979/api/Auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          Username: formData.userName,
-          Password: formData.password,
-        }),
-      });
+      const response = await fetch(
+        "https://103.179.184.83:7979/api/Auth/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            Username: formData.userName,
+            Password: formData.password,
+          }),
+        }
+      );
       const result = await response.json();
 
       if (response.ok) {
@@ -84,7 +88,7 @@ const Login = () => {
         });
         const token = result.data;
         Cookies.set("token", token, { expires: 7 }); // Set cookie for token
-        
+
         // Fetch current user details using the token
         await fetchCurrentUser(token);
         localStorage.setItem("loginSuccess", "true");

@@ -20,7 +20,9 @@ export const ProjectDetail = () => {
     // Fetch project details by ID
     const fetchProject = async () => {
       try {
-        const response = await axios.get(`${apiUrl}/Post/getById/${id}`);
+        const response = await axios.get(
+          `https://103.179.184.83:7979/api/Post/getById/${id}`
+        );
         console.log("Fetched project data:", response.data); // Log the project data for debugging
         setProjectData(response.data.data); // Ensure we are setting the correct structure (response.data.data)
       } catch (err) {

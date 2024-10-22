@@ -16,7 +16,7 @@ const Membership = () => {
     const fetchMembershipPlans = async () => {
       try {
         const response = await fetch(
-          `http://103.179.184.83:7979/api/MembershipPlan/getAllMembershipPlans`
+          `https://103.179.184.83:7979/api/MembershipPlan/getAllMembershipPlans`
         );
 
         if (!response.ok) {
@@ -51,7 +51,7 @@ const Membership = () => {
 
     try {
       const response = await fetch(
-        `http://103.179.184.83:7979/api/Payment/request-top-up-wallet-with-payos?userId=${accountId}&amount=${amount}`,
+        `https://103.179.184.83:7979/api/Payment/request-top-up-wallet-with-payos?userId=${accountId}&amount=${amount}`,
         {
           method: "POST", // or GET based on your API requirements
           headers: {
