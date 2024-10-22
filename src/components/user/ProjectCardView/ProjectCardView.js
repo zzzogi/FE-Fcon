@@ -1,6 +1,7 @@
 import React from "react";
 import "./ProjectCardView.css";
 import { useNavigate } from "react-router-dom";
+import Avatar1 from "../../../assets/images/avatar/avatar-1.jpg";
 
 const ProjectCardView = ({ infomation }) => {
   const navigate = useNavigate();
@@ -13,12 +14,12 @@ const ProjectCardView = ({ infomation }) => {
           <div className="status">
             <i className="bi bi-check"></i>
           </div>
-          <img src={infomation.avatar} alt="avatar" />
+          <img src={infomation?.avatar || Avatar1} alt="avatar" />
         </div>
         <div className="info">
           <p hidden>{infomation.id}</p>
           <p>{infomation.name}</p>
-          <p>{infomation.position}</p>         
+          <p>{infomation.position}</p>
         </div>
         <div className="voting">
           <i className="bi bi-star-fill"></i>

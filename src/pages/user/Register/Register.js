@@ -14,10 +14,10 @@ const Register = () => {
   const apiUrl = process.env.REACT_APP_API_URL;
 
   const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
-    confirmPassword: ''
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
   });
 
   const [formType, setFormType] = useState("freelancer");
@@ -29,7 +29,7 @@ const Register = () => {
   const toggleHidden = (name) => {
     setInputTypeHidden({
       ...inputTypeHidden,
-      [name]: !inputTypeHidden[name]
+      [name]: !inputTypeHidden[name],
     });
   };
 
@@ -42,7 +42,7 @@ const Register = () => {
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -61,7 +61,7 @@ const Register = () => {
     }
 
     try {
-      const response = await fetch("http://103.179.184.83:7979/api/api/Auth/register", {
+      const response = await fetch(`${apiUrl}/Auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -78,12 +78,10 @@ const Register = () => {
           Location: "string",
           DeliveryTime: "string",
           LanguageLevel: "string",
-          imgUrl: "string"
+          imgUrl: "string",
           // role: formType, // e.g., "freelancer" or "company"
         }),
       });
-
-      const result = await response.json();
 
       if (response.ok) {
         navigate("/login"); // Redirect on successful registration
@@ -198,7 +196,8 @@ const Register = () => {
               <div className="position-relative">
                 <input type="checkbox" className="checkmark" />
                 <span>
-                  I have read and agree to all <a href="#">Terms & Conditions</a>
+                  I have read and agree to all{" "}
+                  <a href="#">Terms & Conditions</a>
                 </span>
               </div>
             </div>
@@ -213,13 +212,14 @@ const Register = () => {
             <div className="action-line">
               <span>OR</span>
             </div>
-            <div className="action-socials">
-              {/* Social buttons */}
-            </div>
+            <div className="action-socials">{/* Social buttons */}</div>
             <div className="action-options">
               <div>
                 Already have an account?{" "}
-                <span className="signup-link" onClick={() => onNavRoute("/login")}>
+                <span
+                  className="signup-link"
+                  onClick={() => onNavRoute("/login")}
+                >
                   Sign in
                 </span>
               </div>

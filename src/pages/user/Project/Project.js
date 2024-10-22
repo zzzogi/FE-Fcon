@@ -16,21 +16,31 @@ const Project = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await axios.get("http://103.179.184.83:7979/apiPost/getAllPosts"); // Replace with your actual API endpoint
+        const response = await axios.get(`${apiUrl}/Post/getAllPosts`); // Replace with your actual API endpoint
         if (response.data.success) {
           const filteredByType = response.data.data.filter(
             (project) => project.postTypeId === 1
           );
-      
+
           // Adding random locations for each project for filtering
-          const locations = ["Hà Nội", "Đà Nẵng", "Hồ Chí Minh", "Hải Phòng", "Japan", "Thủ Đức", "Hòa Lạc"];
-      
-          const projectsWithLocations = filteredByType.map((project, index) => ({
-            ...project,
-            // Assign a location by cycling through the locations array
-            position: locations[index % locations.length],
-          }));
-      
+          const locations = [
+            "Hà Nội",
+            "Đà Nẵng",
+            "Hồ Chí Minh",
+            "Hải Phòng",
+            "Japan",
+            "Thủ Đức",
+            "Hòa Lạc",
+          ];
+
+          const projectsWithLocations = filteredByType.map(
+            (project, index) => ({
+              ...project,
+              // Assign a location by cycling through the locations array
+              position: locations[index % locations.length],
+            })
+          );
+
           setProjects(projectsWithLocations);
           setFilteredProjects(projectsWithLocations); // Initially, all projects with postTypeId = 1 are displayed
         } else {
@@ -41,7 +51,6 @@ const Project = () => {
       } finally {
         setLoading(false);
       }
-      
     };
     fetchProjects();
   }, []);
@@ -108,7 +117,7 @@ const Project = () => {
                       infomation={{
                         id: project.postId,
                         name: project.title,
-                        position:  project.position,
+                        position: project.position,
                         tags: project.skills.split(", "),
                         salary: `$${project.budgetOrSalary}`,
                         avatar: project.imgUrl,
@@ -143,4 +152,3 @@ const Project = () => {
 };
 
 export default Project;
-
