@@ -250,7 +250,7 @@ const PostProject = () => {
 
     try {
       const response = await fetch(
-        `https://103.179.184.83:7979/api/Post/AddNewPost`,
+        `http://103.179.184.83:7979/api/Post/AddNewPost`,
         {
           method: "POST",
           headers: {

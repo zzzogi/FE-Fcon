@@ -169,7 +169,7 @@ const Project = () => {
     const fetchProjects = async () => {
       try {
         const response = await axios.get(
-          `https://103.179.184.83:7979/api/Post/getAllPosts`
+          `http://103.179.184.83:7979/api/Post/getAllPosts`
         ); // Replace with your actual API endpoint
         if (response.data.success) {
           const filteredByType = response.data.data.filter(

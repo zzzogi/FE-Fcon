@@ -62,7 +62,7 @@ const Register = () => {
 
     try {
       const response = await fetch(
-        `https://103.179.184.83:7979/api/Auth/register`,
+        `http://103.179.184.83:7979/api/Auth/register`,
         {
           method: "POST",
           headers: {
