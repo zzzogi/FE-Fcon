@@ -39,7 +39,7 @@ const Login = () => {
   const fetchCurrentUser = async (token) => {
     try {
       const response = await fetch(
-        `http://103.179.184.83:7979/api/User/getCurrentUser`,
+        `https://api-be.fieldy.online/api/User/getCurrentUser`,
         {
           method: "GET",
           headers: {
@@ -67,7 +67,7 @@ const Login = () => {
     try {
       // const response = await fetch(`${apiUrl}/Auth/login`, {
       const response = await fetch(
-        "http://103.179.184.83:7979/api/Auth/login",
+        "https://api-be.fieldy.online/api/Auth/login",
         {
           method: "POST",
           headers: {

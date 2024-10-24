@@ -36,7 +36,7 @@
 //     };
 
 //     try {
-//       const response = await fetch("http://103.179.184.83:7979/api/Post/AddNewPost", {
+//       const response = await fetch("https://api-be.fieldy.online/api/Post/AddNewPost", {
 //         method: 'POST',
 //         headers: {
 //           'Content-Type': 'application/json',
@@ -250,7 +250,7 @@ const PostProject = () => {
 
     try {
       const response = await fetch(
-        `http://103.179.184.83:7979/api/Post/AddNewPost`,
+        `https://api-be.fieldy.online/api/Post/AddNewPost`,
         {
           method: "POST",
           headers: {

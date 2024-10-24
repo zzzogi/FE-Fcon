@@ -17,7 +17,7 @@ const Project = () => {
     const fetchProjects = async () => {
       try {
         const response = await axios.get(
-          `http://103.179.184.83:7979/api/Post/getAllPosts`
+          `https://api-be.fieldy.online/api/Post/getAllPosts`
         ); // Replace with your actual API endpoint
         if (response.data.success) {
           const filteredByType = response.data.data.filter(
