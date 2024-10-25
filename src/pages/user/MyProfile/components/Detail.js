@@ -10,18 +10,23 @@ import TimeLine from "../../../../assets/images/icon/time-line.svg";
 import UserHeartLine from "../../../../assets/images/icon/user-heart-line.svg";
 import TranslateTwo from "../../../../assets/images/icon/translate-2.svg";
 import TranslateOne from "../../../../assets/images/icon/translate.svg";
+import PlaceholderImage from "../../../../assets/images/Fcon.jpg";
 import "../layout.css";
 
 const Detail = ({ data }) => {
   const info = data || {};
-  const reviews = info.reviews || [];  // Ensure reviews is always an array
+  const reviews = info.reviews || []; // Ensure reviews is always an array
 
   return (
     <div>
       <div className="company-detail-block">
         <div className="company-detail">
           <div className="company-detail-image">
-            <img src={info.imgUrl || ""} className="img-fluid" alt="project" />
+            <img
+              src={info.imgUrl || PlaceholderImage}
+              className="img-fluid"
+              alt="project"
+            />
           </div>
           <div className="company-title">
             <h4>{info.title || "No Title Provided"}</h4>
@@ -32,11 +37,13 @@ const Detail = ({ data }) => {
           <ul>
             <li>
               <img src={MapPin} alt="icons" className="icon" />
-              {info.position} {/* Placeholder since location is missing in the API */}
+              {info.position}{" "}
+              {/* Placeholder since location is missing in the API */}
             </li>
             <li>
               <img src={Calendar} alt="icons" className="icon" />
-              {new Date(info.createdAt).toLocaleDateString() || "Date not available"}
+              {new Date(info.createdAt).toLocaleDateString() ||
+                "Date not available"}
             </li>
             <li>
               <img src={Pen} alt="icons" className="icon" />
@@ -56,7 +63,9 @@ const Detail = ({ data }) => {
               </div>
               <div className="proposal-detail text-capitalize">
                 <span style={{ display: "block" }}>Skills Required</span>
-                <p style={{ marginBottom: 0 }}>{info.skills || "Not specified"}</p>
+                <p style={{ marginBottom: 0 }}>
+                  {info.skills || "Not specified"}
+                </p>
               </div>
             </li>
             <li>
@@ -65,7 +74,9 @@ const Detail = ({ data }) => {
               </div>
               <div className="proposal-detail text-capitalize">
                 <span style={{ display: "block" }}>Budget</span>
-                <p style={{ marginBottom: 0 }}>${info.budgetOrSalary || "Not specified"}</p>
+                <p style={{ marginBottom: 0 }}>
+                  ${info.budgetOrSalary || "Not specified"}
+                </p>
               </div>
             </li>
             <li>
@@ -74,7 +85,9 @@ const Detail = ({ data }) => {
               </div>
               <div className="proposal-detail text-capitalize">
                 <span style={{ display: "block" }}>Post Type</span>
-                <p style={{ marginBottom: 0 }}>{info.postType || "Not specified"}</p>
+                <p style={{ marginBottom: 0 }}>
+                  {info.postType || "Not specified"}
+                </p>
               </div>
             </li>
           </ul>

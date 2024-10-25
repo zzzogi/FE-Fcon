@@ -10,26 +10,29 @@ const Membership = () => {
   const [error, setError] = useState(null);
   const apiUrl = process.env.REACT_APP_API_URL;
 
+  console.log(apiUrl);
+
   useEffect(() => {
     const fetchMembershipPlans = async () => {
       try {
-        const response = await fetch("https://103.179.184.83:7979/api/MembershipPlan/getAllMembershipPlans");
-    
+        const response = await fetch(
+          `https://api-be.fieldy.online/api/MembershipPlan/getAllMembershipPlans`
+        );
+
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-    
+
         const data = await response.json();
-    
-        console.log("Raw API response:", data);  // Log full response
-    
+
+        console.log("Raw API response:", data); // Log full response
+
         // Extract the membership plans from the 'data' field in the response
         const plansData = Array.isArray(data.data) ? data.data : [];
-    
-        console.log("Parsed plans data:", plansData);  // Log parsed data
-    
+
+        console.log("Parsed plans data:", plansData); // Log parsed data
+
         setPlans(plansData);
-    
       } catch (error) {
         console.error("Error fetching membership plans:", error);
         setError(error.message);
@@ -41,36 +44,37 @@ const Membership = () => {
     fetchMembershipPlans();
   }, []);
 
-//**fetching payment api */
-const handleSelectPlan = async (plan) => {
-  const accountId = Cookies.get("userId"); // Generate or fetch the actual account ID here
-  const amount = plan.price; // Use the plan price
+  //**fetching payment api */
+  const handleSelectPlan = async (plan) => {
+    const accountId = Cookies.get("userId"); // Generate or fetch the actual account ID here
+    const amount = plan.price; // Use the plan price
 
-  try {
-    const response = await fetch(`http://103.179.184.83:7979/api/Payment/request-top-up-wallet-with-payos?userId=${accountId}&amount=${amount}`, {
-      method: 'POST', // or GET based on your API requirements
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    try {
+      const response = await fetch(
+        `https://api-be.fieldy.online/api/Payment/request-top-up-wallet-with-payos?userId=${accountId}&amount=${amount}`,
+        {
+          method: "POST", // or GET based on your API requirements
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
-    const data = await response.json();
-    console.log("Payment API response:", data); // Log the payment response
+      const data = await response.json();
+      console.log("Payment API response:", data); // Log the payment response
 
-    if (data) {
-      // Redirect to the payment URL
-      window.location.href = data.data; // Navigate to the payment URL
-    } else {
-      // Handle the error case (e.g., show a message to the user)
-      alert(data.message || "Failed to create payment URL.");
+      if (data) {
+        // Redirect to the payment URL
+        window.location.href = data.data; // Navigate to the payment URL
+      } else {
+        // Handle the error case (e.g., show a message to the user)
+        alert(data.message || "Failed to create payment URL.");
+      }
+    } catch (error) {
+      console.error("Error during payment request:", error);
+      alert("An error occurred while processing the payment.");
     }
-  } catch (error) {
-    console.error("Error during payment request:", error);
-    alert("An error occurred while processing the payment.");
-  }
-};
-
-
+  };
 
   if (loading) {
     return <p>Loading membership plans...</p>;
@@ -132,9 +136,8 @@ const handleSelectPlan = async (plan) => {
 
 export default Membership;
 
-
-        
-        {/* <div class="page-title">
+{
+  /* <div class="page-title">
           <h3>Current Plan</h3>
         </div>
         <div class="row">
@@ -294,10 +297,13 @@ export default Membership;
               </tr>
             </tbody>
           </table>
-        </div> */}
-      {/* </div>
+        </div> */
+}
+{
+  /* </div>
     </div>
   );
 };
 
-export default Membership; */}
+export default Membership; */
+}

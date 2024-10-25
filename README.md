@@ -5,10 +5,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Available Scripts
 
 In the project directory, you can run:
-### `npm install react-hook-form react-toastify react-quill quill-image-uploader react-tag-input-component react-modal clsx
-`
-### `npm audit fix
-`
+
+### ` npm i --force`
 ### `npm start`
 
 Runs the app in the development mode.\

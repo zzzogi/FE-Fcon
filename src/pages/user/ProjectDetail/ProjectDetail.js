@@ -20,7 +20,9 @@ export const ProjectDetail = () => {
     // Fetch project details by ID
     const fetchProject = async () => {
       try {
-        const response = await axios.get(`http://103.179.184.83:7979/api/Post/getById/${id}`);        
+        const response = await axios.get(
+          `https://api-be.fieldy.online/api/Post/getById/${id}`
+        );
         console.log("Fetched project data:", response.data); // Log the project data for debugging
         setProjectData(response.data.data); // Ensure we are setting the correct structure (response.data.data)
       } catch (err) {
@@ -51,10 +53,13 @@ export const ProjectDetail = () => {
               {projectData ? (
                 <>
                   {/* Pass projectData to the Detail component as 'data' */}
-                 
+
                   <Detail data={projectData} page="employers" />
                   {projectData.chips && (
-                    <ChipList title={"Skills Required"} chips={projectData.chips} />
+                    <ChipList
+                      title={"Skills Required"}
+                      chips={projectData.chips}
+                    />
                   )}
                   {projectData.attachments && (
                     <Attachments attachments={projectData.attachments} />
@@ -73,7 +78,7 @@ export const ProjectDetail = () => {
                 <div>No project data available</div>
               )}
             </div>
-            <Sidebar data={projectData} page="employers"/>
+            <Sidebar data={projectData} page="employers" />
           </div>
         </div>
       </div>

@@ -36,7 +36,7 @@
 //     };
 
 //     try {
-//       const response = await fetch("http://103.179.184.83:7979/api/Post/AddNewPost", {
+//       const response = await fetch("https://api-be.fieldy.online/api/Post/AddNewPost", {
 //         method: 'POST',
 //         headers: {
 //           'Content-Type': 'application/json',
@@ -210,11 +210,8 @@ import "react-toastify/dist/ReactToastify.css";
 // Import js-cookie for managing cookies
 import Cookies from "js-cookie";
 
-import clsx from "clsx";
-
 const PostProject = () => {
   const { register, handleSubmit, watch } = useForm();
-  const budget = watch("budget");
   const apiUrl = process.env.REACT_APP_API_URL;
 
   const onSubmit = async (data) => {
@@ -252,14 +249,17 @@ const PostProject = () => {
     };
 
     try {
-      const response = await fetch("http://103.179.184.83:7979/api/Post/AddNewPost", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`, // Use the token retrieved from cookies
-        },
-        body: JSON.stringify(postData),
-      });
+      const response = await fetch(
+        `https://api-be.fieldy.online/api/Post/AddNewPost`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, // Use the token retrieved from cookies
+          },
+          body: JSON.stringify(postData),
+        }
+      );
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -368,7 +368,8 @@ const PostProject = () => {
                               {...register("skill_sets", { required: true })} // Add validation if needed
                             />
                             <p className="text-muted mb-0">
-                              Enter skills needed for the project, for best results add 5 or more skills.
+                              Enter skills needed for the project, for best
+                              results add 5 or more skills.
                             </p>
                           </div>
                         </div>
@@ -402,7 +403,10 @@ const PostProject = () => {
                     </div>
                   </div>
                 </div>
-                <button type="submit" className="btn btn-outline-danger btn-block">
+                <button
+                  type="submit"
+                  className="btn btn-outline-danger btn-block"
+                >
                   Post Project
                 </button>
               </form>
