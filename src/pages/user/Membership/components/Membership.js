@@ -1,101 +1,197 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Cookies from "js-cookie"; // Import js-cookie for handling cookies
 import "../layout.css";
+import { useNavigate } from "react-router-dom";
 
 const Membership = () => {
+  const [plans, setPlans] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const apiUrl = process.env.REACT_APP_API_URL;
+  const navigate = useNavigate();
+
+  const onNavRoute = (endpoint) => {
+    navigate(endpoint);
+  };
+
+  console.log(apiUrl);
+
+  useEffect(() => {
+    const fetchMembershipPlans = async () => {
+      try {
+        const response = await fetch(
+          `https://api-be.fieldy.online/api/MembershipPlan/getAllMembershipPlans`
+        );
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        console.log("Raw API response:", data); // Log full response
+
+        // Extract the membership plans from the 'data' field in the response
+        const plansData = Array.isArray(data.data) ? data.data : [];
+
+        console.log("Parsed plans data:", plansData); // Log parsed data
+
+        setPlans(plansData);
+      } catch (error) {
+        console.error("Error fetching membership plans:", error);
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMembershipPlans();
+  }, []);
+
+  //**fetching payment api */
+  const handleSelectPlan = async (plan) => {
+    const accountId = Cookies.get("userId");
+    const amount = plan.price;
+    const planId = plan.planId;
+    const token = Cookies.get("token");
+
+    // Redirect to login if user is not authenticated
+    if (!accountId || accountId === "undefined") {
+      navigate("/login");
+      return;
+    }
+    if (!token) {
+      navigate("/login");
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        `https://api-be.fieldy.online/api/Membership/AddNewMembership`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            userId: accountId,
+            planId: planId,
+            status: "success",
+          }),
+        }
+      );
+
+      const data = await response.json();
+      console.log("Payment API response:", data);
+
+      // Check for payment URL and redirect if it exists
+      if (response.ok && data.data) {
+        window.location.href = data.data; // Redirect to payment URL
+      } else {
+        alert(data.message || "Failed to create payment URL.");
+      }
+    } catch (error) {
+      console.error("Error during payment request:", error);
+      alert("An error occurred while processing the payment.");
+    }
+  };
+
+  if (loading) {
+    return <p>Loading membership plans...</p>;
+  }
+
+  if (error) {
+    return <p>{error}</p>;
+  }
+
   return (
-    <div class="col-xl-12" style={{ marginTop: "24px" }}>
-      <div class="dashboard-sec payout-section freelancer-statements plan-billing">
-        <div class="page-title portfolio-title">
-          <h3 class="mb-0">Plan & Billing</h3>
+    <div className="col-xl-12" style={{ marginTop: "24px" }}>
+      <div className="dashboard-sec payout-section freelancer-statements plan-billing">
+        <div className="page-title portfolio-title">
+          <h3 className="mb-0">Plan & Billing</h3>
         </div>
-        <div class="plan-billing-section">
-          <div class="row row-gap">
-            <div class="col-xl-4 col-md-6">
-              <div class="package-detail">
-                <h4>Basic Plan</h4>
-                <p>Go Pro, Best for the individuals</p>
-                <h3 class="package-price">
-                  $19.00 <span>/ Month</span>
-                </h3>
-                <div class="package-feature">
-                  <ul>
-                    <li>12 Project Credits</li>
-                    <li>10 Allowed Services</li>
-                    <li>20 Days visibility</li>
-                    <li>5 Featured Services</li>
-                    <li>20 Days visibility</li>
-                    <li>30 Days Package Expiry</li>
-                    <li class="non-check">Profile Featured</li>
-                  </ul>
+        <div className="plan-billing-section">
+          <div className="row row-gap">
+            {plans.length > 0 ? (
+              plans.map((plan) => (
+                <div className="col-xl-4 col-md-6" key={plan.planId}>
+                  <div className="package-detail">
+                    <h4>{plan.name}</h4>
+                    <p>{plan.description}</p>
+                    <h3 className="package-price">
+                      ${plan.price} <span>/ Month</span>
+                    </h3>
+                    <div className="package-feature">
+                      <ul>
+                        {plan.features.split(", ").map((feature, index) => (
+                          <li key={index}>{feature}</li>
+                        ))}
+                      </ul>
+                    </div>
+                    <button
+                      onClick={() => handleSelectPlan(plan)} // Trigger the payment request
+                      className="btn btn-outline-primary btn-block"
+                    >
+                      Select Plan
+                    </button>
+                  </div>
                 </div>
-                <a
-                  href="#payout_modal"
-                  data-bs-toggle="modal"
-                  class="btn btn-outline-primary btn-block"
-                >
-                  Select Plan
-                </a>
-              </div>
-            </div>
-            <div class="col-xl-4 col-md-6">
-              <div class="package-detail">
-                <h4>Business</h4>
-                <p>Highest selling package features</p>
-                <h3 class="package-price">
-                  $29.00<span>/ Month</span>
-                </h3>
-                <div class="package-feature">
-                  <ul>
-                    <li>15 Project Credits</li>
-                    <li>12 Allowed Services</li>
-                    <li>25 Days visibility</li>
-                    <li>10 Featured Services</li>
-                    <li>30 Days visibility</li>
-                    <li>40 Days Package Expiry</li>
-                    <li>Profile Featured</li>
-                  </ul>
+              ))
+            ) : (
+              <p>No plans available</p>
+            )}
+          </div>
+        </div>
+        <div class="page-title">
+          <h3>Current Plan</h3>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="member-plan pro-box">
+              <div class="member-detail">
+                <div class="row">
+                  <div class="col-md-4">
+                    <h5>The Unlimited</h5>
+                    <div class="yr-amt">
+                      Our most popular plan for small teams.
+                    </div>
+                    <div class="expiry-on">
+                      <span>
+                        <i class="feather-calendar"></i>Renew Date:
+                      </span>
+                      24 JAN 2022
+                    </div>
+                  </div>
+                  <div class="col-md-8 change-plan mt-3 mt-md-0">
+                    <div>
+                      <h3>$1200</h3>
+                      <div class="yr-duration">Duration: One Year</div>
+                    </div>
+                    <div class="change-plan-btn">
+                      <a href="#" class="btn btn-primary-lite">
+                        Cancel Subscription
+                      </a>
+                      <a href="#" class="btn btn-primary black-btn">
+                        Change Plan
+                      </a>
+                    </div>
+                  </div>
                 </div>
-                <a
-                  href="#payout_modal"
-                  data-bs-toggle="modal"
-                  class="btn btn-outline-primary btn-block"
-                >
-                  Select Plan
-                </a>
-              </div>
-            </div>
-            <div class="col-xl-4 col-md-6">
-              <div class="package-detail">
-                <h4>The Unlimited</h4>
-                <p>Drive crazy, unlimited on the go</p>
-                <h3 class="package-price">
-                  $79.00<span>/ Month</span>
-                </h3>
-                <div class="package-feature">
-                  <ul>
-                    <li>Unlimited Project Credits</li>
-                    <li>Unlimited Services</li>
-                    <li>Services Never Expire</li>
-                    <li>20 Featured Services</li>
-                    <li>Services Never Expire</li>
-                    <li>Package Never Expire</li>
-                    <li>Profile Featured</li>
-                  </ul>
-                </div>
-                <a
-                  href="#payout_modal"
-                  data-bs-toggle="modal"
-                  class="btn btn-outline-primary btn-block"
-                >
-                  Select Plan
-                </a>
               </div>
             </div>
           </div>
         </div>
-        <div class="page-title">
+      </div>
+    </div>
+  );
+};
+
+export default Membership;
+
+{
+  /* <div class="page-title">
           <h3>Current Plan</h3>
         </div>
         <div class="row">
@@ -255,10 +351,12 @@ const Membership = () => {
               </tr>
             </tbody>
           </table>
-        </div>
-      </div>
+        </div> 
+
+   </div>
     </div>
   );
 };
 
-export default Membership;
+export default Membership; */
+}

@@ -5,13 +5,15 @@ import GoogleSVG from "../../../assets/images/icon/google-icon.svg";
 import FacebookSVG from "../../../assets/images/icon/fb-icon.svg";
 import AppleSVG from "../../../assets/images/icon/ios-icon.svg";
 import { useNavigate } from "react-router-dom";
-import { useUserContext } from "../../../context/userContext";
+import Cookies from "js-cookie"; // Import js-cookie for handling cookies
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
-  const { userInfo, update } = useUserContext();
   const [inputTypeHidden, setInputTypeHidden] = useState({
     password: true,
   });
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   const [formData, setFormData] = useState({
     email: "",
@@ -33,38 +35,80 @@ const Login = () => {
     setFormData({ ...formData, [name]: value });
   };
 
+  /* FETCH CURRENT USER AFTER LOGIN ------------------- */
+  const fetchCurrentUser = async (token) => {
+    try {
+      const response = await fetch(
+        `https://api-be.fieldy.online/api/User/getCurrentUser`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            accept: "*/*",
+          },
+        }
+      );
+
+      if (response.ok) {
+        const result = await response.json();
+        Cookies.set("userId", result.userId, { expires: 7 }); // Set cookie for userId
+        Cookies.set("userType", result.userType, { expires: 7 }); // Set cookie for userType
+
+        console.log("Current user data:", result);
+      } else {
+        console.log("Failed to fetch current user");
+      }
+    } catch (error) {
+      console.error("Error fetching current user:", error);
+    }
+  };
+
   /* HANDLE LOGIN API CALL ------------------- */
-  // const handleLogin = async () => {
-  //   try {
-  //     const response = await fetch("http://localhost:5052/api/Auth/login", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         Username: formData.userName,
-  //         Password: formData.password,
-  //       }),
-  //     });
-  //     const result = await response.json();
+  const handleLogin = async () => {
+    try {
+      // const response = await fetch(`${apiUrl}/Auth/login`, {
+      const response = await fetch(
+        "https://api-be.fieldy.online/api/Auth/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            Username: formData.userName,
+            Password: formData.password,
+          }),
+        }
+      );
+      const result = await response.json();
 
-  //     if (response.ok) {
-  //       console.log("Login successful", result);
-  //       alert("Login successful");
-  //       navigate("/"); // Redirect to dashboard on successful login
-  //     } else {
-  //       console.log("Login failed", result);
-  //       alert(result.message || "Login failed. Please try again.");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error during login:", error);
-  //   }
-  // };
+      if (response.ok) {
+        console.log("Login successful", result);
+        toast.success("Login successfully!", {
+          position: "top-center",
+        });
+        const token = result.data;
+        Cookies.set("token", token, { expires: 7 }); // Set cookie for token
 
-  const handleLogin = () => {
-    update({ ...userInfo, userId: 1 });
-    alert("Đăng nhập thành công!");
-    navigate("/");
+        // Fetch current user details using the token
+        await fetchCurrentUser(token);
+        localStorage.setItem("loginSuccess", "true");
+        console.log(localStorage);
+        navigate("/"); // Redirect to dashboard on successful login
+      } else {
+        console.log("Login failed", result);
+        toast.error(result.message || "Login failed. Please try again.", {
+          position: "top-center",
+          autoClose: 3000,
+        });
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+      toast.error("An error occurred. Please try again.", {
+        position: "top-center",
+        autoClose: 3000,
+      });
+    }
   };
 
   /* ON NAVIGATE TO PAGE ------------------- */
@@ -165,6 +209,8 @@ const Login = () => {
           </div>
         </div>
       </div>
+      {/* Include the ToastContainer for rendering toast messages */}
+      <ToastContainer />
     </div>
   );
 };

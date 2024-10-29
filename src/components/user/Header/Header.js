@@ -1,19 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Header.css";
 import "../DropMenu/DropMenu.css";
 import DropMenu from "../DropMenu/DropMenu";
 import LogoHeader from "../../../assets/images/FconLogo.jpg";
 import Avatar1 from "../../../assets/images/avatar/avatar-1.jpg";
 import { useNavigate } from "react-router-dom";
-import { useUserContext } from "../../../context/userContext";
 import Notifications from "react-notifications-menu";
+import Cookies from "js-cookie"; // Import js-cookie to access cookies
 
 const Header = () => {
-  const { userInfo, update } = useUserContext();
   /* NAVIGATE TO PAGE  ------------------- */
   const navigate = useNavigate();
   const onNavRoute = (endpoint) => {
     navigate(endpoint);
+  };
+
+  // Get userType from cookies
+  const userType = Cookies.get("userType");
+
+  // Log the cookie value whenever the page is loaded
+  useEffect(() => {
+    console.log("userType cookie value:", userType);
+  }, [userType]);
+
+  // Handle logout (delete cookies)
+  const handleLogout = () => {
+    alert("Bạn đã đăng xuất");
+    Cookies.remove("userType"); // Remove userType cookie
+    Cookies.remove("token"); // If you have a token cookie, remove it as well
+    navigate("/"); // Redirect to the login page
   };
 
   return (
@@ -33,7 +48,7 @@ const Header = () => {
       </div>
 
       {/* Notification */}
-      {userInfo.userId ? (
+      {userType ? (
         <Notifications
           height="500px"
           width="500px"
@@ -48,7 +63,7 @@ const Header = () => {
       ) : null}
 
       {/* Auth header */}
-      {!userInfo.userId ? (
+      {!userType ? (
         <div className="auth-header">
           <div
             className="auth-button register"
@@ -101,14 +116,7 @@ const Header = () => {
                         </div>
                       </div>
                       <div className="nav-ref-container">
-                        <div
-                          className="sub-nav-item"
-                          onClick={() => {
-                            update({ ...userInfo, userId: 0 });
-                            alert("Bạn đã đăng xuất");
-                            navigate("/");
-                          }}
-                        >
+                        <div className="sub-nav-item" onClick={handleLogout}>
                           Log out
                         </div>
                       </div>

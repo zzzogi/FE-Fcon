@@ -19,8 +19,7 @@ import EduImg1 from "../../../assets/images/icon/report.png";
 import UserAva1 from "../../../assets/images/user/avatar-1.jpg";
 import UserAva2 from "../../../assets/images/user/avatar-2.jpg";
 
-import { useParams } from 'react-router-dom';
-
+import { useParams } from "react-router-dom";
 
 // [ Education - Experience ] Card Component
 const ECard = ({ data }) => {
@@ -46,7 +45,7 @@ const RCard = ({ data }) => {
   return (
     <div className="RCard">
       <div className="avatar">
-        <img src={data.avatar} alt="avatar"/>
+        <img src={data.avatar} alt="avatar" />
       </div>
       <div className="info">
         <div className="title">
@@ -89,7 +88,6 @@ const RCard = ({ data }) => {
 const Profile = () => {
   // Get Slug from router
   const { userType } = useParams();
-
 
   // Data render
   const experiences = [
@@ -155,7 +153,10 @@ const Profile = () => {
       {/* Bread crumb and current route */}
       <div className="section-bread-crumb">
         <div className="container">
-          <BreadCrumb title={`${userType} Detail`} page={`${userType} detail`} />
+          <BreadCrumb
+            title={`${userType} Detail`}
+            page={`${userType} detail`}
+          />
         </div>
       </div>
 

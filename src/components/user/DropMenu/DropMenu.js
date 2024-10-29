@@ -1,10 +1,10 @@
 import React from "react";
 import "./DropMenu.css";
 import { useNavigate } from "react-router-dom";
-import { useUserContext } from "../../../context/userContext";
+import Cookies from "js-cookie"; // Import js-cookie to access cookies
 
 const DropMenu = () => {
-  const { userInfo } = useUserContext();
+  const userType = Cookies.get("userType");
   // Employers Data
   const employers = [
     {
@@ -27,10 +27,6 @@ const DropMenu = () => {
       href: "/projects",
       ref: [],
     },
-    {
-      sub: "Payments",
-      ref: [],
-    },
   ];
 
   // Freelancers Data
@@ -43,10 +39,6 @@ const DropMenu = () => {
     {
       sub: "My profile",
       href: "/developer-profile",
-      ref: [],
-    },
-    {
-      sub: "Payments",
       ref: [],
     },
   ];
@@ -76,6 +68,9 @@ const DropMenu = () => {
   return (
     <div className="DropMenu">
       <div className="nav-list">
+        <div className="nav-item nav-dropmenu" onClick={() => onNavRoute("/")}>
+          <span>Home</span>
+        </div>
         <div
           className="nav-item nav-dropmenu"
           onClick={() => onNavRoute("/about-us")}
@@ -84,97 +79,105 @@ const DropMenu = () => {
         </div>
 
         {/* Employees */}
-        <div className="nav-item nav-dropmenu">
-          <span>For employers</span>
-          <i className="bi bi-chevron-down"></i>
-          <div className="nav-menu-container">
-            {employers.map((item) => {
-              return (
-                <div
-                  className={
-                    "sub-nav-item" +
-                    (item.ref.length > 0 ? " sub-nav-drop" : "")
-                  }
-                  key={item.sub}
-                  onClick={() => {
-                    if (item.ref.length === 0) {
-                      onNavRoute(item.href ? item.href : "#");
-                    }
-                    return;
-                  }}
-                >
-                  {item.sub}
-                  {item.ref.length > 0 && (
-                    <i className="bi bi-chevron-right"></i>
-                  )}
-                  {item.ref.length > 0 && (
-                    <div className="nav-ref-container">
-                      {item.ref.map((refer) => {
-                        return (
-                          <div
-                            className="sub-nav-item"
-                            key={refer.sub}
-                            onClick={() => {
-                              console.log(refer.href);
-                              onNavRoute(refer.href);
-                            }}
-                          >
-                            {refer.sub}
-                          </div>
-                        );
-                      })}
+        {userType === "company" && (
+          <>
+            <div className="nav-item nav-dropmenu">
+              <span>For employers</span>
+              <i className="bi bi-chevron-down"></i>
+              <div className="nav-menu-container">
+                {employers.map((item) => {
+                  return (
+                    <div
+                      className={
+                        "sub-nav-item" +
+                        (item.ref.length > 0 ? " sub-nav-drop" : "")
+                      }
+                      key={item.sub}
+                      onClick={() => {
+                        if (item.ref.length === 0) {
+                          onNavRoute(item.href ? item.href : "#");
+                        }
+                        return;
+                      }}
+                    >
+                      {item.sub}
+                      {item.ref.length > 0 && (
+                        <i className="bi bi-chevron-right"></i>
+                      )}
+                      {item.ref.length > 0 && (
+                        <div className="nav-ref-container">
+                          {item.ref.map((refer) => {
+                            return (
+                              <div
+                                className="sub-nav-item"
+                                key={refer.sub}
+                                onClick={() => {
+                                  console.log(refer.href);
+                                  onNavRoute(refer.href);
+                                }}
+                              >
+                                {refer.sub}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
                     </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        </div>
+                  );
+                })}
+              </div>
+            </div>
+          </>
+        )}
 
         {/* Freelancer */}
-        <div className="nav-item nav-dropmenu">
-          <span>For freelancer</span>
-          <i className="bi bi-chevron-down"></i>
-          <div className="nav-menu-container">
-            {freelancer.map((item) => {
-              return (
-                <div
-                  className={
-                    "sub-nav-item" +
-                    (item.ref.length > 0 ? " sub-nav-drop" : "")
-                  }
-                  key={item.sub}
-                  onClick={() => {
-                    if (item.ref.length === 0) {
-                      onNavRoute(item.href ? item.href : "#");
-                    }
-                    return;
-                  }}
-                >
-                  {item.sub}
-                  {item.ref.length > 0 && (
-                    <i className="bi bi-chevron-right"></i>
-                  )}
-                  {item.ref.length > 0 && (
-                    <div className="nav-ref-container">
-                      {item.ref.map((refer) => {
-                        return (
-                          <div
-                            className="sub-nav-item"
-                            key={refer.sub}
-                            onClick={() => onNavRoute(refer.href)}
-                          >
-                            {refer.sub}
-                          </div>
-                        );
-                      })}
+        {userType === "freelancer" && (
+          <>
+            <div className="nav-item nav-dropmenu">
+              <span>For freelancer</span>
+              <i className="bi bi-chevron-down"></i>
+              <div className="nav-menu-container">
+                {freelancer.map((item) => {
+                  return (
+                    <div
+                      className={
+                        "sub-nav-item" +
+                        (item.ref.length > 0 ? " sub-nav-drop" : "")
+                      }
+                      key={item.sub}
+                      onClick={() => {
+                        if (item.ref.length === 0) {
+                          onNavRoute(item.href ? item.href : "#");
+                        }
+                        return;
+                      }}
+                    >
+                      {item.sub}
+                      {item.ref.length > 0 && (
+                        <i className="bi bi-chevron-right"></i>
+                      )}
+                      {item.ref.length > 0 && (
+                        <div className="nav-ref-container">
+                          {item.ref.map((refer) => {
+                            return (
+                              <div
+                                className="sub-nav-item"
+                                key={refer.sub}
+                                onClick={() => onNavRoute(refer.href)}
+                              >
+                                {refer.sub}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
                     </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        </div>
+                  );
+                })}
+              </div>
+            </div>
+          </>
+        )}
 
         {/* Membership */}
         <div
@@ -229,13 +232,15 @@ const DropMenu = () => {
           </div>
         </div>
 
-        {userInfo.userRole === "admin" && (
-          <div
-            className="nav-item nav-dropmenu"
-            onClick={() => (window.location.href = "/admin")}
-          >
-            <span>Admin console</span>
-          </div>
+        {userType === "admin" && (
+          <>
+            <div
+              className="nav-item nav-dropmenu"
+              onClick={() => (window.location.href = "/admin")}
+            >
+              <span>Admin console</span>
+            </div>
+          </>
         )}
       </div>
     </div>
