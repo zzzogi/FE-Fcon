@@ -63,6 +63,10 @@ const Membership = () => {
       navigate("/login");
       return;
     }
+    if (!token) {
+      navigate("/login");
+      return;
+    }
   
     try {
       const response = await fetch(
@@ -85,8 +89,8 @@ const Membership = () => {
       console.log("Payment API response:", data);
   
       // Check for payment URL and redirect if it exists
-      if (response.ok && data.paymentUrl) {
-        window.location.href = data.paymentUrl; // Redirect to payment URL
+      if (response.ok && data.data) {
+        window.location.href = data.data; // Redirect to payment URL
       } else {
         alert(data.message || "Failed to create payment URL.");
       }
