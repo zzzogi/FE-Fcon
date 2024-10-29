@@ -16,6 +16,8 @@ import MembershipPage from "../pages/user/Membership";
 import PostProject from "../pages/user/PostProject";
 import Admin from "../pages/admin";
 import BlogReview from "../pages/user/BlogReview";
+import UserSetting from "../pages/user/UserSetting";
+import Proposals from "../pages/user/Proposals";
 
 const AppRoutes = () => {
   return (
@@ -25,9 +27,6 @@ const AppRoutes = () => {
 
       {/* Login Router */}
       <Route path="/login" element={<Login />} />
-
-       {/* Logout Router
-       <Route path="/logout" element={<Logout />} /> */}
 
       {/* Register Router */}
       <Route path="/register" element={<Register />} />
@@ -40,6 +39,13 @@ const AppRoutes = () => {
       {/* Developer Router */}
       <Route path="/developer-profile" element={<DeverloperProfile />} />
 
+      {/* User */}
+      <Route path="/user-setting" element={<UserSetting />} />
+
+      {/* Proposal */}
+      <Route path="/proposal" element={<Proposals />} />
+
+      {/* Membership */}
       <Route path="/membership" element={<MembershipPage />} />
 
       {/* Project Router */}

@@ -8,14 +8,13 @@ const FilterSide = ({ onFilterChange }) => {
   const [selectedCategories, setSelectedCategories] = useState([]);
 
   const locations = [
-    { label: "Hải Phòng" },
-    { label: "Hồ Chí Minh" },
-    { label: "Thủ Đức" },
-    { label: "Hòa Lạc" },
-    { label: "Đà Nẵng" },
-    { label: "Japan" },
-    { label: "Hà Nội" },
-    
+    { label: "US" },
+    { label: "UK" },
+    { label: "Ho Chi Minh" },
+    { label: "Vietnam" },
+    { label: "DE" },
+    { label: "JP" },
+    { label: "CA" },
   ];
 
   const skills = [

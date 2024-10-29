@@ -1,7 +1,6 @@
 import React from "react";
 import "./ProjectCardView.css";
 import { useNavigate } from "react-router-dom";
-import Avatar1 from "../../../assets/images/avatar/avatar-1.jpg";
 
 const ProjectCardView = ({ infomation }) => {
   const navigate = useNavigate();
@@ -14,12 +13,12 @@ const ProjectCardView = ({ infomation }) => {
           <div className="status">
             <i className="bi bi-check"></i>
           </div>
-          <img src={infomation?.avatar || Avatar1} alt="avatar" />
+          <img src={infomation.avatar} alt="avatar" />
         </div>
         <div className="info">
-          <p hidden>{infomation.id}</p>
           <p>{infomation.name}</p>
           <p>{infomation.position}</p>
+          <p>Ho Chi Minh, Viet Nam</p>
         </div>
         <div className="voting">
           <i className="bi bi-star-fill"></i>
@@ -29,11 +28,13 @@ const ProjectCardView = ({ infomation }) => {
           <i className="bi bi-star-fill grey"></i>
         </div>
         <div className="tags">
-          {infomation.tags.map((tag) => (
-            <div className="tag" key={infomation.name + tag}>
-              {tag}
-            </div>
-          ))}
+          {infomation.tags.map((tag) => {
+            return (
+              <div className="tag" key={infomation.name + tag}>
+                {tag}
+              </div>
+            );
+          })}
         </div>
         <div className="salary">
           <h4>{infomation.salary}</h4>
@@ -43,7 +44,7 @@ const ProjectCardView = ({ infomation }) => {
         </div>
         <button
           className="view-profile"
-          onClick={() => navigate(`/projects/${infomation.id}`)} // Navigates to the project details page
+          onClick={() => navigate("/projects/123")}
         >
           View project
         </button>
