@@ -9,10 +9,62 @@ import Documents from "./components/Documents";
 import clsx from "clsx";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Cookies from "js-cookie";
 
 const PostProject = () => {
-  const { register, handleSubmit, control, watch } = useForm();
-  const budget = watch("budget");
+  const { register, handleSubmit, watch } = useForm();
+  const apiUrl = process.env.REACT_APP_API_URL;
+
+  const onSubmit = async (data) => {
+    const userId = Cookies.get("userId"); // Hardcoded userId for now
+    const postTypeId = 2; // Hardcoded postTypeId
+
+    const token = Cookies.get("token"); // Get the token from cookies
+
+    if (!token) {
+      toast("Please login befor create post !!.", {
+        type: "error",
+        position: "top-center",
+      });
+      return;
+    }
+    // if (!userId) {
+    //   toast("No userID found, please login again.", {
+    //     type: "error",
+    //     position: "top-center",
+    //   });
+    //   return;
+    // }
+
+    const postData = {
+      userId: userId,
+      postTypeId: postTypeId,
+      title: data.project_title,
+      description: data.description, // Ensure you get the value from the textarea
+      budgetOrSalary: data.price, // Set budget or salary based on selection
+      skills: data.skill_sets,
+      status: "active", // Set this as per your business logic
+      createdAt: new Date().toISOString(), // Current date in ISO format
+      updatedAt: new Date().toISOString(), // Current date in ISO format
+      imgUrl: "",
+    };
+
+    try {
+      const response = await fetch(
+        `https://api-be.fieldy.online/api/Post/AddNewPost`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, // Use the token retrieved from cookies
+          },
+          body: JSON.stringify(postData),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
 
   const onSubmit = (data) => {
     console.log(data);
@@ -140,9 +192,11 @@ const PostProject = () => {
                               {...register("skill_sets")}
                               onKeyDown={(e) => {}}
                             />
-                            <p class="text-muted mb-0">
-                              Enter skills for needed for project, for best
-                              result add 5 or more Skills
+
+                            <p className="text-muted mb-0">
+                              Enter skills needed for the project, for best
+                              results add 5 or more skills.
+
                             </p>
                           </div>
                         </div>
