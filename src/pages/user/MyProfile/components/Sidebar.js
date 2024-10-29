@@ -1,7 +1,6 @@
 import React from "react";
 import "../layout.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import ComputerLine from "../../../../assets/images/icon/computer-line.svg";
 import MapPin from "../../../../assets/images/icon/map-pin.svg";
 import AirPlay from "../../../../assets/images/icon/airplay.svg";
 import Phone from "../../../../assets/images/icon/phone.svg";
@@ -12,13 +11,9 @@ import Close from "../../../../assets/images/icon/close.svg";
 import Eye from "../../../../assets/images/icon/eye.svg";
 import Pen from "../../../../assets/images/icon/edit-2.svg";
 import ChipList from "./Chip";
+import { ToastContainer, toast } from "react-toastify";
 
-
-
-
-const Sidebar = ({ chips, data }) => {
-  const info = data || {}; 
-  const reviews = info.reviews || [];
+const Sidebar = ({ chips }) => {
   const addRow = () => {
     const rowToAdd = document.getElementById("add_row1");
     let html = "";
@@ -286,15 +281,15 @@ const Sidebar = ({ chips, data }) => {
         <div class="card budget-widget ">
           <div class="budget-widget-details">
             <h6>Budget</h6>
-            <h4>${info.budgetOrSalary}</h4>
+            <h4>$125 - $180</h4>
             <p class="mb-0">Hourly Rate</p>
             <ul class="budget-profiles">
               <li>
-                {/* <h6>
+                <h6>
                   <img src={MapPin} alt="icon" class="icon" />
                   Location
                 </h6>
-                <h5>{info.position}</h5> */}
+                <h5>London, UK</h5>
               </li>
               <li>
                 <h6>
@@ -315,7 +310,7 @@ const Sidebar = ({ chips, data }) => {
                   <img src={Globe} alt="icon" class="icon" />
                   Language Level
                 </h6>
-                <h5>High</h5>
+                <h5>Basic</h5>
               </li>
               <li>
                 <h6>
@@ -335,26 +330,21 @@ const Sidebar = ({ chips, data }) => {
           </div>
           <div>
             <a
-              data-bs-toggle="modal"
+              // data-bs-toggle="modal"
               href="#file"
               class="btn proposal-btn btn-primary"
+              onClick={() =>
+                toast("Gửi lời mời thành công!", {
+                  type: "success",
+                })
+              }
             >
               Send Invite
             </a>
           </div>
         </div>
-        <div class="card budget-widget ">
-          <div class="budget-widget-details">                    
-            <ul class="budget-profiles">             
-              <li>
-                <h6>
-                  <img src={ComputerLine} alt="icon" class="icon" />
-                  SKill
-                </h6>
-                <h5>{info.skills}</h5>
-              </li>
-            </ul>
-          </div>       
+        <div class="card budget-widget">
+          <ChipList title="Skills" chips={[{}]} />
         </div>
         <div class="card budget-widget">
           <h6>Location</h6>
@@ -365,6 +355,7 @@ const Sidebar = ({ chips, data }) => {
             ></iframe>
           </div>
         </div>
+        <ToastContainer />
       </div>
     </>
   );

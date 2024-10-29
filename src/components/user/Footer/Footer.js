@@ -156,7 +156,7 @@ const Footer = () => {
       </div>
       <div className="footer-bottom">
         <div className="copyright-text text-center">
-          <p>Copyright 2024 © F-Con. All right reserved.</p>
+          <p>Copyright 2024 © KofeJob. All right reserved.</p>
         </div>
       </div>
     </div>

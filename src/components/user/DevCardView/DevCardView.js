@@ -24,9 +24,9 @@ const DevCardView = ({ infomation }) => {
         <div className="info">
           <p>{infomation.name}</p>
           <p>{infomation.position}</p>
-          {/* <p>
+          <p>
             Ho Chi Minh, Viet Nam
-          </p> */}
+          </p>
         </div>
         <div className="voting">
           <i className="bi bi-star-fill"></i>

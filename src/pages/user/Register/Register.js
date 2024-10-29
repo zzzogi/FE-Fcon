@@ -11,13 +11,12 @@ const Register = () => {
     password: true,
     confirm: true,
   });
-  const apiUrl = process.env.REACT_APP_API_URL;
 
   const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
+    username: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
   });
 
   const [formType, setFormType] = useState("freelancer");
@@ -29,7 +28,7 @@ const Register = () => {
   const toggleHidden = (name) => {
     setInputTypeHidden({
       ...inputTypeHidden,
-      [name]: !inputTypeHidden[name],
+      [name]: !inputTypeHidden[name]
     });
   };
 
@@ -42,7 +41,7 @@ const Register = () => {
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value
     });
   };
 
@@ -61,30 +60,24 @@ const Register = () => {
     }
 
     try {
-      const response = await fetch(
-        `https://api-be.fieldy.online/api/Auth/register`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            Username: formData.username,
-            Email: formData.email,
-            PasswordHash: formData.password,
-            UserType: formType, // or assign as needed
-            ContactInfo: "random", // or assign as needed
-            CreatedAt: new Date().toISOString(), // Assign current timestamp
-            UpdatedAt: new Date().toISOString(), // Assign current timestamp
-            NumberJobDone: 4,
-            Location: "string",
-            DeliveryTime: "string",
-            LanguageLevel: "string",
-            imgUrl: "string",
-            // role: formType, // e.g., "freelancer" or "company"
-          }),
-        }
-      );
+      const response = await fetch("http://localhost:5052/api/Auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          Username: formData.username,
+          Email: formData.email,
+          PasswordHash: formData.password,
+          UserType: formType, // or assign as needed
+          ContactInfo: "random", // or assign as needed
+          CreatedAt: new Date().toISOString(), // Assign current timestamp
+          UpdatedAt: new Date().toISOString() // Assign current timestamp
+          // role: formType, // e.g., "freelancer" or "company"
+        }),
+      });
+
+      const result = await response.json();
 
       if (response.ok) {
         navigate("/login"); // Redirect on successful registration
@@ -113,10 +106,10 @@ const Register = () => {
               Freelancer
             </button>
             <button
-              onClick={() => onChangeFormType("company")}
-              className={formType === "company" ? "form-active" : ""}
+              onClick={() => onChangeFormType("employee")}
+              className={formType === "employee" ? "form-active" : ""}
             >
-              Company
+              Employee
             </button>
           </div>
         </div>
@@ -199,8 +192,7 @@ const Register = () => {
               <div className="position-relative">
                 <input type="checkbox" className="checkmark" />
                 <span>
-                  I have read and agree to all{" "}
-                  <a href="#">Terms & Conditions</a>
+                  I have read and agree to all <a href="#">Terms & Conditions</a>
                 </span>
               </div>
             </div>
@@ -215,14 +207,13 @@ const Register = () => {
             <div className="action-line">
               <span>OR</span>
             </div>
-            <div className="action-socials">{/* Social buttons */}</div>
+            <div className="action-socials">
+              {/* Social buttons */}
+            </div>
             <div className="action-options">
               <div>
                 Already have an account?{" "}
-                <span
-                  className="signup-link"
-                  onClick={() => onNavRoute("/login")}
-                >
+                <span className="signup-link" onClick={() => onNavRoute("/login")}>
                   Sign in
                 </span>
               </div>
