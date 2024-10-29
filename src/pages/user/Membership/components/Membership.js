@@ -17,8 +17,6 @@ const Membership = () => {
 
   console.log(apiUrl);
 
-  console.log(apiUrl);
-
   useEffect(() => {
     const fetchMembershipPlans = async () => {
       try {
@@ -92,32 +90,6 @@ const Membership = () => {
       if (response.ok && data.data) {
         window.location.href = data.data; // Redirect to payment URL
       } else {
-        alert(data.message || "Failed to create payment URL.");
-      }
-    } catch (error) {
-      console.error("Error during payment request:", error);
-      alert("An error occurred while processing the payment.");
-    }
-
-    try {
-      const response = await fetch(
-        `https://api-be.fieldy.online/api/Payment/request-top-up-wallet-with-payos?userId=${accountId}&amount=${amount}`,
-        {
-          method: "POST", // or GET based on your API requirements
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      const data = await response.json();
-      console.log("Payment API response:", data); // Log the payment response
-
-      if (data) {
-        // Redirect to the payment URL
-        window.location.href = data.data; // Navigate to the payment URL
-      } else {
-        // Handle the error case (e.g., show a message to the user)
         alert(data.message || "Failed to create payment URL.");
       }
     } catch (error) {
@@ -379,6 +351,9 @@ export default Membership;
               </tr>
             </tbody>
           </table>
+        </div> 
+
+   </div>
     </div>
   );
 };
