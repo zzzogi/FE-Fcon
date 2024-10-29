@@ -7,14 +7,6 @@
   border: none;
 }
 
-.content {
-  min-height: 200px;
-}
-
-.container {
-  min-width: 1300px !important;
-}
-
 .company-detail-block {
   padding: 30px 0;
   border-bottom: 1px solid #ced4e6;

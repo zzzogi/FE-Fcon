@@ -16,33 +16,33 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <div className="app-layout">
-        {pathName !== "/admin" ? (
-          <>
-            <div className="app-header">
-              <div className="container">
-                <Header />
+      <div className="App">
+        <div className="app-layout">
+          {pathName !== "/admin" ? (
+            <>
+              <div className="app-header">
+                <div className="container">
+                  <Header />
+                </div>
               </div>
-            </div>
-            <div className="app-main">
-              <AppRoutes />
-            </div>
-            <div className="app-footer">
-              <div className="container">
-                <Footer />
+              <div className="app-main">
+                <AppRoutes />
               </div>
-            </div>
-          </>
-        ) : (
-          <>
-            <div className="app-main">
-              <AppRoutes />
-            </div>
-          </>
-        )}
+              <div className="app-footer">
+                <div className="container">
+                  <Footer />
+                </div>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="app-main">
+                <AppRoutes />
+              </div>
+            </>
+          )}
+        </div>
       </div>
-    </div>
   );
 }
 

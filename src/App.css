@@ -47,7 +47,3 @@ input[type="checkbox"] {
   width: 100%;
   min-height: 200px;
 }
-
-.container {
-  min-width: 1300px !important;
-}

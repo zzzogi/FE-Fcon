@@ -60,6 +60,42 @@ table .badge {
   height: auto;
   padding: 10px 15px;
 }
+
+.sidebar-menu li div {
+  color: #131523;
+  display: block;
+  font-size: 15px;
+  height: auto;
+  padding: 10px 15px;
+}
+
+.sidebar-menu > ul > li > div:hover {
+  background-color: rgba(118, 56, 255, 0.05);
+  color: #ff5b37;
+  cursor: pointer;
+}
+
+.sidebar-menu li div:hover {
+  cursor: pointer;
+  color: #ff5b37;
+}
+
+.sidebar-menu li div:active {
+  color: #ff5b37;
+  position: relative;
+  background: #ffffff;
+  box-shadow: 0px 4px 4px rgb(0 0 0 / 6%);
+  border-radius: 5px;
+}
+
+.sidebar-menu li.active > div {
+  color: #ff5b37;
+  position: relative;
+  background: #ffffff;
+  box-shadow: 0px 4px 4px rgb(0 0 0 / 6%);
+  border-radius: 5px;
+}
+
 .sidebar-menu li a:hover {
   color: #ff5b37;
 }

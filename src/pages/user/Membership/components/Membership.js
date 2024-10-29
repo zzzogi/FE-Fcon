@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Cookies from "js-cookie"; // Import js-cookie for handling cookies
@@ -15,7 +14,6 @@ const Membership = () => {
   const onNavRoute = (endpoint) => {
     navigate(endpoint);
   };
-
 
   console.log(apiUrl);
 
@@ -53,11 +51,11 @@ const Membership = () => {
 
   //**fetching payment api */
   const handleSelectPlan = async (plan) => {
-    const accountId = Cookies.get("userId"); 
-    const amount = plan.price; 
+    const accountId = Cookies.get("userId");
+    const amount = plan.price;
     const planId = plan.planId;
     const token = Cookies.get("token");
-    
+
     // Redirect to login if user is not authenticated
     if (!accountId || accountId === "undefined") {
       navigate("/login");
@@ -67,7 +65,7 @@ const Membership = () => {
       navigate("/login");
       return;
     }
-  
+
     try {
       const response = await fetch(
         `https://api-be.fieldy.online/api/Membership/AddNewMembership`,
@@ -75,7 +73,7 @@ const Membership = () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-             Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
             userId: accountId,
@@ -84,10 +82,10 @@ const Membership = () => {
           }),
         }
       );
-  
+
       const data = await response.json();
       console.log("Payment API response:", data);
-  
+
       // Check for payment URL and redirect if it exists
       if (response.ok && data.data) {
         window.location.href = data.data; // Redirect to payment URL
@@ -99,8 +97,6 @@ const Membership = () => {
       alert("An error occurred while processing the payment.");
     }
   };
-  
-  
 
   if (loading) {
     return <p>Loading membership plans...</p>;
@@ -139,7 +135,7 @@ const Membership = () => {
                       className="btn btn-outline-primary btn-block"
                     >
                       Select Plan
-                    </button>                  
+                    </button>
                   </div>
                 </div>
               ))
@@ -187,8 +183,6 @@ const Membership = () => {
             </div>
           </div>
         </div>
-
-
       </div>
     </div>
   );

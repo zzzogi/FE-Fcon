@@ -9,8 +9,13 @@ const DropMenu = () => {
   const employers = [
     {
       sub: "Freelancer",
-      href: "/members",
-      ref: [],
+      href: "/",
+      ref: [
+        {
+          sub: "Freelancer List",
+          href: "/members",
+        },
+      ],
     },
     {
       sub: "My profile",
@@ -35,25 +40,6 @@ const DropMenu = () => {
       sub: "My profile",
       href: "/developer-profile",
       ref: [],
-    },
-  ];
-
-  // Pages data
-  const pages = [
-    {
-      sub: "About us",
-      ref: [],
-      href: "/about-us",
-    },
-    {
-      sub: "Login",
-      ref: [],
-      href: "/login",
-    },
-    {
-      sub: "Register",
-      ref: [],
-      href: "/register",
     },
   ];
 
@@ -84,6 +70,12 @@ const DropMenu = () => {
       <div className="nav-list">
         <div className="nav-item nav-dropmenu" onClick={() => onNavRoute("/")}>
           <span>Home</span>
+        </div>
+        <div
+          className="nav-item nav-dropmenu"
+          onClick={() => onNavRoute("/about-us")}
+        >
+          <span>About Us</span>
         </div>
 
         {/* Employees */}
@@ -187,46 +179,6 @@ const DropMenu = () => {
           </>
         )}
 
-        {/* Pages */}
-        <div className="nav-item nav-dropmenu">
-          <span>Pages</span>
-          <i className="bi bi-chevron-down"></i>
-          <div className="nav-menu-container">
-            {pages.map((item) => {
-              return (
-                <div
-                  className={
-                    "sub-nav-item" +
-                    (item.ref.length > 0 ? " sub-nav-drop" : "")
-                  }
-                  key={item.sub}
-                  onClick={() => onNavRoute(item.href ? item.href : "#")}
-                >
-                  {item.sub}
-                  {item.ref.length > 0 && (
-                    <i className="bi bi-chevron-right"></i>
-                  )}
-                  {item.ref.length > 0 && (
-                    <div className="nav-ref-container">
-                      {item.ref.map((refer) => {
-                        return (
-                          <div
-                            className="sub-nav-item"
-                            key={refer.sub}
-                            onClick={() => onNavRoute(refer.href)}
-                          >
-                            {refer.sub}
-                          </div>
-                        );
-                      })}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
         {/* Membership */}
         <div
           className="nav-item nav-dropmenu"
@@ -279,6 +231,7 @@ const DropMenu = () => {
             })}
           </div>
         </div>
+
         {userType === "admin" && (
           <>
             <div

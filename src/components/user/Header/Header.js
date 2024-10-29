@@ -1,71 +1,16 @@
-// import React from "react";
-// import "./Header.css";
-// import DropMenu from "../DropMenu/DropMenu";
-// import LogoHeader from "../../../assets/images/FconLogo.jpg";
-// import { useNavigate } from "react-router-dom";
-
-// const Header = () => {
-//   /* NAVIGATE TO PAGE  ------------------- */
-//   const navigate = useNavigate();
-//   const onNavRoute = (endpoint) => {
-//     navigate(endpoint);
-//   };
-//   const credenticals = Cookies.get("userType");
-
-//   return (
-//     <div className="Header">
-//       <img
-//         src={LogoHeader}
-//         alt="header-logo-img"
-//         onClick={() => onNavRoute("/")}
-//         width={55 * 1.96629213483}
-//         height={55}
-//         style={{ cursor: "pointer" }}
-//       />
-
-//       {/* Dropdown menu  */}
-//       <div className="navbar-main">
-//         <DropMenu />
-//       </div>
-
-//       {/* Auth header */}
-//       <div className="auth-header">
-//         <div
-//           className="auth-button register"
-//           onClick={() => onNavRoute("/register")}
-//         >
-//           <i className="bi bi-person"></i>
-//           <span>Register</span>
-//         </div>
-//         <div className="line"></div>
-//         <div className="auth-button login" onClick={() => onNavRoute("/login")}>
-//           <i className="bi bi-person-lock"></i>
-//           <span>Login</span>
-//         </div>
-//         <div
-//           className="project-add"
-//           onClick={() => onNavRoute("/post-project")}
-//         >
-//           <i className="bi bi-plus"></i>
-//           Post a project
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Header;
 import React, { useEffect } from "react";
 import "./Header.css";
+import "../DropMenu/DropMenu.css";
 import DropMenu from "../DropMenu/DropMenu";
 import LogoHeader from "../../../assets/images/FconLogo.jpg";
+import Avatar1 from "../../../assets/images/avatar/avatar-1.jpg";
 import { useNavigate } from "react-router-dom";
+import Notifications from "react-notifications-menu";
 import Cookies from "js-cookie"; // Import js-cookie to access cookies
 
 const Header = () => {
-  const navigate = useNavigate();
-
   /* NAVIGATE TO PAGE  ------------------- */
+  const navigate = useNavigate();
   const onNavRoute = (endpoint) => {
     navigate(endpoint);
   };
@@ -80,6 +25,7 @@ const Header = () => {
 
   // Handle logout (delete cookies)
   const handleLogout = () => {
+    alert("Bạn đã đăng xuất");
     Cookies.remove("userType"); // Remove userType cookie
     Cookies.remove("token"); // If you have a token cookie, remove it as well
     navigate("/"); // Redirect to the login page
@@ -96,41 +42,101 @@ const Header = () => {
         style={{ cursor: "pointer" }}
       />
 
-      {/* Dropdown menu */}
+      {/* Dropdown menu  */}
       <div className="navbar-main">
         <DropMenu />
       </div>
 
-      {/* Auth header */}
-      <div className="auth-header">
-        {/* Conditionally render based on the presence of the userType cookie */}
-        {!userType ? (
-          <>
-            <div
-              className="auth-button register"
-              onClick={() => onNavRoute("/register")}
-            >
-              <i className="bi bi-person"></i>
-              <span>Register</span>
-            </div>
-            <div className="line"></div>
-            <div className="auth-button login" onClick={() => onNavRoute("/login")}>
-              <i className="bi bi-person-lock"></i>
-              <span>Login</span>
-            </div>
-          </>
-        ) : (
-          <div className="auth-button logout" onClick={handleLogout}>
-            <i className="bi bi-box-arrow-right"></i>
-            <span>Logout</span>
-          </div>
-        )}
+      {/* Notification */}
+      {userType ? (
+        <Notifications
+          height="500px"
+          width="500px"
+          data={[
+            {
+              image: Avatar1,
+              message: "Kameshwaran S just sent you a proposal.",
+              detailPage: "/proposal",
+            },
+          ]}
+        />
+      ) : null}
 
-        <div className="project-add" onClick={() => onNavRoute("/post-project")}>
-          <i className="bi bi-plus"></i>
-          Post a project
+      {/* Auth header */}
+      {!userType ? (
+        <div className="auth-header">
+          <div
+            className="auth-button register"
+            onClick={() => onNavRoute("/register")}
+          >
+            <i className="bi bi-person"></i>
+            <span>Register</span>
+          </div>
+          <div className="line"></div>
+          <div
+            className="auth-button login"
+            onClick={() => onNavRoute("/login")}
+          >
+            <i className="bi bi-person-lock"></i>
+            <span>Login</span>
+          </div>
         </div>
-      </div>
+      ) : (
+        <>
+          <div className="navbar-main">
+            <div className="DropMenu">
+              <div className="nav-list">
+                <div className="nav-item nav-dropmenu">
+                  <img
+                    src={Avatar1}
+                    alt="profile"
+                    style={{
+                      borderRadius: "50%",
+                      width: "35px",
+                      height: "35px",
+                    }}
+                  />
+                  <span>Adam Levine</span>
+                  <div className="nav-menu-container">
+                    <div className="sub-nav-drop">
+                      <div className="nav-ref-container">
+                        <div
+                          className="sub-nav-item"
+                          onClick={() => onNavRoute("/proposal")}
+                        >
+                          My proposals
+                        </div>
+                      </div>
+                      <div className="nav-ref-container">
+                        <div
+                          className="sub-nav-item"
+                          onClick={() => onNavRoute("/user-setting")}
+                        >
+                          User setting
+                        </div>
+                      </div>
+                      <div className="nav-ref-container">
+                        <div className="sub-nav-item" onClick={handleLogout}>
+                          Log out
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="auth-header">
+            <div
+              className="project-add"
+              onClick={() => onNavRoute("/post-project")}
+            >
+              <i className="bi bi-plus"></i>
+              Post a project
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };

@@ -211,15 +211,23 @@ import "react-toastify/dist/ReactToastify.css";
 import Cookies from "js-cookie";
 
 const PostProject = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   <input
     type="text"
-    className={`form-control ${errors.project_title ? 'is-invalid' : ''}`}
+    className={`form-control ${errors.project_title ? "is-invalid" : ""}`}
     {...register("project_title", { required: "Project title is required" })}
-  />
-  {errors.project_title && <div className="invalid-feedback">{errors.project_title.message}</div>}
-  
+  />;
+  {
+    errors.project_title && (
+      <div className="invalid-feedback">{errors.project_title.message}</div>
+    );
+  }
+
   const apiUrl = process.env.REACT_APP_API_URL;
 
   const onSubmit = async (data) => {
@@ -227,19 +235,16 @@ const PostProject = () => {
 
     let postTypeId = 0; // Hardcoded postTypeId
     const userType = Cookies.get("userType");
-    console.log(userType)
-    if(userType && userType === "freelancer"){
+    console.log(userType);
+    if (userType && userType === "freelancer") {
       postTypeId = 1; //
-      console.log(userType)
+      console.log(userType);
     }
-    if(userType && userType === "company"){
+    if (userType && userType === "company") {
       postTypeId = 2; //
-      console.log(userType)
+      console.log(userType);
     }
-    
-    
 
-    
     const token = Cookies.get("token"); // Get the token from cookies
 
     if (!token) {
