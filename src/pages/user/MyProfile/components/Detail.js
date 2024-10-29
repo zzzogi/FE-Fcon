@@ -1,18 +1,13 @@
 import React from "react";
-import { convertMinsToHrsMins } from "../../../../utils/commonFunc";
-import MapPin from "../../../../assets/images/icon/map-pin.svg";
-import Star from "../../../../assets/images/icon/star.svg";
+import PlaceholderImage from "../../../../assets/images/Fcon.jpg";
 import Calendar from "../../../../assets/images/icon/calendar.svg";
-import Eye from "../../../../assets/images/icon/eye.svg";
-import Pen from "../../../../assets/images/icon/edit-2.svg";
 import ComputerLine from "../../../../assets/images/icon/computer-line.svg";
+import Pen from "../../../../assets/images/icon/edit-2.svg";
+import Eye from "../../../../assets/images/icon/eye.svg";
+import MapPin from "../../../../assets/images/icon/map-pin.svg";
 import TimeLine from "../../../../assets/images/icon/time-line.svg";
 import UserHeartLine from "../../../../assets/images/icon/user-heart-line.svg";
-import TranslateTwo from "../../../../assets/images/icon/translate-2.svg";
-import TranslateOne from "../../../../assets/images/icon/translate.svg";
-import PlaceholderImage from "../../../../assets/images/Fcon.jpg";
 import "../layout.css";
-
 
 const Detail = ({ data }) => {
   const info = data || {};
@@ -28,26 +23,15 @@ const Detail = ({ data }) => {
               className="img-fluid"
               alt="project"
             />
-
           </div>
-          <div class="company-title">
-            {page === "employers" || page === "project-detail" ? (
-              <>
-                <p>{userData.name}</p>
-                <h4>{userData.description}</h4>
-              </>
-            ) : (
-              <>
-                <h4>{userData.name}</h4>
-                <p>{userData.description}</p>
-              </>
-            )}
+          <div className="company-title">
+            <h4>{info.title || "No Title Provided"}</h4>
+            {/* <p>{info.description || "No Description Provided"}</p> */}
           </div>
         </div>
-        <div class="company-address">
+        <div className="company-address">
           <ul>
             <li>
-
               <img src={MapPin} alt="icons" className="icon" />
               {info.position}{" "}
               {/* Placeholder since location is missing in the API */}
@@ -56,35 +40,18 @@ const Detail = ({ data }) => {
               <img src={Calendar} alt="icons" className="icon" />
               {new Date(info.createdAt).toLocaleDateString() ||
                 "Date not available"}
-
             </li>
             <li>
-              <img src={Calendar} alt="icons" class="icon" />
-              {userData.info.createdDate}
+              <img src={Pen} alt="icons" className="icon" />
+              {info.status || "Status not available"}
             </li>
-            {page === "employers" || page === "project-detail" ? (
-              <>
-                <li>
-                  <img src={Eye} alt="icons" class="icon" />
-                  {userData.info.numsOfViews + " reviews"}
-                </li>
-                <li>
-                  <img src={Pen} alt="icons" class="icon" />
-                  {userData.info.numsOfProposals + " Proposal"}
-                </li>
-              </>
-            ) : (
-              <>
-                <li>
-                  <img src={Star} alt="icons" class="icon" />
-                  {userData.info.rating + " "},
-                  {userData.info.numsOfReviews + " reviews"}
-                </li>
-              </>
-            )}
+            <li>
+              <img src={Eye} alt="icons" className="icon" />
+              {reviews.length + " reviews"} {/* Safely accessing length */}
+            </li>
           </ul>
         </div>
-        <div class="project-proposal-detail">
+        <div className="project-proposal-detail">
           <ul>
             <li>
               <div className="proposal-detail-img">
@@ -122,9 +89,9 @@ const Detail = ({ data }) => {
           </ul>
         </div>
       </div>
-      <div class="company-detail-block company-description">
-        <h4 class="company-detail-title">Description</h4>
-        <p>{userData.about}</p>
+      <div className="company-detail-block company-description">
+        <h4 className="company-detail-title">Description</h4>
+        <p>{info.description || "No additional description available"}</p>
       </div>
     </div>
   );
