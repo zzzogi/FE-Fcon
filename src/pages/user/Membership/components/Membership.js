@@ -98,8 +98,6 @@ const Membership = () => {
       console.error("Error during payment request:", error);
       alert("An error occurred while processing the payment.");
     }
-    const accountId = Cookies.get("userId"); // Generate or fetch the actual account ID here
-    const amount = plan.price; // Use the plan price
 
     try {
       const response = await fetch(
