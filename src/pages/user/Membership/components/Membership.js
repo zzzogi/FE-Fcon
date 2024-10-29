@@ -66,7 +66,7 @@ const Membership = () => {
   
     try {
       const response = await fetch(
-        `https://api-be.fieldy.online/api/Membership/InitiateMembership`,
+        `https://api-be.fieldy.online/api/Membership/AddNewMembership`,
         {
           method: "POST",
           headers: {

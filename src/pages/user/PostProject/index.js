@@ -227,13 +227,6 @@ const PostProject = () => {
       });
       return;
     }
-    // if (!userId) {
-    //   toast("No userID found, please login again.", {
-    //     type: "error",
-    //     position: "top-center",
-    //   });
-    //   return;
-    // }
 
     const postData = {
       userId: userId,
