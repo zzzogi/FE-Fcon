@@ -1,12 +1,16 @@
 import React from "react";
-import PlaceholderImage from "../../../../assets/images/Fcon.jpg";
-import Calendar from "../../../../assets/images/icon/calendar.svg";
-import ComputerLine from "../../../../assets/images/icon/computer-line.svg";
-import Pen from "../../../../assets/images/icon/edit-2.svg";
-import Eye from "../../../../assets/images/icon/eye.svg";
+import { convertMinsToHrsMins } from "../../../../utils/commonFunc";
 import MapPin from "../../../../assets/images/icon/map-pin.svg";
+import Star from "../../../../assets/images/icon/star.svg";
+import Calendar from "../../../../assets/images/icon/calendar.svg";
+import Eye from "../../../../assets/images/icon/eye.svg";
+import Pen from "../../../../assets/images/icon/edit-2.svg";
+import ComputerLine from "../../../../assets/images/icon/computer-line.svg";
 import TimeLine from "../../../../assets/images/icon/time-line.svg";
 import UserHeartLine from "../../../../assets/images/icon/user-heart-line.svg";
+import TranslateTwo from "../../../../assets/images/icon/translate-2.svg";
+import TranslateOne from "../../../../assets/images/icon/translate.svg";
+import PlaceholderImage from "../../../../assets/images/Fcon.jpg";
 import "../layout.css";
 
 const Detail = ({ data }) => {
