@@ -8,17 +8,19 @@ import "./Project.css";
 const Project = () => {
   const [projects, setProjects] = useState([]); // All projects
   const [filteredProjects, setFilteredProjects] = useState([]); // Filtered projects
+  const [searchTerm, setSearchTerm] = useState(""); // Search term state
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const apiUrl = process.env.REACT_APP_API_URL;
+  
   // Fetch data from API
   useEffect(() => {
     const fetchProjects = async () => {
       try {
         const response = await axios.get(
           `https://api-be.fieldy.online/api/Post/getAllPosts`
-        ); // Replace with your actual API endpoint
+        ); 
         if (response.data.success) {
           const filteredByType = response.data.data.filter(
             (project) => project.postTypeId === 1
@@ -38,13 +40,12 @@ const Project = () => {
           const projectsWithLocations = filteredByType.map(
             (project, index) => ({
               ...project,
-              // Assign a location by cycling through the locations array
               position: locations[index % locations.length],
             })
           );
 
           setProjects(projectsWithLocations);
-          setFilteredProjects(projectsWithLocations); // Initially, all projects with postTypeId = 1 are displayed
+          setFilteredProjects(projectsWithLocations); 
         } else {
           setError("Failed to load projects.");
         }
@@ -84,12 +85,25 @@ const Project = () => {
     setFilteredProjects(newFilteredProjects);
   };
 
+  // Handle search functionality
+  const handleSearchChange = (event) => {
+    const value = event.target.value;
+    setSearchTerm(value);
+    if (value) {
+      const searchedProjects = projects.filter((project) =>
+        project.title.toLowerCase().includes(value.toLowerCase())
+      );
+      setFilteredProjects(searchedProjects);
+    } else {
+      setFilteredProjects(projects);
+    }
+  };
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
 
   return (
     <div className="Project">
-      {/* Bread crumb and current router */}
       <div className="section-bread-crumb">
         <div className="container">
           <BreadCrumb title="Project Grid" page="Project" />
@@ -99,18 +113,22 @@ const Project = () => {
       <div className="section-dev-list">
         <div className="container">
           <div className="main-flex">
-            {/* Filter sidebar */}
             <div className="filter-side">
               <FilterSide onFilterChange={handleFilterChange} />
             </div>
 
             <div className="dev-list">
-              {/* Filter-top */}
               <div className="dev-list-filter">
+                <input
+                  type="text"
+                  placeholder="Search projects..."
+                  value={searchTerm}
+                  onChange={handleSearchChange}
+                  className="search-bar"
+                />
                 <span>Found {filteredProjects.length} Results</span>
               </div>
 
-              {/* List-render */}
               <div className="project-list">
                 {filteredProjects.length > 0 ? (
                   filteredProjects.map((project) => (
@@ -131,7 +149,6 @@ const Project = () => {
                 )}
               </div>
 
-              {/* Pagination can be handled here */}
               <div className="dev-list-navigator">
                 <div className="arrow arrow-left">
                   <i className="bi bi-chevron-left"></i>
