@@ -79,7 +79,7 @@ const Detail = ({ data }) => {
                 </p>
               </div>
             </li>
-            <li>
+            {/* <li>
               <div className="proposal-detail-img">
                 <img src={UserHeartLine} alt="icons" />
               </div>
@@ -89,7 +89,7 @@ const Detail = ({ data }) => {
                   {info.postType || "Not specified"}
                 </p>
               </div>
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>
