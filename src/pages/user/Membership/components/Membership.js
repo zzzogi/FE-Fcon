@@ -117,7 +117,7 @@ const Membership = () => {
                     <h4>{plan.name}</h4>
                     <p>{plan.description}</p>
                     <h3 className="package-price">
-                      ${plan.price} <span>/ Month</span>
+                      ${plan.price} <span>/6 Months</span>
                     </h3>
                     <div className="package-feature">
                       <ul>
