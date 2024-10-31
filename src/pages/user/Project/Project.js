@@ -6,46 +6,33 @@ import ProjectCardView from "../../../components/user/ProjectCardView/ProjectCar
 import "./Project.css";
 
 const Project = () => {
-  const [projects, setProjects] = useState([]); // All projects
-  const [filteredProjects, setFilteredProjects] = useState([]); // Filtered projects
-  const [searchTerm, setSearchTerm] = useState(""); // Search term state
+  const [projects, setProjects] = useState([]);
+  const [filteredProjects, setFilteredProjects] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const apiUrl = process.env.REACT_APP_API_URL;
-  
-  // Fetch data from API
+
   useEffect(() => {
     const fetchProjects = async () => {
       try {
         const response = await axios.get(
           `https://api-be.fieldy.online/api/Post/getAllPosts`
-        ); 
+        );
         if (response.data.success) {
           const filteredByType = response.data.data.filter(
             (project) => project.postTypeId === 1
           );
 
-          // Adding random locations for each project for filtering
-          const locations = [
-            "Hà Nội",
-            "Đà Nẵng",
-            "Hồ Chí Minh",
-            "Hải Phòng",
-            "Japan",
-            "Thủ Đức",
-            "Hòa Lạc",
-          ];
-
-          const projectsWithLocations = filteredByType.map(
-            (project, index) => ({
-              ...project,
-              position: locations[index % locations.length],
-            })
-          );
+          const locations = ["Hà Nội", "Đà Nẵng", "Hồ Chí Minh", "Hải Phòng", "Japan", "Thủ Đức", "Hòa Lạc"];
+          const projectsWithLocations = filteredByType.map((project, index) => ({
+            ...project,
+            position: locations[index % locations.length],
+          }));
 
           setProjects(projectsWithLocations);
-          setFilteredProjects(projectsWithLocations); 
+          setFilteredProjects(projectsWithLocations);
         } else {
           setError("Failed to load projects.");
         }
@@ -68,24 +55,18 @@ const Project = () => {
       );
     }
 
-    // Filter by skills
-    if (selectedFilters.skills.length > 0) {
-      newFilteredProjects = newFilteredProjects.filter((project) =>
-        selectedFilters.skills.some((skill) => project.skills.includes(skill))
-      );
-    }
-
-    // Filter by categories
-    if (selectedFilters.categories.length > 0) {
-      newFilteredProjects = newFilteredProjects.filter((project) =>
-        selectedFilters.categories.includes(project.title)
-      );
+    // Filter by price range
+    if (selectedFilters.priceRange) {
+      const { minPrice, maxPrice } = selectedFilters.priceRange;
+      newFilteredProjects = newFilteredProjects.filter((project) => {
+        const price = parseFloat(project.budgetOrSalary);
+        return price >= minPrice && price <= maxPrice;
+      });
     }
 
     setFilteredProjects(newFilteredProjects);
   };
 
-  // Handle search functionality
   const handleSearchChange = (event) => {
     const value = event.target.value;
     setSearchTerm(value);

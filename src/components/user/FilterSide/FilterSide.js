@@ -4,8 +4,8 @@ import CheckDropMenu from "../CheckDropMenu/CheckDropMenu";
 
 const FilterSide = ({ onFilterChange }) => {
   const [selectedLocations, setSelectedLocations] = useState([]);
-  const [selectedSkills, setSelectedSkills] = useState([]);
-  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(10000);
 
   const locations = [
     { label: "Hải Phòng" },
@@ -15,64 +15,28 @@ const FilterSide = ({ onFilterChange }) => {
     { label: "Đà Nẵng" },
     { label: "Japan" },
     { label: "Hà Nội" },
-    
-  ];
-
-  const skills = [
-    { label: "HTML" },
-    { label: "CSS" },
-    { label: "Copywriting" },
-    { label: "Node.js" },
-    { label: "Android Studio" },
-    { label: "PostgreSQL" },
-    { label: "Data Visualization" },
-  ];
-
-  const categories = [
-    { label: "Web Developer Needed" },
-    { label: "Mobile App Developer" },
-    { label: "Content Writer" },
-    { label: "Data Analyst" },
-    { label: "Graphic Designer" },
-    { label: "Backend Developer" },
-    { label: "UI/UX Designer" },
-    { label: "Full Stack Developer" },
-    { label: "Business Analyst" },
-    { label: "Marketing Specialist" },
   ];
 
   const handleLocationChange = (selected) => {
     setSelectedLocations(selected);
     onFilterChange({
       locations: selected,
-      skills: selectedSkills,
-      categories: selectedCategories,
+      priceRange: { minPrice, maxPrice },
     });
   };
 
-  const handleSkillChange = (selected) => {
-    setSelectedSkills(selected);
+  const handlePriceChange = () => {
     onFilterChange({
       locations: selectedLocations,
-      skills: selected,
-      categories: selectedCategories,
-    });
-  };
-
-  const handleCategoryChange = (selected) => {
-    setSelectedCategories(selected);
-    onFilterChange({
-      locations: selectedLocations,
-      skills: selectedSkills,
-      categories: selected,
+      priceRange: { minPrice, maxPrice },
     });
   };
 
   const resetFilters = () => {
     setSelectedLocations([]);
-    setSelectedSkills([]);
-    setSelectedCategories([]);
-    onFilterChange({ locations: [], skills: [], categories: [] });
+    setMinPrice(0);
+    setMaxPrice(10000);
+    onFilterChange({ locations: [], priceRange: { minPrice: 0, maxPrice: 10000000 } });
   };
 
   return (
@@ -80,26 +44,35 @@ const FilterSide = ({ onFilterChange }) => {
       <div className="filter-container">
         <div className="filter-title">
           <h4>Filters</h4>
-          <button className="reset-filters" onClick={resetFilters}>Reset Filters</button>
+          <button className="reset-filters" onClick={resetFilters}>Reset</button>
         </div>
+
         <CheckDropMenu
           title="Location"
           options={locations}
           selectedOptions={selectedLocations}
           onChange={handleLocationChange}
         />
-        <CheckDropMenu
-          title="Skills"
-          options={skills}
-          selectedOptions={selectedSkills}
-          onChange={handleSkillChange}
-        />
-        <CheckDropMenu
-          title="Categories"
-          options={categories}
-          selectedOptions={selectedCategories}
-          onChange={handleCategoryChange}
-        />
+
+        <div className="price-filter">
+          <h5>Price Range</h5>
+          <div className="price-inputs">
+            <input
+              type="number"
+              placeholder="Min"
+              value={minPrice}
+              onChange={(e) => setMinPrice(Number(e.target.value))}
+              onBlur={handlePriceChange}
+            />
+            <input
+              type="number"
+              placeholder="Max"
+              value={maxPrice}
+              onChange={(e) => setMaxPrice(Number(e.target.value))}
+              onBlur={handlePriceChange}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
