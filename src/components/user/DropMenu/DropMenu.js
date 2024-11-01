@@ -7,26 +7,27 @@ const DropMenu = () => {
   const userType = Cookies.get("userType");
   // Employers Data
   const employers = [
+    // {
+    //   sub: "Freelancer",
+    //   href: "/",
+    //   ref: [
+    //     {
+    //       sub: "Freelancer List",
+    //       href: "/members",
+    //     },
+    //   ],
+    // },
     {
-      sub: "Freelancer",
-      href: "/",
-      ref: [
-        {
-          sub: "Freelancer List",
-          href: "/members",
-        },
-      ],
+      sub: "Projects",
+      href: "/projects",
+      ref: [],
     },
     {
       sub: "My profile",
       href: "/company-profile",
       ref: [],
     },
-    {
-      sub: "Projects",
-      href: "/projects",
-      ref: [],
-    },
+  
   ];
 
   // Freelancers Data
