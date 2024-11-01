@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
   AreaChart,
@@ -11,129 +11,108 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
+// Sample data for the area chart
 const data = [
-  {
-    name: "09/5/2024",
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: "10/5/2024",
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: "11/5/2024",
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: "12/5/2024",
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-  {
-    name: "13/5/2024",
-    uv: 1890,
-    pv: 4800,
-    amt: 2181,
-  },
-  {
-    name: "14/5/2024",
-    uv: 2390,
-    pv: 3800,
-    amt: 2500,
-  },
-  {
-    name: "15/5/2024",
-    uv: 3490,
-    pv: 4300,
-    amt: 2100,
-  },
+  { name: "27/10/2024", uv: 4000, pv: 2400, amt: 2400 },
+  { name: "29/10/2024", uv: 3000, pv: 1398, amt: 2210 },
+  { name: "31/10/2024", uv: 2000, pv: 9800, amt: 2290 },
+  { name: "02/11/2024", uv: 2780, pv: 3908, amt: 2000 },
+  { name: "4/11/2024", uv: 1890, pv: 4800, amt: 2181 },
+  { name: "6/11/2024", uv: 2390, pv: 3800, amt: 2500 },
+  { name: "08/11/2024", uv: 3490, pv: 4300, amt: 2100 },
 ];
 
+// Sample data for the table
+const getRandomDate = () => {
+  const start = new Date("2024-10-27");
+  const end = new Date("2024-11-08");
+  const randomTime = start.getTime() + Math.random() * (end.getTime() - start.getTime());
+  const randomDate = new Date(randomTime);
+  
+  // Format the date as DD/MM/YYYY
+  const day = String(randomDate.getDate()).padStart(2, '0');
+  const month = String(randomDate.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+  const year = randomDate.getFullYear();
+  
+  return `${day}/${month}/${year}`;
+};
+
+const tableData = [
+  { username: "thanhhoang93", deposit: "+25,000", date: getRandomDate(), plan: "2" }, // plan=2
+  { username: "baongoc_87", deposit: "+25,000", date: getRandomDate(), plan: "2" }, // plan=2
+  { username: "honghanh1203", deposit: "+25,000", date: getRandomDate(), plan: "2" }, // plan=2
+  { username: "linhnguyen.vn", deposit: "+25,000", date: getRandomDate(), plan: "2" }, // plan=2
+  { username: "duypham_hn", deposit: "+25,000", date: getRandomDate(), plan: "2" }, // plan=2
+  { username: "nguyentuan_99", deposit: "+25,000", date: getRandomDate(), plan: "2" }, // plan=2
+  { username: "hongson85", deposit: "+25,000", date: getRandomDate(), plan: "2" }, // plan=2
+  { username: "kimanh_ha", deposit: "+25,000", date: getRandomDate(), plan: "2" }, // plan=2
+  { username: "lebao92", deposit: "+10,000", date: getRandomDate(), plan: "1" }, // plan=1
+  { username: "minhthu2304", deposit: "+25,000", date: getRandomDate(), plan: "2" }, // plan=2
+  { username: "vanhung_qn", deposit: "+10,000", date: getRandomDate(), plan: "1" }, // plan=1
+  { username: "haianh1995", deposit: "+25,000", date: getRandomDate(), plan: "2" }, // plan=2
+  { username: "nguyenduong99", deposit: "+10,000", date: getRandomDate(), plan: "1" }, // plan=1
+  { username: "lehoang.hcm", deposit: "+10,000", date: getRandomDate(), plan: "1" }, // plan=1
+  { username: "tramy2802", deposit: "+25,000", date: getRandomDate(), plan: "2" }, // plan=2
+  { username: "hoangnam.vn", deposit: "+25,000", date: getRandomDate(), plan: "2" }, // plan=2
+  { username: "phucnguyen_98", deposit: "+25,000", date: getRandomDate(), plan: "2" }, // plan=2
+  { username: "tuyettrinh85", deposit: "+25,000", date: getRandomDate(), plan: "2" }, // plan=2
+  { username: "nguyenkhoi.bh", deposit: "+10,000", date: getRandomDate(), plan: "1" }, // plan=1
+  { username: "thanhlam_hue", deposit: "+25,000", date: getRandomDate(), plan: "2" }, // plan=2
+  { username: "yenphuong_qn", deposit: "+50,000", date: getRandomDate(), plan: "3" }, // plan=3
+];
+
+
+
 const RevenueReport = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 4; // Number of rows per page
+  const totalPages = Math.ceil(tableData.length / itemsPerPage);
+
+  // Calculate the data for the current page
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentData = tableData.slice(startIndex, startIndex + itemsPerPage);
+
+  const handlePageChange = (page) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  };
+
   return (
-    <div class="card-body">
-      <div class="card-header pt-0" style={{ marginBottom: 30 }}>
-        <h4 class="card-title">Biểu đồ doanh thu</h4>
+    <div className="card-body">
+      <div className="card-header pt-0" style={{ marginBottom: 30 }}>
+        <h4 className="card-title">Revenue Chart</h4>
       </div>
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-7">
-            <AreaChart
-              width={700}
-              height={400}
-              data={data}
-              margin={{
-                top: 10,
-                right: 30,
-                left: 0,
-                bottom: 0,
-              }}
-            >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
-              <YAxis />
-              <Tooltip />
-              <Area
-                type="monotone"
-                dataKey="uv"
-                stackId="1"
-                stroke="#8884d8"
-                fill="#8884d8"
-              />
-              <Area
-                type="monotone"
-                dataKey="pv"
-                stackId="1"
-                stroke="#82ca9d"
-                fill="#82ca9d"
-              />
+      <div className="container">
+        <div className="row">
+          <div className="col-lg-7">
+            <ResponsiveContainer width="100%" height={400}>
               <AreaChart
-                type="monotone"
-                dataKey="amt"
-                stackId="1"
-                stroke="#ffc658"
-                fill="#ffc658"
-              />
-            </AreaChart>
+                data={data}
+                margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Area type="monotone" dataKey="uv" stackId="1" stroke="#8884d8" fill="#8884d8" />
+                <Area type="monotone" dataKey="pv" stackId="1" stroke="#82ca9d" fill="#82ca9d" />
+                <Area type="monotone" dataKey="amt" stackId="1" stroke="#ffc658" fill="#ffc658" />
+              </AreaChart>
+            </ResponsiveContainer>
           </div>
-          <div class="col-lg-4">
-            <div class="card budget-widget">
-              <div class="budget-widget-details">
-                <h6>Thông số trong tuần</h6>
-                <ul class="budget-profiles">
-                  <li
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <h5>Số người dùng đăng ký gói</h5>
-                    <h5 style={{ fontWeight: 700 }}>32</h5>
+          <div className="col-lg-4">
+            <div className="card budget-widget">
+              <div className="budget-widget-details">
+                <h6>Total transactions</h6>
+                <ul className="budget-profiles">
+                  <li style={{ display: "flex", justifyContent: "space-between" }}>
+                    <h5>Total memberships registered: </h5>
+                    <h5 style={{ fontWeight: 700 }}>21</h5>
                   </li>
-                  <li
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <h5>Số người dùng huỷ đăng ký</h5>
-                    <h5 style={{ fontWeight: 700 }}>3</h5>
-                  </li>
-                  <li
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <h5>Tổng doanh thu</h5>
-                    <h5 style={{ fontWeight: 700 }}>$497,60</h5>
+                  <li style={{ display: "flex", justifyContent: "space-between" }}>
+                    <h5>Total</h5>
+                    <h5 style={{ fontWeight: 700 }}>525,000</h5>
                   </li>
                 </ul>
               </div>
@@ -142,76 +121,67 @@ const RevenueReport = () => {
         </div>
       </div>
       <div style={{ marginBottom: 50 }} />
-      <div class="card-header pt-0" style={{ marginBottom: 30 }}>
-        <h4 class="card-title">Biến động</h4>
+      <div className="card-header pt-0" style={{ marginBottom: 30 }}>
+        <h4 className="card-title">Fluctuations</h4>
       </div>
-      <div class="table-responsive">
-        <table class="table mb-0">
+      <div className="table-responsive">
+        <table className="table mb-0">
           <thead>
             <tr>
               <th>Username</th>
               <th>Deposit</th>
               <th>Date</th>
-              <th>Membership Package</th>
+              <th>Membership Plan</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>John Doe</td>
-              <td>+19,98$</td>
-              <td>12 May 2024</td>
-              <td>2</td>
-            </tr>
-            <tr>
-              <td>Mary Moe</td>
-              <td>+29,98$</td>
-              <td>11 May 2024</td>
-              <td>3</td>
-            </tr>
-            <tr>
-              <td>July Dooley</td>
-              <td>+29,98$</td>
-              <td>11 May 2024</td>
-              <td>3</td>
-            </tr>
-            <tr>
-              <td>Monkey Donkey</td>
-              <td>+9,98$</td>
-              <td>11 May 2024</td>
-              <td>1</td>
-            </tr>
+            {currentData.map((entry, index) => (
+              <tr key={index}>
+                <td>{entry.username}</td>
+                <td>{entry.deposit}</td>
+                <td>{entry.date}</td>
+                <td>{entry.plan}</td>
+              </tr>
+            ))}
           </tbody>
           <tfoot>
             <tr>
-              <div style={{ paddingBottom: "32px" }}>
-                <ul class="pagination mb-4">
-                  <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1">
+              <td colSpan="4">
+                <ul className="pagination mb-4">
+                  <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
+                    <a
+                      className="page-link"
+                      href="#"
+                      onClick={() => handlePageChange(currentPage - 1)}
+                    >
                       Previous
                     </a>
                   </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">
-                      1
-                    </a>
-                  </li>
-                  <li class="page-item active">
-                    <a class="page-link" href="#">
-                      2 <span class="sr-only">(current)</span>
-                    </a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">
-                      3
-                    </a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">
+                  {Array.from({ length: totalPages }, (_, index) => (
+                    <li
+                      key={index + 1}
+                      className={`page-item ${currentPage === index + 1 ? "active" : ""}`}
+                    >
+                      <a
+                        className="page-link"
+                        href="#"
+                        onClick={() => handlePageChange(index + 1)}
+                      >
+                        {index + 1}
+                      </a>
+                    </li>
+                  ))}
+                  <li className={`page-item ${currentPage === totalPages ? "disabled" : ""}`}>
+                    <a
+                      className="page-link"
+                      href="#"
+                      onClick={() => handlePageChange(currentPage + 1)}
+                    >
                       Next
                     </a>
                   </li>
                 </ul>
-              </div>
+              </td>
             </tr>
           </tfoot>
         </table>

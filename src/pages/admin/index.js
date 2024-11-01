@@ -35,7 +35,7 @@ const Admin = () => {
             }}
           >
             <ul>
-              <li class={`${page === "blog" ? "active" : null}`}>
+              {/* <li class={`${page === "blog" ? "active" : null}`}>
                 <div
                   style={{ textDecoration: "none" }}
                   onClick={() => setPage("blog")}
@@ -43,7 +43,7 @@ const Admin = () => {
                   <img src={Pen} class="icon" alt="icon" />{" "}
                   <span>Create blog</span>
                 </div>
-              </li>
+              </li> */}
               <li class={`${page === "project" ? "active" : null}`}>
                 <div
                   style={{ textDecoration: "none" }}
