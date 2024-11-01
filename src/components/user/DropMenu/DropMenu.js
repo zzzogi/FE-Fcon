@@ -79,7 +79,7 @@ const DropMenu = () => {
         </div>
 
         {/* Employees */}
-        {userType === "company" && (
+        {userType  && (
           <>
             <div className="nav-item nav-dropmenu">
               <span>For employers</span>
@@ -131,7 +131,7 @@ const DropMenu = () => {
         )}
 
         {/* Freelancer */}
-        {userType === "freelancer" && (
+        {userType && (
           <>
             <div className="nav-item nav-dropmenu">
               <span>For freelancer</span>
@@ -188,7 +188,7 @@ const DropMenu = () => {
         </div>
 
         {/* Blogs */}
-        <div className="nav-item nav-dropmenu">
+        {/* <div className="nav-item nav-dropmenu">
           <span>Blogs</span>
           <i className="bi bi-chevron-down"></i>
           <div className="nav-menu-container">
@@ -230,7 +230,7 @@ const DropMenu = () => {
               );
             })}
           </div>
-        </div>
+        </div> */}
 
         {userType === "admin" && (
           <>
