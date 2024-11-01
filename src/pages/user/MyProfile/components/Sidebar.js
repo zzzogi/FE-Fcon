@@ -274,7 +274,7 @@ const Sidebar = ({ chips, data }) => {
                   href="freelancer-dashboard.html"
                   class="btn btn-primary submit-btn"
                 >
-                  Go to Dashboard
+                  Close
                 </a>
               </div>
             </div>
@@ -288,13 +288,13 @@ const Sidebar = ({ chips, data }) => {
             <h6>Budget</h6>
             <h4>${info.budgetOrSalary}</h4>
             <p class="mb-0">Hourly Rate</p>
-            <ul class="budget-profiles">
+            {/* <ul class="budget-profiles">
               <li>
-                {/* <h6>
+                <h6>
                   <img src={MapPin} alt="icon" class="icon" />
                   Location
                 </h6>
-                <h5>{info.position}</h5> */}
+                <h5>{info.position}</h5>
               </li>
               <li>
                 <h6>
@@ -331,7 +331,7 @@ const Sidebar = ({ chips, data }) => {
                 </h6>
                 <h5>info@example.com</h5>
               </li>
-            </ul>
+            </ul> */}
           </div>
           <div>
             <a
@@ -339,7 +339,7 @@ const Sidebar = ({ chips, data }) => {
               href="#file"
               class="btn proposal-btn btn-primary"
             >
-              Send Invite
+              Send Proposal
             </a>
           </div>
         </div>
@@ -349,7 +349,7 @@ const Sidebar = ({ chips, data }) => {
               <li>
                 <h6>
                   <img src={ComputerLine} alt="icon" class="icon" />
-                  SKill
+                  Skill
                 </h6>
                 <h5>{info.skills}</h5>
               </li>

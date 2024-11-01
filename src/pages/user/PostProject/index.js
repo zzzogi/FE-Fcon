@@ -332,7 +332,7 @@ const PostProject = () => {
                       </div>
                     </div>
 
-                    <div className="col-lg-4 col-md-12">
+                    {/* <div className="col-lg-4 col-md-12">
                       <div className="mb-3">
                         <label className="focus-label">Project Duration</label>
                         <select className="form-control select">
@@ -342,7 +342,7 @@ const PostProject = () => {
                           <option>More than a month</option>
                         </select>
                       </div>
-                    </div>
+                    </div> */}
 
                     <div className="col-lg-4 col-md-6">
                       <div className="mb-3">
@@ -357,7 +357,7 @@ const PostProject = () => {
                       </div>
                     </div>
 
-                    <div className="col-lg-6 col-md-12">
+                    {/* <div className="col-lg-6 col-md-12">
                       <div className="mb-3">
                         <label className="focus-label">Freelancer Level</label>
                         <select className="form-control select">
@@ -366,7 +366,7 @@ const PostProject = () => {
                           <option>Professional</option>
                         </select>
                       </div>
-                    </div>
+                    </div> */}
 
                     <div className="col-lg-12 col-md-12">
                       <div className="mb-3">
@@ -416,7 +416,7 @@ const PostProject = () => {
                         <textarea
                           className="form-control"
                           rows="5"
-                          placeholder="Place project descriptions"
+                          placeholder="Place project descriptions and also give your contact information"
                           {...register("description")}
                         ></textarea>
                       </div>
