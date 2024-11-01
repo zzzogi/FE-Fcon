@@ -53,6 +53,7 @@ const Login = () => {
         const result = await response.json();
         Cookies.set("userId", result.userId, { expires: 7 }); // Set cookie for userId
         Cookies.set("userType", result.userType, { expires: 7 }); // Set cookie for userType
+        Cookies.set("username", result.username, { expires: 7});
 
         console.log("Current user data:", result);
       } else {

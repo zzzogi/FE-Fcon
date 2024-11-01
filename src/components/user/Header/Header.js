@@ -15,13 +15,15 @@ const Header = () => {
     navigate(endpoint);
   };
 
-  // Get userType from cookies
+  // Get userType and userName from cookies
   const userType = Cookies.get("userType");
+  const userName = Cookies.get("username"); // Set default value if userName is undefined
 
   // Log the cookie value whenever the page is loaded
   useEffect(() => {
     console.log("userType cookie value:", userType);
-  }, [userType]);
+    console.log("userName cookie value:", userName);
+  }, [userType, userName]);
 
   // Handle logout (delete cookies)
   const handleLogout = () => {
@@ -42,7 +44,7 @@ const Header = () => {
         style={{ cursor: "pointer" }}
       />
 
-      {/* Dropdown menu  */}
+      {/* Dropdown menu */}
       <div className="navbar-main">
         <DropMenu />
       </div>
@@ -96,7 +98,8 @@ const Header = () => {
                       height: "35px",
                     }}
                   />
-                  <span>Adam Levine</span>
+                  {/* Display userName with a fallback */}
+                  <span>{userName}</span>
                   <div className="nav-menu-container">
                     <div className="sub-nav-drop">
                       <div className="nav-ref-container">
@@ -132,7 +135,7 @@ const Header = () => {
               onClick={() => onNavRoute("/post-project")}
             >
               <i className="bi bi-plus"></i>
-              Post a project
+              Post a Blog
             </div>
           </div>
         </>
