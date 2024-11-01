@@ -18,30 +18,30 @@ const DropMenu = () => {
     //   ],
     // },
     {
-      sub: "Projects",
-      href: "/projects",
+      sub: "Blog",
+      href: "/members",
       ref: [],
     },
-    {
-      sub: "My profile",
-      href: "/company-profile",
-      ref: [],
-    },
+    // {
+    //   sub: "My profile",
+    //   href: "/company-profile",
+    //   ref: [],
+    // },
   
   ];
 
   // Freelancers Data
   const freelancer = [
     {
-      sub: "Projects",
+      sub: "Blog",
       href: "/projects",
       ref: [],
     },
-    {
-      sub: "My profile",
-      href: "/developer-profile",
-      ref: [],
-    },
+    // {
+    //   sub: "My profile",
+    //   href: "/developer-profile",
+    //   ref: [],
+    // },
   ];
 
   // Blogs data
@@ -83,7 +83,7 @@ const DropMenu = () => {
         {userType  && (
           <>
             <div className="nav-item nav-dropmenu">
-              <span>For employers</span>
+              <span>For company</span>
               <i className="bi bi-chevron-down"></i>
               <div className="nav-menu-container">
                 {employers.map((item) => {
