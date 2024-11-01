@@ -112,7 +112,7 @@ const RevenueReport = () => {
                   </li>
                   <li style={{ display: "flex", justifyContent: "space-between" }}>
                     <h5>Total</h5>
-                    <h5 style={{ fontWeight: 700 }}>525,000</h5>
+                    <h5 style={{ fontWeight: 700 }}>475,000</h5>
                   </li>
                 </ul>
               </div>
