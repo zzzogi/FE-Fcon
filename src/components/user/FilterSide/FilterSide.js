@@ -6,7 +6,6 @@ const FilterSide = ({ onFilterChange }) => {
   const [selectedLocations, setSelectedLocations] = useState([]);
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(10000);
-
   const locations = [
     { label: "Hải Phòng" },
     { label: "Hồ Chí Minh" },
@@ -21,7 +20,6 @@ const FilterSide = ({ onFilterChange }) => {
     setSelectedLocations(selected);
     onFilterChange({
       locations: selected,
-      priceRange: { minPrice, maxPrice },
     });
   };
 
@@ -36,7 +34,10 @@ const FilterSide = ({ onFilterChange }) => {
     setSelectedLocations([]);
     setMinPrice(0);
     setMaxPrice(10000);
-    onFilterChange({ locations: [], priceRange: { minPrice: 0, maxPrice: 10000000 } });
+    onFilterChange({
+      locations: [],
+      priceRange: { minPrice: 0, maxPrice: 10000000 },
+    });
   };
 
   return (
@@ -44,7 +45,9 @@ const FilterSide = ({ onFilterChange }) => {
       <div className="filter-container">
         <div className="filter-title">
           <h4>Filters</h4>
-          <button className="reset-filters" onClick={resetFilters}>Reset</button>
+          <button className="reset-filters" onClick={resetFilters}>
+            Reset
+          </button>
         </div>
 
         <CheckDropMenu

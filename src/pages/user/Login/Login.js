@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Login.css";
-import Logo from "../../../assets/images/FconLogo.jpg";
+import Logo from "../../../assets/images/FconLogo.png";
 import GoogleSVG from "../../../assets/images/icon/google-icon.svg";
 import FacebookSVG from "../../../assets/images/icon/fb-icon.svg";
 import AppleSVG from "../../../assets/images/icon/ios-icon.svg";
@@ -53,7 +53,7 @@ const Login = () => {
         const result = await response.json();
         Cookies.set("userId", result.userId, { expires: 7 }); // Set cookie for userId
         Cookies.set("userType", result.userType, { expires: 7 }); // Set cookie for userType
-        Cookies.set("username", result.username, { expires: 7});
+        Cookies.set("username", result.username, { expires: 7 });
 
         console.log("Current user data:", result);
       } else {

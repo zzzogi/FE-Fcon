@@ -1,6 +1,6 @@
 import React from "react";
 import "./Footer.css";
-import LogoFooter from "../../../assets/images/FconLogo.jpg";
+import LogoFooter from "../../../assets/images/FconLogo.png";
 const Footer = () => {
   return (
     <div className="Footer">
@@ -14,22 +14,22 @@ const Footer = () => {
         </p>
         <ul>
           <li>
-            <a href='true'>
+            <a href="true">
               <i className="fa-brands fa-facebook-f" aria-hidden="true"></i>
             </a>
           </li>
           <li>
-            <a href='true'>
+            <a href="true">
               <i className="fa-brands fa-twitter" aria-hidden="true"></i>
             </a>
           </li>
           <li>
-            <a href='true'>
+            <a href="true">
               <i className="fa-brands fa-instagram" aria-hidden="true"></i>
             </a>
           </li>
           <li>
-            <a href='true'>
+            <a href="true">
               <i className="fa-brands fa-linkedin" aria-hidden="true"></i>
             </a>
           </li>

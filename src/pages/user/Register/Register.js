@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Logo from "../../../assets/images/FconLogo.jpg";
+import Logo from "../../../assets/images/FconLogo.png";
 import GoogleSVG from "../../../assets/images/icon/google-icon.svg";
 import FacebookSVG from "../../../assets/images/icon/fb-icon.svg";
 import AppleSVG from "../../../assets/images/icon/ios-icon.svg";

@@ -318,8 +318,14 @@ const PostProject = () => {
                 {/* Handle form submit correctly */}
                 <div className="title-box widget-box">
                   <div className="row">
-                    <div className="col-lg-12">
-                      <h4>Basic Details</h4>
+                    <div className="col-lg-12 mt-4">
+                      <h4
+                        style={{
+                          fontWeight: 900,
+                        }}
+                      >
+                        Basic Details
+                      </h4>
                     </div>
                     <div className="col-lg-12 col-md-12">
                       <div className="mb-3">
@@ -375,10 +381,16 @@ const PostProject = () => {
                       </div>
                     </div>
 
-                    <div className="col-lg-12 col-md-12">
+                    <div className="col-lg-12 col-md-12 mt-4">
                       <div className="title-content p-0">
                         <div className="title-detail">
-                          <h4>Skill Set</h4>
+                          <h4
+                            style={{
+                              fontWeight: 900,
+                            }}
+                          >
+                            Skill Set
+                          </h4>
                           <div className="mb-3">
                             <input
                               type="text"
@@ -387,7 +399,13 @@ const PostProject = () => {
                               placeholder="UX, UI, App Design, Wireframing, Branding"
                               {...register("skill_sets", { required: true })} // Add validation if needed
                             />
-                            <p className="text-muted mb-0">
+                            <p
+                              className="text-muted mb-0 mt-1"
+                              style={{
+                                fontSize: 12,
+                                fontStyle: "italic",
+                              }}
+                            >
                               Enter skills needed for the project, for best
                               results add 5 or more skills.
                             </p>
@@ -396,8 +414,14 @@ const PostProject = () => {
                       </div>
                     </div>
 
-                    <div className="col-lg-12 my-3">
-                      <h4>Budget</h4>
+                    <div className="col-lg-12 mt-5">
+                      <h4
+                        style={{
+                          fontWeight: 900,
+                        }}
+                      >
+                        Budget
+                      </h4>
                     </div>
                     <div className="col-lg-6 col-md-12">
                       <div className="mb-3">

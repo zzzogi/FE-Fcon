@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import "./Header.css";
 import "../DropMenu/DropMenu.css";
 import DropMenu from "../DropMenu/DropMenu";
-import LogoHeader from "../../../assets/images/FconLogo.jpg";
+import LogoHeader from "../../../assets/images/FconLogo.png";
 import Avatar1 from "../../../assets/images/avatar/avatar-1.jpg";
 import { useNavigate } from "react-router-dom";
 import Notifications from "react-notifications-menu";

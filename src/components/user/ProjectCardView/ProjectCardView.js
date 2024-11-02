@@ -29,12 +29,16 @@ const ProjectCardView = ({ infomation }) => {
           <i className="bi bi-star-fill grey"></i>
         </div>
         <div className="tags">
-          {infomation.tags.map((tag) => (
+          {infomation.tags.slice(0, 3).map((tag) => (
             <div className="tag" key={infomation.name + tag}>
               {tag}
             </div>
           ))}
+          {infomation.tags.length > 3 && (
+            <div className="tag">+{infomation.tags.length - 3}</div>
+          )}
         </div>
+
         <div className="salary">
           <h4>{infomation.salary}</h4>
         </div>

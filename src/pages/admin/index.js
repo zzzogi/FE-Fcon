@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Logo from "../../assets/images/FconLogo.jpg";
+import Logo from "../../assets/images/FconLogo.png";
 import "./layout.css";
 import Pen from "../../assets/images/icon/edit-2.svg";
 import Pending from "../../assets/images/icon/airplay.svg";
