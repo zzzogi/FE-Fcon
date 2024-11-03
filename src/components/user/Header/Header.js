@@ -51,17 +51,7 @@ const Header = () => {
 
       {/* Notification */}
       {userType ? (
-        <Notifications
-          height="500px"
-          width="500px"
-          data={[
-            {
-              image: Avatar1,
-              message: "Kameshwaran S just sent you a proposal.",
-              detailPage: "/proposal",
-            },
-          ]}
-        />
+        <Notifications height="500px" width="500px" data={[]} />
       ) : null}
 
       {/* Auth header */}

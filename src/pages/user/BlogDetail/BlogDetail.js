@@ -82,6 +82,11 @@ const BlogDetail = () => {
                     "https://c0.wallpaperflare.com/preview/274/250/540/career-success-path-stair.jpg"
                   }
                   alt="blog-img"
+                  style={{
+                    maxWidth: "840px",
+                    maxHeight: "320px",
+                    objectFit: "contain",
+                  }}
                 />
               </div>
               <div className="blog-name">
