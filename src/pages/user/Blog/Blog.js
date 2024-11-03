@@ -2,55 +2,39 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import BreadCrumb from "../../../components/user/BreadCrumb/BreadCrumb";
-import "./Blog.css";
-
 import BlogCard from "../../../components/user/BlogCard/BlogCard";
-import BlogLatest from "../../../components/user/BlogLastest/BlogLatest";
 import BlogTags from "../../../components/user/BlogTags/BlogTags";
+import "./Blog.css";
 
 const Blog = () => {
   const [blogs, setBlogs] = useState([]);
+  const [filteredBlogs, setFilteredBlogs] = useState([]);
+  const [tags, setTags] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
-  const [tags, setTags] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchProjects = async () => {
+    const fetchBlogs = async () => {
       try {
         const response = await axios.get(
           `https://api-be.fieldy.online/api/Post/getAllPosts`
         );
         if (response.data.success) {
           const filteredByType = response.data.data.filter(
-            (project) => project.postTypeId === 2
+            (blog) => blog.postTypeId === 2
           );
 
           const skillsArray = response.data.data.flatMap((item) =>
             item.skills.split(",").map((skill) => skill.trim())
           );
 
-          const locations = [
-            "Hà Nội",
-            "Đà Nẵng",
-            "Hồ Chí Minh",
-            "Hải Phòng",
-            "Japan",
-            "Thủ Đức",
-            "Hòa Lạc",
-          ];
-          const projectsWithLocations = filteredByType.map(
-            (project, index) => ({
-              ...project,
-              position: locations[index % locations.length],
-            })
-          );
-
-          setBlogs(projectsWithLocations);
+          setBlogs(filteredByType);
+          setFilteredBlogs(filteredByType);
           setTags(skillsArray);
-          // setFilteredProjects(projectsWithLocations);
         } else {
-          setError("Failed to load projects.");
+          setError("Failed to load blogs.");
         }
       } catch (err) {
         setError("Error fetching data.");
@@ -58,10 +42,22 @@ const Blog = () => {
         setLoading(false);
       }
     };
-    fetchProjects();
+    fetchBlogs();
   }, []);
 
-  /* NAVIGATE TO PAGE  ------------------- */
+  const handleSearchChange = (event) => {
+    const value = event.target.value;
+    setSearchTerm(value);
+    if (value) {
+      const searchedBlogs = blogs.filter((blog) =>
+        blog.title.toLowerCase().includes(value.toLowerCase())
+      );
+      setFilteredBlogs(searchedBlogs);
+    } else {
+      setFilteredBlogs(blogs);
+    }
+  };
+
   const onNavRoute = (endpoint) => {
     navigate(endpoint);
   };
@@ -81,28 +77,50 @@ const Blog = () => {
       <div className="section-blog-list">
         <div className="container">
           <div className="main-flex">
+            {/* Sidebar */}
+            <div className="filter-side">
+              <div className="filter-sticky">
+                <div className="blog-tags">
+                  <BlogTags tags={tags} />
+                </div>
+              </div>
+            </div>
+
             {/* Main content */}
             <div className="blog-list">
-              {/* List-render */}
+              {/* Search bar */}
+              <div className="blog-list-filter">
+                <input
+                  type="text"
+                  placeholder="Search blog..."
+                  value={searchTerm}
+                  onChange={handleSearchChange}
+                  className="search-bar"
+                />
+                <span>Found {filteredBlogs.length} Results</span>
+              </div>
+
+              {/* Blog cards */}
               <div className="blog-list-inner">
-                {blogs.map((blog, index) => {
-                  return (
+                {filteredBlogs.length > 0 ? (
+                  filteredBlogs.map((blog, index) => (
                     <div
                       className="blog-card"
                       key={blog.name + "_" + index}
                       onClick={() => onNavRoute(`/blog/${blog.postId}`)}
-                      // onClick={() => onNavRoute(`/blog/[id_or_alias]`)}
                     >
                       <BlogCard data={blog} />
                     </div>
-                  );
-                })}
+                  ))
+                ) : (
+                  <p>No blogs found based on your search.</p>
+                )}
               </div>
 
               {/* Navigator */}
               <div className="blog-list-navigator">
                 <div className="arrow arrow-left">
-                  <i class="bi bi-chevron-left"></i>
+                  <i className="bi bi-chevron-left"></i>
                 </div>
                 <div className="number-page page-actived">1</div>
                 <div className="number-page">2</div>
@@ -110,22 +128,7 @@ const Blog = () => {
                 <div className="number-page dot-summary">...</div>
                 <div className="number-page">20</div>
                 <div className="arrow arrow-right">
-                  <i class="bi bi-chevron-right"></i>
-                </div>
-              </div>
-            </div>
-
-            {/* Filter sidebar */}
-            <div className="filter-side">
-              <div className="filter-sticky">
-                {/* <div className="blog-lastest">
-                  <BlogLatest />
-                </div> */}
-                {/* <div className="blog-categories">
-                  <BlogCategories />
-                </div> */}
-                <div className="blog-tags">
-                  <BlogTags tags={tags} />
+                  <i className="bi bi-chevron-right"></i>
                 </div>
               </div>
             </div>
