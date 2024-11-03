@@ -87,7 +87,7 @@ const Project = () => {
     <div className="Project">
       <div className="section-bread-crumb">
         <div className="container">
-          <BreadCrumb title="Project Grid" page="Project" />
+          <BreadCrumb title="Blog List" page="Blog" />
         </div>
       </div>
 
@@ -102,7 +102,7 @@ const Project = () => {
               <div className="dev-list-filter">
                 <input
                   type="text"
-                  placeholder="Search projects..."
+                  placeholder="Search blog..."
                   value={searchTerm}
                   onChange={handleSearchChange}
                   className="search-bar"
