@@ -75,7 +75,7 @@ const Detail = ({ data }) => {
               <div className="proposal-detail text-capitalize">
                 <span style={{ display: "block" }}>Budget</span>
                 <p style={{ marginBottom: 0 }}>
-                  ${info.budgetOrSalary || "Not specified"}
+                  {info.budgetOrSalary || "Not specified"} VND
                 </p>
               </div>
             </li>

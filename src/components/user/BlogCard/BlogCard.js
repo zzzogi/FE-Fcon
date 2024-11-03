@@ -22,7 +22,7 @@ const BlogCard = ({ data }) => {
       <div className="image">
         <img src={data?.imgUrl || MeetingImage} alt="blog-img" />
       </div>
-      <div className="author">
+      {/* <div className="author">
         <div className="author-container">
           <div className="avatar">
             <img
@@ -36,7 +36,7 @@ const BlogCard = ({ data }) => {
           <i className="bi bi-calendar-check-fill"></i>{" "}
           {convertDate(data.createdAt)}
         </p>
-      </div>
+      </div> */}
       <div className="info">
         <h3>{data.title}</h3>
         <p>{data.description}</p>

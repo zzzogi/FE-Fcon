@@ -43,7 +43,7 @@ export const ProjectDetail = () => {
     <div>
       <div className="section-bread-crumb">
         <div className="container">
-          <BreadCrumb title="Project Details" page="Project Details" />
+          <BreadCrumb title="Blog Details" page="Blog Details" />
         </div>
       </div>
       <div className="content">

@@ -120,7 +120,7 @@ const Project = () => {
                         name: project.title,
                         position: project.position,
                         tags: project.skills.split(", "),
-                        salary: `$${project.budgetOrSalary}`,
+                        salary: `${project.budgetOrSalary}`,
                         avatar: project.imgUrl,
                       }}
                     />

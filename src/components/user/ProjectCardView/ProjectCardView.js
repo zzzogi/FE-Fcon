@@ -40,7 +40,7 @@ const ProjectCardView = ({ infomation }) => {
         </div>
 
         <div className="salary">
-          <h4>{infomation.salary}</h4>
+          <h4>{infomation.salary} VND</h4>
         </div>
         <div className="left">
           <span>{infomation.lastest}</span>

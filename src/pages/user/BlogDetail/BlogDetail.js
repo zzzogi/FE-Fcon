@@ -66,7 +66,7 @@ const BlogDetail = () => {
       {/* Bread crumb and current route */}
       <div className="section-bread-crumb">
         <div className="container">
-          <BreadCrumb title="Blog Detail" page="Blog name" />
+          <BreadCrumb title="Blog Details" page="Blog Details" />
         </div>
       </div>
 
@@ -85,15 +85,15 @@ const BlogDetail = () => {
                 />
               </div>
               <div className="blog-name">
-                <h3>Your next job starts right here</h3>
+                <h3>{blogs?.title}</h3>
               </div>
               <div className="blog-info">
-                <div className="author">
+                {/* <div className="author">
                   <div className="avatar">
                     <img src={AuthImg} alt="blog-author" />
                   </div>
                   <p className="name">{blogs?.name || "John Doe"}</p>
-                </div>
+                </div> */}
                 <div className="created-at item-flex">
                   <i class="bi bi-calendar"></i>{" "}
                   {convertDate(blogs?.createdAt) || "A while ago"}
@@ -106,7 +106,7 @@ const BlogDetail = () => {
                   <i class="bi bi-tags-fill"></i> {blogs?.skills || "No tags"}
                 </div>
                 <div className="tips item-flex">
-                  Budget: ${blogs?.budgetOrSalary || "0"}
+                  Budget: {blogs?.budgetOrSalary || "0"} VND
                 </div>
               </div>
               <div className="blog-description">
