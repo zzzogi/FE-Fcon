@@ -1,107 +1,73 @@
-import React from "react";
-import BreadCrumb from "../../../components/user/BreadCrumb/BreadCrumb";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import BreadCrumb from "../../../components/user/BreadCrumb/BreadCrumb";
 import "./Blog.css";
 
 import BlogCard from "../../../components/user/BlogCard/BlogCard";
-import BlogImg1 from "../../../assets/images/blog/blog-01.jpg";
-import BlogImg2 from "../../../assets/images/blog/blog-02.jpg";
-import AuthorImg1 from "../../../assets/images/img-02.jpg";
-import AuthorImg2 from "../../../assets/images/img-03.jpg";
 import BlogLatest from "../../../components/user/BlogLastest/BlogLatest";
-import BlogCategories from "../../../components/user/BlogCategories/BlogCategories";
 import BlogTags from "../../../components/user/BlogTags/BlogTags";
 
 const Blog = () => {
-  const blogs = [
-    {
-      title: "Choose a Blogging Platform",
-      desc: "Select a blogging platform that suits your needs. WordPress, Blogger, and Medium are popular options.",
-      image: BlogImg1,
-      author: {
-        name: "Aidan Funnell",
-        avatar: AuthorImg1,
-      },
-      createdAt: "4 Oct 2023",
-    },
-    {
-      title: "Pick a Domain Name",
-      desc: "Choose a memorable and relevant domain name for your blog. Ideally, it should reflect your niche and personal brand.",
-      image: BlogImg2,
-      author: {
-        name: "Deborah Angel",
-        avatar: AuthorImg2,
-      },
-      createdAt: "10 Oct 2023",
-    },
-    {
-      title: "Analyze and Improve",
-      desc: "Use analytics tools (e.g., Google Analytics) to track your blog's performance. Analyze which content performs well and adjust your strategy accordingly.",
-      image: BlogImg2,
-      author: {
-        name: "Darren Elder",
-        avatar: AuthorImg2,
-      },
-      createdAt: "3 Nov 2023",
-    },
-    {
-      title: "Pick a Domain Name",
-      desc: "Choose a memorable and relevant domain name for your blog. Ideally, it should reflect your niche and personal brand.",
-      image: BlogImg2,
-      author: {
-        name: "Deborah Angel",
-        avatar: AuthorImg2,
-      },
-      createdAt: "10 Oct 2023",
-    },
-    {
-      title: "Analyze and Improve",
-      desc: "Use analytics tools (e.g., Google Analytics) to track your blog's performance. Analyze which content performs well and adjust your strategy accordingly.",
-      image: BlogImg2,
-      author: {
-        name: "Darren Elder",
-        avatar: AuthorImg2,
-      },
-      createdAt: "3 Nov 2023",
-    },
-    {
-      title: "Pick a Domain Name",
-      desc: "Choose a memorable and relevant domain name for your blog. Ideally, it should reflect your niche and personal brand.",
-      image: BlogImg2,
-      author: {
-        name: "Deborah Angel",
-        avatar: AuthorImg2,
-      },
-      createdAt: "10 Oct 2023",
-    },
-    {
-      title: "Analyze and Improve",
-      desc: "Use analytics tools (e.g., Google Analytics) to track your blog's performance. Analyze which content performs well and adjust your strategy accordingly.",
-      image: BlogImg2,
-      author: {
-        name: "Darren Elder",
-        avatar: AuthorImg2,
-      },
-      createdAt: "3 Nov 2023",
-    },
-    {
-      title: "Pick a Domain Name",
-      desc: "Choose a memorable and relevant domain name for your blog. Ideally, it should reflect your niche and personal brand.",
-      image: BlogImg2,
-      author: {
-        name: "Deborah Angel",
-        avatar: AuthorImg2,
-      },
-      createdAt: "10 Oct 2023",
-    },
-
-  ];
+  const [blogs, setBlogs] = useState([]);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [tags, setTags] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const response = await axios.get(
+          `https://api-be.fieldy.online/api/Post/getAllPosts`
+        );
+        if (response.data.success) {
+          const filteredByType = response.data.data.filter(
+            (project) => project.postTypeId === 2
+          );
+
+          const skillsArray = response.data.data.flatMap((item) =>
+            item.skills.split(",").map((skill) => skill.trim())
+          );
+
+          const locations = [
+            "Hà Nội",
+            "Đà Nẵng",
+            "Hồ Chí Minh",
+            "Hải Phòng",
+            "Japan",
+            "Thủ Đức",
+            "Hòa Lạc",
+          ];
+          const projectsWithLocations = filteredByType.map(
+            (project, index) => ({
+              ...project,
+              position: locations[index % locations.length],
+            })
+          );
+
+          setBlogs(projectsWithLocations);
+          setTags(skillsArray);
+          // setFilteredProjects(projectsWithLocations);
+        } else {
+          setError("Failed to load projects.");
+        }
+      } catch (err) {
+        setError("Error fetching data.");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProjects();
+  }, []);
 
   /* NAVIGATE TO PAGE  ------------------- */
   const onNavRoute = (endpoint) => {
     navigate(endpoint);
   };
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>{error}</p>;
 
   return (
     <div className="Blog">
@@ -121,7 +87,12 @@ const Blog = () => {
               <div className="blog-list-inner">
                 {blogs.map((blog, index) => {
                   return (
-                    <div className="blog-card" key={blog.name + "_" + index} onClick={() => onNavRoute("/blog/[id_or_alias]")}>
+                    <div
+                      className="blog-card"
+                      key={blog.name + "_" + index}
+                      onClick={() => onNavRoute(`/blog/${blog.postId}`)}
+                      // onClick={() => onNavRoute(`/blog/[id_or_alias]`)}
+                    >
                       <BlogCard data={blog} />
                     </div>
                   );
@@ -150,11 +121,11 @@ const Blog = () => {
                 <div className="blog-lastest">
                   <BlogLatest />
                 </div>
-                <div className="blog-categories">
+                {/* <div className="blog-categories">
                   <BlogCategories />
-                </div>
+                </div> */}
                 <div className="blog-tags">
-                  <BlogTags />
+                  <BlogTags tags={tags} />
                 </div>
               </div>
             </div>

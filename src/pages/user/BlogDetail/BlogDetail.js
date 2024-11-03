@@ -1,4 +1,5 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import "./BlogDetail.css";
 import BreadCrumb from "../../../components/user/BreadCrumb/BreadCrumb";
 import BlogLatest from "../../../components/user/BlogLastest/BlogLatest";
@@ -6,8 +7,60 @@ import BlogCategories from "../../../components/user/BlogCategories/BlogCategori
 import BlogTags from "../../../components/user/BlogTags/BlogTags";
 import "./BlogDetail.css";
 import AuthImg from "../../../assets/images/img-02.jpg";
+import { useLocation } from "react-router-dom";
+
+function convertDate(dateStr) {
+  // Create a Date object from the string
+  const date = new Date(dateStr);
+
+  // Get day, month, and year components
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0"); // Months are zero-based
+  const year = date.getFullYear();
+
+  // Return formatted date
+  return `${day}/${month}/${year}`;
+}
 
 const BlogDetail = () => {
+  const location = useLocation();
+  const postId = location.pathname.match(/\/blog\/(\d+)$/)[1];
+
+  const [blogs, setBlogs] = useState([]);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [tags, setTags] = useState([]);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const response = await axios.get(
+          `https://api-be.fieldy.online/api/Post/getById/${postId}`
+        );
+
+        console.log(response);
+        if (response.data.success) {
+          const skillsArray = response.data.data.skills
+            .split(",")
+            .map((item) => item.trim());
+
+          setBlogs(response.data.data);
+          setTags(skillsArray);
+        } else {
+          setError("Failed to load projects.");
+        }
+      } catch (err) {
+        setError("Error fetching data.");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProjects();
+  }, [postId]);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>{error}</p>;
+
   return (
     <div className="BlogDetail">
       {/* Bread crumb and current route */}
@@ -24,7 +77,10 @@ const BlogDetail = () => {
             <div className="blog-content">
               <div className="blog-image">
                 <img
-                  src="https://c0.wallpaperflare.com/preview/274/250/540/career-success-path-stair.jpg"
+                  src={
+                    blogs?.imgUrl ||
+                    "https://c0.wallpaperflare.com/preview/274/250/540/career-success-path-stair.jpg"
+                  }
                   alt="blog-img"
                 />
               </div>
@@ -36,76 +92,42 @@ const BlogDetail = () => {
                   <div className="avatar">
                     <img src={AuthImg} alt="blog-author" />
                   </div>
-                  <p className="name">John Doe</p>
+                  <p className="name">{blogs?.name || "John Doe"}</p>
                 </div>
                 <div className="created-at item-flex">
-                  <i class="bi bi-calendar"></i> 4 May 2021
+                  <i class="bi bi-calendar"></i>{" "}
+                  {convertDate(blogs?.createdAt) || "A while ago"}
                 </div>
                 <div className="comments item-flex">
-                  <i class="bi bi-chat-square-dots"></i> 12 Comments
+                  <i class="bi bi-chat-square-dots"></i> {blogs.reviews.length}{" "}
+                  Reviews
                 </div>
                 <div className="tips item-flex">
-                  <i class="bi bi-tags-fill"></i> Study Tips
+                  <i class="bi bi-tags-fill"></i> {blogs?.skills || "No tags"}
+                </div>
+                <div className="tips item-flex">
+                  Budget: ${blogs?.budgetOrSalary || "0"}
                 </div>
               </div>
               <div className="blog-description">
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                  irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                  cupidatat non proident, sunt in culpa qui officia deserunt
-                  mollit anim id est laborum.
-                </p>
-                <p>
-                  Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                  accusantium doloremque laudantium, totam rem aperiam, eaque
-                  ipsa quae ab illo inventore veritatis et quasi architecto
-                  beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem
-                  quia voluptas sit aspernatur aut odit aut fugit, sed quia
-                  consequuntur magni dolores eos qui ratione voluptatem sequi
-                  nesciunt. Neque porro quisquam est, qui dolorem ipsum quia
-                  dolor sit amet, consectetur, adipisci velit, sed quia non
-                  numquam eius modi tempora incidunt ut labore et dolore magnam
-                  aliquam quaerat voluptatem. Ut enim ad minima veniam, quis
-                  nostrum exercitationem ullam corporis suscipit laboriosam,
-                  nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum
-                  iure reprehenderit qui in ea voluptate velit esse quam nihil
-                  molestiae consequatur, vel illum qui dolorem eum fugiat quo
-                  voluptas nulla pariatur?
-                </p>
-                <p>
-                  At vero eos et accusamus et iusto odio dignissimos ducimus qui
-                  blanditiis praesentium voluptatum deleniti atque corrupti quos
-                  dolores et quas molestias excepturi sint occaecati cupiditate
-                  non provident, similique sunt in culpa qui officia deserunt
-                  mollitia animi, id est laborum et dolorum fuga. Et harum
-                  quidem rerum facilis est et expedita distinctio. Nam libero
-                  tempore, cum soluta nobis est eligendi optio cumque nihil
-                  impedit quo minus id quod maxime placeat facere possimus,
-                  omnis voluptas assumenda est, omnis dolor repellendus.
-                  Temporibus autem quibusdam et aut officiis debitis aut rerum
-                  necessitatibus saepe eveniet ut et voluptates repudiandae sint
-                  et molestiae non recusandae. Itaque earum rerum hic tenetur a
-                  sapiente delectus, ut aut reiciendis voluptatibus maiores
-                  alias consequatur aut perferendis doloribus asperiores
-                  repellat.
-                </p>
+                <p>{blogs.description}</p>
               </div>
 
               {/* blog comment area */}
-              <div className="comment-blog">
+              {/* <div className="comment-blog">
                 <div className="comment-title">Comment this blog</div>
                 <div className="comment-input">
-                    <textarea rows="4" class="form-control" style={{height: "118px"}}></textarea>
+                  <textarea
+                    rows="4"
+                    class="form-control"
+                    style={{ height: "118px" }}
+                  ></textarea>
                 </div>
                 <button>Comment</button>
-              </div>
+              </div> */}
 
               {/* Comment list area */}
-              <div className="comment-container">
+              {/* <div className="comment-container">
                 <div className="comment-title">Comments (12)</div>
                 <div className="comment-list">
                   <div className="comment-item">
@@ -178,20 +200,18 @@ const BlogDetail = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
 
             {/* Filter sidebar */}
             <div className="filter-side">
               <div className="filter-sticky">
-                {/* <div className="blog-lastest">
+                <div className="blog-lastest">
                   <BlogLatest />
-                </div> */}
-                <div className="blog-categories">
-                  <BlogCategories />
                 </div>
+
                 <div className="blog-tags">
-                  <BlogTags />
+                  <BlogTags tags={tags} />
                 </div>
               </div>
             </div>

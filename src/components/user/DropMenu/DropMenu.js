@@ -19,7 +19,7 @@ const DropMenu = () => {
     // },
     {
       sub: "Blog",
-      href: "/members",
+      href: "/blogs",
       ref: [],
     },
     // {
@@ -27,7 +27,6 @@ const DropMenu = () => {
     //   href: "/company-profile",
     //   ref: [],
     // },
-  
   ];
 
   // Freelancers Data
@@ -80,7 +79,7 @@ const DropMenu = () => {
         </div>
 
         {/* Employees */}
-        {userType  && (
+        {userType && (
           <>
             <div className="nav-item nav-dropmenu">
               <span>For company</span>

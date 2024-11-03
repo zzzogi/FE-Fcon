@@ -1,28 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./BlogTags.css";
 
-const BlogTags = ({ max = 10 }) => {
-  const tags = [
-    "Employer",
-    "Student",
-    "Freelancer",
-    "Designer",
-    "Jobs",
-    "Developer",
-    "Coding",
-    "Skills",
-    "Knowledge",
-    "Node",
-    "Js",
-    "Courses",
-    "Engineer",
-    "Online",
-    "Study",
-    "Project",
-    "Experience",
-    "Freshers",
-  ];
-
+const BlogTags = ({ tags, max = 10 }) => {
   const [isView, setIsView] = useState(false);
 
   const onView = () => {
@@ -43,6 +22,7 @@ const BlogTags = ({ max = 10 }) => {
               } else {
                 return <div className="tag-item">{tag}</div>;
               }
+              return void 0;
             })}
             <div className="more" onClick={onView}>
               {isView ? "hidden" : "view all"}
