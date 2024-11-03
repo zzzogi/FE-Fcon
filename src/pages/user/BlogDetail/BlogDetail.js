@@ -206,9 +206,9 @@ const BlogDetail = () => {
             {/* Filter sidebar */}
             <div className="filter-side">
               <div className="filter-sticky">
-                <div className="blog-lastest">
+                {/* <div className="blog-lastest">
                   <BlogLatest />
-                </div>
+                </div> */}
 
                 <div className="blog-tags">
                   <BlogTags tags={tags} />

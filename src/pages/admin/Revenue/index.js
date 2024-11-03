@@ -9,59 +9,195 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
+  Legend,
+  Label,
 } from "recharts";
 
 // Sample data for the area chart
 const data = [
-  { name: "27/10/2024", uv: 4000, pv: 2400, amt: 2400 },
-  { name: "29/10/2024", uv: 3000, pv: 1398, amt: 2210 },
-  { name: "31/10/2024", uv: 2000, pv: 9800, amt: 2290 },
-  { name: "02/11/2024", uv: 2780, pv: 3908, amt: 2000 },
-  { name: "4/11/2024", uv: 1890, pv: 4800, amt: 2181 },
-  { name: "6/11/2024", uv: 2390, pv: 3800, amt: 2500 },
-  { name: "08/11/2024", uv: 3490, pv: 4300, amt: 2100 },
+  {
+    name: "27/10/2024",
+    "Membership Plan 1": 1,
+    "Membership Plan 2": 3,
+    "Membership Plan 3": 4,
+  },
+  {
+    name: "29/10/2024",
+    "Membership Plan 1": 2,
+    "Membership Plan 2": 1,
+    "Membership Plan 3": 3,
+  },
+  {
+    name: "31/10/2024",
+    "Membership Plan 1": 4,
+    "Membership Plan 2": 1,
+    "Membership Plan 3": 5,
+  },
+  {
+    name: "02/11/2024",
+    "Membership Plan 1": 1,
+    "Membership Plan 2": 3,
+    "Membership Plan 3": 2,
+  },
+  {
+    name: "4/11/2024",
+    "Membership Plan 1": 1,
+    "Membership Plan 2": 4,
+    "Membership Plan 3": 5,
+  },
+  {
+    name: "6/11/2024",
+    "Membership Plan 1": 2,
+    "Membership Plan 2": 3,
+    "Membership Plan 3": 4,
+  },
+  {
+    name: "08/11/2024",
+    "Membership Plan 1": 1,
+    "Membership Plan 2": 3,
+    "Membership Plan 3": 2,
+  },
 ];
 
 // Sample data for the table
 const getRandomDate = () => {
   const start = new Date("2024-10-27");
   const end = new Date("2024-11-08");
-  const randomTime = start.getTime() + Math.random() * (end.getTime() - start.getTime());
+  const randomTime =
+    start.getTime() + Math.random() * (end.getTime() - start.getTime());
   const randomDate = new Date(randomTime);
-  
+
   // Format the date as DD/MM/YYYY
-  const day = String(randomDate.getDate()).padStart(2, '0');
-  const month = String(randomDate.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+  const day = String(randomDate.getDate()).padStart(2, "0");
+  const month = String(randomDate.getMonth() + 1).padStart(2, "0"); // Months are 0-based
   const year = randomDate.getFullYear();
-  
+
   return `${day}/${month}/${year}`;
 };
 
 const tableData = [
-  { username: "thanhhoang93", deposit: "+25,000", date: getRandomDate(), plan: "2" }, // plan=2
-  { username: "baongoc_87", deposit: "+25,000", date: getRandomDate(), plan: "2" }, // plan=2
-  { username: "honghanh1203", deposit: "+25,000", date: getRandomDate(), plan: "2" }, // plan=2
-  { username: "linhnguyen.vn", deposit: "+25,000", date: getRandomDate(), plan: "2" }, // plan=2
-  { username: "duypham_hn", deposit: "+25,000", date: getRandomDate(), plan: "2" }, // plan=2
-  { username: "nguyentuan_99", deposit: "+25,000", date: getRandomDate(), plan: "2" }, // plan=2
-  { username: "hongson85", deposit: "+25,000", date: getRandomDate(), plan: "2" }, // plan=2
-  { username: "kimanh_ha", deposit: "+25,000", date: getRandomDate(), plan: "2" }, // plan=2
+  {
+    username: "thanhhoang93",
+    deposit: "+25,000",
+    date: getRandomDate(),
+    plan: "2",
+  }, // plan=2
+  {
+    username: "baongoc_87",
+    deposit: "+25,000",
+    date: getRandomDate(),
+    plan: "2",
+  }, // plan=2
+  {
+    username: "honghanh1203",
+    deposit: "+25,000",
+    date: getRandomDate(),
+    plan: "2",
+  }, // plan=2
+  {
+    username: "linhnguyen.vn",
+    deposit: "+25,000",
+    date: getRandomDate(),
+    plan: "2",
+  }, // plan=2
+  {
+    username: "duypham_hn",
+    deposit: "+25,000",
+    date: getRandomDate(),
+    plan: "2",
+  }, // plan=2
+  {
+    username: "nguyentuan_99",
+    deposit: "+25,000",
+    date: getRandomDate(),
+    plan: "2",
+  }, // plan=2
+  {
+    username: "hongson85",
+    deposit: "+25,000",
+    date: getRandomDate(),
+    plan: "2",
+  }, // plan=2
+  {
+    username: "kimanh_ha",
+    deposit: "+25,000",
+    date: getRandomDate(),
+    plan: "2",
+  }, // plan=2
   { username: "lebao92", deposit: "+10,000", date: getRandomDate(), plan: "1" }, // plan=1
-  { username: "minhthu2304", deposit: "+25,000", date: getRandomDate(), plan: "2" }, // plan=2
-  { username: "vanhung_qn", deposit: "+10,000", date: getRandomDate(), plan: "1" }, // plan=1
-  { username: "haianh1995", deposit: "+25,000", date: getRandomDate(), plan: "2" }, // plan=2
-  { username: "nguyenduong99", deposit: "+10,000", date: getRandomDate(), plan: "1" }, // plan=1
-  { username: "lehoang.hcm", deposit: "+10,000", date: getRandomDate(), plan: "1" }, // plan=1
-  { username: "tramy2802", deposit: "+25,000", date: getRandomDate(), plan: "2" }, // plan=2
-  { username: "hoangnam.vn", deposit: "+25,000", date: getRandomDate(), plan: "2" }, // plan=2
-  { username: "phucnguyen_98", deposit: "+25,000", date: getRandomDate(), plan: "2" }, // plan=2
-  { username: "tuyettrinh85", deposit: "+25,000", date: getRandomDate(), plan: "2" }, // plan=2
-  { username: "nguyenkhoi.bh", deposit: "+10,000", date: getRandomDate(), plan: "1" }, // plan=1
-  { username: "thanhlam_hue", deposit: "+25,000", date: getRandomDate(), plan: "2" }, // plan=2
-  { username: "yenphuong_qn", deposit: "+50,000", date: getRandomDate(), plan: "3" }, // plan=3
+  {
+    username: "minhthu2304",
+    deposit: "+25,000",
+    date: getRandomDate(),
+    plan: "2",
+  }, // plan=2
+  {
+    username: "vanhung_qn",
+    deposit: "+10,000",
+    date: getRandomDate(),
+    plan: "1",
+  }, // plan=1
+  {
+    username: "haianh1995",
+    deposit: "+25,000",
+    date: getRandomDate(),
+    plan: "2",
+  }, // plan=2
+  {
+    username: "nguyenduong99",
+    deposit: "+10,000",
+    date: getRandomDate(),
+    plan: "1",
+  }, // plan=1
+  {
+    username: "lehoang.hcm",
+    deposit: "+10,000",
+    date: getRandomDate(),
+    plan: "1",
+  }, // plan=1
+  {
+    username: "tramy2802",
+    deposit: "+25,000",
+    date: getRandomDate(),
+    plan: "2",
+  }, // plan=2
+  {
+    username: "hoangnam.vn",
+    deposit: "+25,000",
+    date: getRandomDate(),
+    plan: "2",
+  }, // plan=2
+  {
+    username: "phucnguyen_98",
+    deposit: "+25,000",
+    date: getRandomDate(),
+    plan: "2",
+  }, // plan=2
+  {
+    username: "tuyettrinh85",
+    deposit: "+25,000",
+    date: getRandomDate(),
+    plan: "2",
+  }, // plan=2
+  {
+    username: "nguyenkhoi.bh",
+    deposit: "+10,000",
+    date: getRandomDate(),
+    plan: "1",
+  }, // plan=1
+  {
+    username: "thanhlam_hue",
+    deposit: "+25,000",
+    date: getRandomDate(),
+    plan: "2",
+  }, // plan=2
+  {
+    username: "yenphuong_qn",
+    deposit: "+50,000",
+    date: getRandomDate(),
+    plan: "3",
+  }, // plan=3
 ];
-
-
 
 const RevenueReport = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -89,15 +225,46 @@ const RevenueReport = () => {
             <ResponsiveContainer width="100%" height={400}>
               <AreaChart
                 data={data}
-                margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+                margin={{ top: 10, right: 30, left: 10, bottom: 20 }}
               >
+                <Legend verticalAlign="top" height={36} />
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
+                <XAxis dataKey="name">
+                  <Label
+                    value="Ngày mua"
+                    offset={-10}
+                    position="insideBottom"
+                  />
+                </XAxis>
+                <YAxis
+                  label={{
+                    value: "Số lượng gói mua",
+                    angle: -90,
+                    position: "insideLeft",
+                  }}
+                />
                 <Tooltip />
-                <Area type="monotone" dataKey="uv" stackId="1" stroke="#8884d8" fill="#8884d8" />
-                <Area type="monotone" dataKey="pv" stackId="1" stroke="#82ca9d" fill="#82ca9d" />
-                <Area type="monotone" dataKey="amt" stackId="1" stroke="#ffc658" fill="#ffc658" />
+                <Area
+                  type="monotone"
+                  dataKey="Membership Plan 1"
+                  stackId="1"
+                  stroke="#8884d8"
+                  fill="#8884d8"
+                />
+                <Area
+                  type="monotone"
+                  dataKey="Membership Plan 2"
+                  stackId="1"
+                  stroke="#82ca9d"
+                  fill="#82ca9d"
+                />
+                <Area
+                  type="monotone"
+                  dataKey="Membership Plan 3"
+                  stackId="1"
+                  stroke="#ffc658"
+                  fill="#ffc658"
+                />
               </AreaChart>
             </ResponsiveContainer>
           </div>
@@ -106,11 +273,15 @@ const RevenueReport = () => {
               <div className="budget-widget-details">
                 <h6>Total transactions</h6>
                 <ul className="budget-profiles">
-                  <li style={{ display: "flex", justifyContent: "space-between" }}>
+                  <li
+                    style={{ display: "flex", justifyContent: "space-between" }}
+                  >
                     <h5>Total memberships registered: </h5>
                     <h5 style={{ fontWeight: 700 }}>21</h5>
                   </li>
-                  <li style={{ display: "flex", justifyContent: "space-between" }}>
+                  <li
+                    style={{ display: "flex", justifyContent: "space-between" }}
+                  >
                     <h5>Total</h5>
                     <h5 style={{ fontWeight: 700 }}>475,000</h5>
                   </li>
@@ -148,7 +319,11 @@ const RevenueReport = () => {
             <tr>
               <td colSpan="4">
                 <ul className="pagination mb-4">
-                  <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
+                  <li
+                    className={`page-item ${
+                      currentPage === 1 ? "disabled" : ""
+                    }`}
+                  >
                     <a
                       className="page-link"
                       href="#"
@@ -160,7 +335,9 @@ const RevenueReport = () => {
                   {Array.from({ length: totalPages }, (_, index) => (
                     <li
                       key={index + 1}
-                      className={`page-item ${currentPage === index + 1 ? "active" : ""}`}
+                      className={`page-item ${
+                        currentPage === index + 1 ? "active" : ""
+                      }`}
                     >
                       <a
                         className="page-link"
@@ -171,7 +348,11 @@ const RevenueReport = () => {
                       </a>
                     </li>
                   ))}
-                  <li className={`page-item ${currentPage === totalPages ? "disabled" : ""}`}>
+                  <li
+                    className={`page-item ${
+                      currentPage === totalPages ? "disabled" : ""
+                    }`}
+                  >
                     <a
                       className="page-link"
                       href="#"
