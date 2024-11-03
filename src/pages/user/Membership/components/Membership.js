@@ -4,6 +4,13 @@ import Cookies from "js-cookie";
 import "../layout.css";
 import { useNavigate } from "react-router-dom";
 
+// Helper function to add 6 months to a date
+const addMonths = (date, months) => {
+  const newDate = new Date(date);
+  newDate.setMonth(newDate.getMonth() + months);
+  return newDate.toLocaleDateString();
+};
+
 const Membership = () => {
   const [plans, setPlans] = useState([]);
   const [currentPlans, setCurrentPlans] = useState([]);
@@ -166,7 +173,7 @@ const Membership = () => {
                             <span>
                               <i className="feather-calendar"></i> End Date:
                             </span>{" "}
-                            {new Date(assignment.endDate).toLocaleDateString()}
+                            {addMonths(assignment.startDate, 6)}
                           </div>
                         </div>
                         <div className="col-md-8 change-plan mt-3 mt-md-0">
