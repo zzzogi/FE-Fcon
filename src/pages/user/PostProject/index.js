@@ -232,7 +232,7 @@ const PostProject = () => {
                     </div>
                     <div className="col-lg-6 col-md-12">
                       <div className="mb-3">
-                        <label className="focus-label">Enter Price (VNĐ)</label>
+                        <label className="focus-label">Enter Price (VND)</label>
                         <input
                           type="text"
                           className="form-control"
