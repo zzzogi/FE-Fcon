@@ -124,7 +124,7 @@ const Membership = () => {
                     <h4>{plan.name}</h4>
                     <p>{plan.description}</p>
                     <h3 className="package-price">
-                      {plan.price} <span>/6 Months</span>
+                      {plan.price} VND <span>/6 Months</span>
                     </h3>
                     <div className="package-feature">
                       <ul>
@@ -178,7 +178,7 @@ const Membership = () => {
                         </div>
                         <div className="col-md-8 change-plan mt-3 mt-md-0">
                           <div>
-                            <h3>{getPlanPrice(assignment.planId)}</h3>
+                            <h3>{getPlanPrice(assignment.planId)} VND</h3>
                             <div className="yr-duration">Duration: 6 Months</div>
                           </div>
                           <div className="change-plan-btn">
