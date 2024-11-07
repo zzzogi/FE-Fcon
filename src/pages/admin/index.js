@@ -11,7 +11,7 @@ import PendingProjects from "./Requests";
 import RevenueReport from "./Revenue";
 
 const Admin = () => {
-  const [page, setPage] = useState("blog");
+  const [page, setPage] = useState("project");
 
   return (
     <div class="main-wrapper">

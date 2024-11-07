@@ -13,11 +13,8 @@ import Eye from "../../../../assets/images/icon/eye.svg";
 import Pen from "../../../../assets/images/icon/edit-2.svg";
 import ChipList from "./Chip";
 
-
-
-
 const Sidebar = ({ chips, data }) => {
-  const info = data || {}; 
+  const info = data || {};
   const reviews = info.reviews || [];
   const addRow = () => {
     const rowToAdd = document.getElementById("add_row1");
@@ -333,7 +330,7 @@ const Sidebar = ({ chips, data }) => {
               </li>
             </ul> */}
           </div>
-          <div>
+          {/* <div>
             <a
               data-bs-toggle="modal"
               href="#file"
@@ -341,11 +338,11 @@ const Sidebar = ({ chips, data }) => {
             >
               Send Proposal
             </a>
-          </div>
+          </div> */}
         </div>
         <div class="card budget-widget ">
-          <div class="budget-widget-details">                    
-            <ul class="budget-profiles">             
+          <div class="budget-widget-details">
+            <ul class="budget-profiles">
               <li>
                 <h6>
                   <img src={ComputerLine} alt="icon" class="icon" />
@@ -354,7 +351,7 @@ const Sidebar = ({ chips, data }) => {
                 <h5>{info.skills}</h5>
               </li>
             </ul>
-          </div>       
+          </div>
         </div>
         <div class="card budget-widget">
           <h6>Location</h6>
