@@ -124,7 +124,12 @@ const tableData = [
     date: getRandomDate(),
     plan: "2",
   }, // plan=2
-  { username: "lebao92", deposit: "+10,000", date: getRandomDate(), plan: "1" }, // plan=1
+  { 
+    username: "lebao92", 
+    deposit: "+25,000", 
+    date: getRandomDate(), 
+    plan: "2" 
+  }, 
   {
     username: "minhthu2304",
     deposit: "+25,000",
@@ -133,10 +138,10 @@ const tableData = [
   }, // plan=2
   {
     username: "vanhung_qn",
-    deposit: "+10,000",
+    deposit: "+25,000",
     date: getRandomDate(),
-    plan: "1",
-  }, // plan=1
+    plan: "2",
+  }, // plan=2
   {
     username: "haianh1995",
     deposit: "+25,000",
@@ -145,24 +150,18 @@ const tableData = [
   }, // plan=2
   {
     username: "nguyenduong99",
-    deposit: "+10,000",
-    date: getRandomDate(),
-    plan: "1",
-  }, // plan=1
-  {
-    username: "lehoang.hcm",
-    deposit: "+10,000",
-    date: getRandomDate(),
-    plan: "1",
-  }, // plan=1
-  {
-    username: "tramy2802",
     deposit: "+25,000",
     date: getRandomDate(),
     plan: "2",
   }, // plan=2
   {
-    username: "hoangnam.vn",
+    username: "lehoang.hcm",
+    deposit: "+25,000",
+    date: getRandomDate(),
+    plan: "2",
+  }, // plan=2
+  {
+    username: "tramy2802",
     deposit: "+25,000",
     date: getRandomDate(),
     plan: "2",
@@ -181,10 +180,10 @@ const tableData = [
   }, // plan=2
   {
     username: "nguyenkhoi.bh",
-    deposit: "+10,000",
+    deposit: "+25,000",
     date: getRandomDate(),
-    plan: "1",
-  }, // plan=1
+    plan: "2",
+  }, // plan=2
   {
     username: "thanhlam_hue",
     deposit: "+25,000",
@@ -193,10 +192,10 @@ const tableData = [
   }, // plan=2
   {
     username: "yenphuong_qn",
-    deposit: "+50,000",
+    deposit: "+25,000",
     date: getRandomDate(),
-    plan: "3",
-  }, // plan=3
+    plan: "2",
+  }, // plan=2
 ];
 
 const RevenueReport = () => {
@@ -277,13 +276,13 @@ const RevenueReport = () => {
                     style={{ display: "flex", justifyContent: "space-between" }}
                   >
                     <h5>Total memberships registered: </h5>
-                    <h5 style={{ fontWeight: 700 }}>21</h5>
+                    <h5 style={{ fontWeight: 700 }}>20</h5>
                   </li>
                   <li
                     style={{ display: "flex", justifyContent: "space-between" }}
                   >
                     <h5>Total</h5>
-                    <h5 style={{ fontWeight: 700 }}>475,000</h5>
+                    <h5 style={{ fontWeight: 700 }}>500,000</h5>
                   </li>
                 </ul>
               </div>
