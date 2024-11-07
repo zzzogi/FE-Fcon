@@ -70,7 +70,7 @@ const Blog = () => {
       {/* Bread crumb and current route */}
       <div className="section-bread-crumb">
         <div className="container">
-          <BreadCrumb title="Blog List" page="Blog" />
+          <BreadCrumb title="List of Posts" page="Posts" />
         </div>
       </div>
 
@@ -92,7 +92,7 @@ const Blog = () => {
               <div className="blog-list-filter">
                 <input
                   type="text"
-                  placeholder="Search blog..."
+                  placeholder="Search..."
                   value={searchTerm}
                   onChange={handleSearchChange}
                   className="search-bar"

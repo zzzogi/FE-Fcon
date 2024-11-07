@@ -66,7 +66,7 @@ const BlogDetail = () => {
       {/* Bread crumb and current route */}
       <div className="section-bread-crumb">
         <div className="container">
-          <BreadCrumb title="Blog Details" page="Blog Details" />
+          <BreadCrumb title="Post Details" page="Post Details" />
         </div>
       </div>
 

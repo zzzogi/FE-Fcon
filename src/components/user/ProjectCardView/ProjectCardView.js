@@ -49,7 +49,7 @@ const ProjectCardView = ({ infomation }) => {
           className="view-profile"
           onClick={() => navigate(`/projects/${infomation.id}`)} // Navigates to the project details page
         >
-          View Blog
+          View Post
         </button>
       </div>
     </div>

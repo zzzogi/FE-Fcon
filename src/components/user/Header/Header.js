@@ -124,8 +124,7 @@ const Header = () => {
               className="project-add"
               onClick={() => onNavRoute("/post-project")}
             >
-              <i className="bi bi-plus"></i>
-              Post a Blog
+              <i className="bi bi-plus"></i>Create Post
             </div>
           </div>
         </>

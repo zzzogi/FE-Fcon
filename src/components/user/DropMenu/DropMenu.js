@@ -18,7 +18,7 @@ const DropMenu = () => {
     //   ],
     // },
     {
-      sub: "Blog",
+      sub: "List of Posts",
       href: "/blogs",
       ref: [],
     },
@@ -32,7 +32,7 @@ const DropMenu = () => {
   // Freelancers Data
   const freelancer = [
     {
-      sub: "Blog",
+      sub: "List of Posts",
       href: "/projects",
       ref: [],
     },
