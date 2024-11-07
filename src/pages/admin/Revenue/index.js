@@ -17,45 +17,31 @@ import {
 const data = [
   {
     name: "27/10/2024",
-    "Membership Plan 1": 1,
     "Membership Plan 2": 3,
-    "Membership Plan 3": 4,
   },
   {
     name: "29/10/2024",
-    "Membership Plan 1": 2,
-    "Membership Plan 2": 1,
-    "Membership Plan 3": 3,
+    "Membership Plan 2": 2,
   },
   {
     name: "31/10/2024",
-    "Membership Plan 1": 4,
-    "Membership Plan 2": 1,
-    "Membership Plan 3": 5,
+    "Membership Plan 2": 3,
   },
   {
     name: "02/11/2024",
-    "Membership Plan 1": 1,
     "Membership Plan 2": 3,
-    "Membership Plan 3": 2,
   },
   {
     name: "4/11/2024",
-    "Membership Plan 1": 1,
     "Membership Plan 2": 4,
-    "Membership Plan 3": 5,
   },
   {
     name: "6/11/2024",
-    "Membership Plan 1": 2,
     "Membership Plan 2": 3,
-    "Membership Plan 3": 4,
   },
   {
     name: "08/11/2024",
-    "Membership Plan 1": 1,
-    "Membership Plan 2": 3,
-    "Membership Plan 3": 2,
+    "Membership Plan 2": 2,
   },
 ];
 
