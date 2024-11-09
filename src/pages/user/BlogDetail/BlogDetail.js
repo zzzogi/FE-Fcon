@@ -6,7 +6,7 @@ import BlogLatest from "../../../components/user/BlogLastest/BlogLatest";
 import BlogCategories from "../../../components/user/BlogCategories/BlogCategories";
 import BlogTags from "../../../components/user/BlogTags/BlogTags";
 import "./BlogDetail.css";
-import AuthImg from "../../../assets/images/img-02.jpg";
+import AvaPlaceholder from "../../../assets/images/avatar_placeholder.png";
 import { useLocation } from "react-router-dom";
 
 function convertDate(dateStr) {
@@ -93,12 +93,12 @@ const BlogDetail = () => {
                 <h3>{blogs?.title}</h3>
               </div>
               <div className="blog-info">
-                {/* <div className="author">
+                <div className="author">
                   <div className="avatar">
-                    <img src={AuthImg} alt="blog-author" />
+                    <img src={AvaPlaceholder} alt="blog-author" />
                   </div>
-                  <p className="name">{blogs?.name || "John Doe"}</p>
-                </div> */}
+                  <p className="name">{blogs?.name || "Guest"}</p>
+                </div>
                 <div className="created-at item-flex">
                   <i class="bi bi-calendar"></i>{" "}
                   {convertDate(blogs?.createdAt) || "A while ago"}

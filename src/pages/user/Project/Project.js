@@ -4,6 +4,7 @@ import BreadCrumb from "../../../components/user/BreadCrumb/BreadCrumb";
 import FilterSide from "../../../components/user/FilterSide/FilterSide";
 import ProjectCardView from "../../../components/user/ProjectCardView/ProjectCardView";
 import "./Project.css";
+import AvatarPlaceholder from "../../../assets/images/avatar_placeholder.png";
 
 const Project = () => {
   const [projects, setProjects] = useState([]);
@@ -21,15 +22,25 @@ const Project = () => {
           `https://api-be.fieldy.online/api/Post/getAllPosts`
         );
         if (response.data.success) {
-          const filteredByType = response.data.data.filter(
-            (project) => project.postTypeId === 1
+          const filteredByTypeAndStatus = response.data.data.filter(
+            (project) => project.postTypeId === 1 && project.status === "active"
           );
 
-          const locations = ["Hà Nội", "Đà Nẵng", "Hồ Chí Minh", "Hải Phòng", "Japan", "Thủ Đức", "Hòa Lạc"];
-          const projectsWithLocations = filteredByType.map((project, index) => ({
-            ...project,
-            position: locations[index % locations.length],
-          }));
+          const locations = [
+            "Hà Nội",
+            "Đà Nẵng",
+            "Hồ Chí Minh",
+            "Hải Phòng",
+            "Japan",
+            "Thủ Đức",
+            "Hòa Lạc",
+          ];
+          const projectsWithLocations = filteredByTypeAndStatus.map(
+            (project, index) => ({
+              ...project,
+              position: locations[index % locations.length],
+            })
+          );
 
           setProjects(projectsWithLocations);
           setFilteredProjects(projectsWithLocations);
@@ -121,7 +132,10 @@ const Project = () => {
                         position: project.position,
                         tags: project.skills.split(", "),
                         salary: `${project.budgetOrSalary}`,
-                        avatar: project.imgUrl,
+                        avatar:
+                          project?.imgUrl || project.imgUrl !== "string"
+                            ? AvatarPlaceholder
+                            : null,
                       }}
                     />
                   ))

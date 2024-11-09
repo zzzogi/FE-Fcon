@@ -5,6 +5,7 @@ import BreadCrumb from "../../../components/user/BreadCrumb/BreadCrumb";
 import BlogCard from "../../../components/user/BlogCard/BlogCard";
 import BlogTags from "../../../components/user/BlogTags/BlogTags";
 import "./Blog.css";
+import Cookies from "js-cookie";
 
 const Blog = () => {
   const [blogs, setBlogs] = useState([]);
@@ -15,6 +16,8 @@ const Blog = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
+  const token = Cookies.get("token");
+
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
@@ -23,7 +26,7 @@ const Blog = () => {
         );
         if (response.data.success) {
           const filteredByType = response.data.data.filter(
-            (blog) => blog.postTypeId === 2
+            (blog) => blog.postTypeId === 2 && blog.status === "active"
           );
 
           const skillsArray = response.data.data.flatMap((item) =>
@@ -58,6 +61,19 @@ const Blog = () => {
     }
   };
 
+  // const getUserById = async (id) => {
+  //   const response = await axios.get(
+  //     `https://api-be.fieldy.online/api/User/getUserById/${id}`,
+
+  //     {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //         accept: "*/*",
+  //       },
+  //     }
+  //   );
+  // };
+
   const onNavRoute = (endpoint) => {
     navigate(endpoint);
   };
@@ -82,6 +98,15 @@ const Blog = () => {
               <div className="filter-sticky">
                 <div className="blog-tags">
                   <BlogTags tags={tags} />
+                  {/* <button
+                    onClick={() => getUserById(51)}
+                    style={{
+                      width: 150,
+                      height: 25,
+                    }}
+                  >
+                    Click me
+                  </button> */}
                 </div>
               </div>
             </div>

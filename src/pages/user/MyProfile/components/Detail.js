@@ -37,7 +37,7 @@ const Detail = ({ data }) => {
           <ul>
             <li>
               <img src={MapPin} alt="icons" className="icon" />
-              {info.position}{" "}
+              {info?.position || "Somewhere far away"}{" "}
               {/* Placeholder since location is missing in the API */}
             </li>
             <li>

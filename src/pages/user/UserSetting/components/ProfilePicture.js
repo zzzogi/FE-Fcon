@@ -59,7 +59,12 @@ const ProfilePicture = ({ register }) => {
       <img
         alt="profile placeholder"
         src={preview || AvatarPlaceholder}
-        style={{ width: 200, height: 200, borderRadius: "50%" }}
+        style={{
+          width: 200,
+          height: 200,
+          borderRadius: "50%",
+          objectFit: "contain",
+        }}
       />
 
       <button onClick={onUpload}>{uploadButtonLabel}</button>
