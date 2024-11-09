@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import BreadCrumb from "../../../components/user/BreadCrumb/BreadCrumb";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ProfilePicture from "./components/ProfilePicture";
-
+import Cookies from "js-cookie";
 /* 
 {
 
@@ -28,14 +28,80 @@ import ProfilePicture from "./components/ProfilePicture";
 "reviewReviewers": [] not ediable
 },
 
+{
+  "userId": 36,
+  "username": "acctest3",
+  "email": "acctest3",
+  "passwordHash": null,
+  "userType": "admin",
+  "contactInfo": "random",
+  "createdAt": "2024-10-29T14:37:22.557",
+  "updatedAt": "2024-10-31T15:32:19.43",
+  "numberJobDone": 0,
+  "location": "string",
+  "deliveryTime": "string",
+  "languageLevel": "string",
+  "imgUrl": "string",
+  "memberships": [],
+  "posts": [],
+  "reviewReviewees": [],
+  "reviewReviewers": []
+}
+
 **/
 
+function convertDate(dateStr) {
+  // Create a Date object from the string
+  const date = new Date(dateStr);
+
+  // Get day, month, and year components
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0"); // Months are zero-based
+  const year = date.getFullYear();
+
+  // Return formatted date
+  return `${day}/${month}/${year}`;
+}
+
 const UserSetting = () => {
-  const { register, handleSubmit, control, watch } = useForm();
+  const [currentUser, setCurrentUser] = useState();
   const [showPassword, setShowPassword] = useState(false);
+  const { register, handleSubmit, control, watch } = useForm();
   const onSubmit = (data) => {
     console.log(data);
+    toast("Hiện tại không thể cập nhật thông tin người dùng", {
+      type: "info",
+      position: "top-center",
+    });
   };
+  const token = Cookies.get("token");
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const response = await fetch(
+        `https://api-be.fieldy.online/api/User/getCurrentUser`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            accept: "*/*",
+          },
+        }
+      );
+
+      if (response.ok) {
+        const result = await response.json();
+
+        setCurrentUser(result);
+      } else {
+        console.log("Failed to fetch current user");
+      }
+    };
+
+    fetchUser();
+  }, [token]);
+
+  console.log(currentUser);
   return (
     <>
       <div className="section-bread-crumb">
@@ -48,16 +114,7 @@ const UserSetting = () => {
           <div class="row">
             <div class="col-md-12">
               <div class="select-project mb-4">
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    toast("Đăng thành công, bài của bạn sẽ sớm được duyệt!", {
-                      type: "success",
-                      position: "top-center",
-                    });
-                    handleSubmit(onSubmit);
-                  }}
-                >
+                <form onSubmit={handleSubmit(onSubmit)}>
                   <div class="title-box widget-box">
                     <div class="row">
                       <div class="row col-lg-4">
@@ -70,7 +127,8 @@ const UserSetting = () => {
                             <input
                               type="text"
                               class="form-control"
-                              {...register("user_name")}
+                              {...register("username")}
+                              value={currentUser?.username || ""}
                             />
                           </div>
                         </div>
@@ -82,6 +140,7 @@ const UserSetting = () => {
                               class="form-control"
                               {...register("userType")}
                               disabled
+                              value={currentUser?.userType || ""}
                             />
                           </div>
                         </div>
@@ -92,14 +151,16 @@ const UserSetting = () => {
                               type={showPassword ? "password" : "text"}
                               class="form-control"
                               {...register("passwordHash")}
+                              value={currentUser?.passwordHash || ""}
+                              disabled
                             />
-                            <input
+                            {/* <input
                               type="checkbox"
                               onClick={() => {
                                 setShowPassword((state) => !state);
                               }}
                             />
-                            Show Password
+                            Show Password */}
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-12">
@@ -109,6 +170,7 @@ const UserSetting = () => {
                               type="text"
                               class="form-control"
                               {...register("email")}
+                              value={currentUser?.email || ""}
                             />
                           </div>
                         </div>
@@ -119,6 +181,7 @@ const UserSetting = () => {
                               type="text"
                               class="form-control"
                               {...register("location")}
+                              value={currentUser?.location || ""}
                             />
                           </div>
                         </div>
@@ -128,6 +191,7 @@ const UserSetting = () => {
                             <select
                               class="form-control select"
                               {...register("languageLevel")}
+                              value={currentUser?.languageLevel || ""}
                             >
                               <option value="0">Beginner</option>
                               <option value="1">Intermediate</option>
@@ -142,6 +206,7 @@ const UserSetting = () => {
                             <select
                               class="form-control select"
                               {...register("deliveryTime")}
+                              value={currentUser?.deliveryTime || ""}
                             >
                               <option value="0">Beginner</option>
                               <option value="1">Intermediate</option>
@@ -157,6 +222,7 @@ const UserSetting = () => {
                               type="text"
                               class="form-control"
                               {...register("contactInfo")}
+                              value={currentUser?.contactInfo || ""}
                             />
                           </div>
                         </div>
@@ -168,6 +234,7 @@ const UserSetting = () => {
                               class="form-control"
                               {...register("createdAt")}
                               disabled
+                              value={convertDate(currentUser?.createdAt) || ""}
                             />
                           </div>
                         </div>
@@ -184,11 +251,9 @@ const UserSetting = () => {
                       </div>
                       <div class="row">
                         <div class="col-md-12 text-end">
-                          <div class="btn-item">
-                            <button type="submit" class="btn next-btn">
-                              Cập nhật thông tin
-                            </button>
-                          </div>
+                          <button type="submit" class="btn btn-primary">
+                            Cập nhật thông tin
+                          </button>
                         </div>
                       </div>
                     </div>

@@ -1,5 +1,7 @@
 import React, { useRef, useState } from "react";
 import AvatarPlaceholder from "../../../../assets/images/avatar_placeholder.png";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ProfilePicture = ({ register }) => {
   const hiddenInputRef = useRef();
@@ -18,7 +20,11 @@ const ProfilePicture = ({ register }) => {
 
   const onUpload = (e) => {
     e.preventDefault();
-    hiddenInputRef.current.click();
+    toast("Chức năng này hiện chưa hỗ trợ!", {
+      type: "info",
+      position: "top-center",
+    });
+    // hiddenInputRef.current.click();
   };
 
   const uploadButtonLabel = preview ? "Change image" : "Upload image";
@@ -44,7 +50,7 @@ const ProfilePicture = ({ register }) => {
 
       <input
         type="file"
-        name="imgUr1"
+        name="imgUrl"
         {...rest}
         onChange={handleUploadedFile}
         ref={(e) => {
@@ -67,7 +73,10 @@ const ProfilePicture = ({ register }) => {
         }}
       />
 
-      <button onClick={onUpload}>{uploadButtonLabel}</button>
+      <button onClick={onUpload} class="btn btn-primary">
+        {uploadButtonLabel}
+      </button>
+      <ToastContainer />
     </div>
   );
 };

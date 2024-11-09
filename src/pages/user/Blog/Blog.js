@@ -5,7 +5,7 @@ import BreadCrumb from "../../../components/user/BreadCrumb/BreadCrumb";
 import BlogCard from "../../../components/user/BlogCard/BlogCard";
 import BlogTags from "../../../components/user/BlogTags/BlogTags";
 import "./Blog.css";
-import Cookies from "js-cookie";
+// import Cookies from "js-cookie";
 
 const Blog = () => {
   const [blogs, setBlogs] = useState([]);
@@ -16,7 +16,7 @@ const Blog = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  const token = Cookies.get("token");
+  // const token = Cookies.get("token");
 
   useEffect(() => {
     const fetchBlogs = async () => {
