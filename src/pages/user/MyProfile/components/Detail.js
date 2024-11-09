@@ -68,7 +68,7 @@ const Detail = ({ data }) => {
                 </p>
               </div>
             </li>
-            <li>
+            {/* <li>
               <div className="proposal-detail-img">
                 <img src={TimeLine} alt="icons" />
               </div>
@@ -78,7 +78,7 @@ const Detail = ({ data }) => {
                   {info.budgetOrSalary || "Not specified"} VND
                 </p>
               </div>
-            </li>
+            </li> */}
             {/* <li>
               <div className="proposal-detail-img">
                 <img src={UserHeartLine} alt="icons" />

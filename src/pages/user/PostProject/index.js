@@ -1,4 +1,3 @@
-
 // // export default PostProject;
 // import React from "react";
 // import "./layout.css";
@@ -300,23 +299,23 @@ const PostProject = () => {
 
   const apiUrl = process.env.REACT_APP_API_URL;
 
-  const onSubmit = async (data) => {
-    const userId = Cookies.get("userId"); // Hardcoded userId for now
+  const userId = Cookies.get("userId"); // Hardcoded userId for now
 
-    let postTypeId = 0; // Hardcoded postTypeId
-    const userType = Cookies.get("userType");
+  let postTypeId = 0; // Hardcoded postTypeId
+  const userType = Cookies.get("userType");
+  console.log(userType);
+  if (userType && userType === "freelancer") {
+    postTypeId = 1; //
     console.log(userType);
-    if (userType && userType === "freelancer") {
-      postTypeId = 1; //
-      console.log(userType);
-    }
-    if (userType && userType === "company") {
-      postTypeId = 2; //
-      console.log(userType);
-    }
+  }
+  if (userType && userType === "company") {
+    postTypeId = 2; //
+    console.log(userType);
+  }
 
-    const token = Cookies.get("token"); // Get the token from cookies
+  const token = Cookies.get("token"); // Get the token from cookies
 
+  const onSubmit = async (data) => {
     if (!token) {
       toast("Please login before creating a post!", {
         type: "error",
@@ -410,27 +409,28 @@ const PostProject = () => {
                       </div>
                     </div>
 
-                    <div className="col-lg-4 col-md-6">
-                      <div className="mb-3">
-                        <label className="focus-label">Deadline Date</label>
-                        <div className="cal-icon">
-                          <input
-                            type="date"
-                            className={`form-control ${
-                              errors.deadline ? "is-invalid" : ""
-                            }`}
-                            {...register("deadline", {
-                              required: "Deadline date is required",
-                            })}
-                          />
-                          {errors.deadline && (
-                            <div className="invalid-feedback">
-                              {errors.deadline.message}
-                            </div>
-                          )}
+                    {userType !== "freelancer" ? (
+                      <div className="col-lg-4 col-md-6">
+                        <div className="mb-3">
+                          <label className="focus-label">Deadline Date</label>
+                          <div className="cal-icon">
+                            <input
+                              type="date"
+                              className={`form-control ${
+                                errors.deadline ? "is-invalid" : ""
+                              }`}
+                              {...register("deadline")}
+                              defaultValue={new Date().toDateString()}
+                            />
+                            {errors.deadline && (
+                              <div className="invalid-feedback">
+                                {errors.deadline.message}
+                              </div>
+                            )}
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    ) : null}
 
                     <div className="col-lg-12 col-md-12">
                       <div className="mb-3">
@@ -489,28 +489,33 @@ const PostProject = () => {
                     </div>
 
                     <div className="col-lg-12 mt-5">
-                      <h4 style={{ fontWeight: 900 }}>Budget</h4>
+                      <h4 style={{ fontWeight: 900 }}>
+                        {userType !== "freelancer" ? "Budget" : "More Info"}
+                      </h4>
                     </div>
-                    <div className="col-lg-6 col-md-12">
-                      <div className="mb-3">
-                        <label className="focus-label">Enter Price (VND)</label>
-                        <input
-                          type="text"
-                          className={`form-control ${
-                            errors.price ? "is-invalid" : ""
-                          }`}
-                          placeholder="15"
-                          {...register("price", {
-                            required: "Price is required",
-                          })}
-                        />
-                        {errors.price && (
-                          <div className="invalid-feedback">
-                            {errors.price.message}
-                          </div>
-                        )}
+                    {userType !== "freelancer" ? (
+                      <div className="col-lg-6 col-md-12">
+                        <div className="mb-3">
+                          <label className="focus-label">
+                            Enter Price (VND)
+                          </label>
+                          <input
+                            type="text"
+                            className={`form-control ${
+                              errors.price ? "is-invalid" : ""
+                            }`}
+                            placeholder="15"
+                            {...register("price")}
+                            defaultValue={0}
+                          />
+                          {errors.price && (
+                            <div className="invalid-feedback">
+                              {errors.price.message}
+                            </div>
+                          )}
+                        </div>
                       </div>
-                    </div>
+                    ) : null}
                     <div className="col-lg-12 col-md-12">
                       <div className="mb-3">
                         <label className="focus-label">Description</label>
@@ -550,4 +555,3 @@ const PostProject = () => {
 };
 
 export default PostProject;
-

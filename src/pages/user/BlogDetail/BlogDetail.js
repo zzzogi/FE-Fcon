@@ -8,6 +8,7 @@ import BlogTags from "../../../components/user/BlogTags/BlogTags";
 import "./BlogDetail.css";
 import AvaPlaceholder from "../../../assets/images/avatar_placeholder.png";
 import { useLocation } from "react-router-dom";
+import Cookies from "js-cookie";
 
 function convertDate(dateStr) {
   // Create a Date object from the string
@@ -22,6 +23,10 @@ function convertDate(dateStr) {
   return `${day}/${month}/${year}`;
 }
 
+function getRandomNumber() {
+  return Math.floor(Math.random() * 100) + 1;
+}
+
 const BlogDetail = () => {
   const location = useLocation();
   const postId = location.pathname.match(/\/blog\/(\d+)$/)[1];
@@ -30,6 +35,8 @@ const BlogDetail = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
   const [tags, setTags] = useState([]);
+
+  const userName = Cookies.get("username");
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -79,7 +86,7 @@ const BlogDetail = () => {
                 <img
                   src={
                     blogs?.imgUrl ||
-                    "https://c0.wallpaperflare.com/preview/274/250/540/career-success-path-stair.jpg"
+                    `https://picsum.photos/id/${getRandomNumber()}/536/354`
                   }
                   alt="blog-img"
                   style={{
@@ -97,7 +104,7 @@ const BlogDetail = () => {
                   <div className="avatar">
                     <img src={AvaPlaceholder} alt="blog-author" />
                   </div>
-                  <p className="name">{blogs?.name || "Guest"}</p>
+                  <p className="name">{blogs?.name || userName}</p>
                 </div>
                 <div className="created-at item-flex">
                   <i class="bi bi-calendar"></i>{" "}

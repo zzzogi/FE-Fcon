@@ -280,12 +280,12 @@ const Sidebar = ({ chips, data }) => {
       </div>
 
       <div class="col-lg-4 col-md-12 sidebar-right theiaStickySidebar project-client-view">
-        <div class="card budget-widget ">
+        {/* <div class="card budget-widget ">
           <div class="budget-widget-details">
             <h6>Budget</h6>
             <h4>{info.budgetOrSalary} VND</h4>
-            {/* <p class="mb-0">Hourly Rate</p> */}
-            {/* <ul class="budget-profiles">
+            <p class="mb-0">Hourly Rate</p>
+            <ul class="budget-profiles">
               <li>
                 <h6>
                   <img src={MapPin} alt="icon" class="icon" />
@@ -328,9 +328,9 @@ const Sidebar = ({ chips, data }) => {
                 </h6>
                 <h5>info@example.com</h5>
               </li>
-            </ul> */}
+            </ul>
           </div>
-          {/* <div>
+          <div>
             <a
               data-bs-toggle="modal"
               href="#file"
@@ -338,8 +338,8 @@ const Sidebar = ({ chips, data }) => {
             >
               Send Proposal
             </a>
-          </div> */}
-        </div>
+          </div>
+        </div> */}
         <div class="card budget-widget ">
           <div class="budget-widget-details">
             <ul class="budget-profiles">

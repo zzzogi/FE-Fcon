@@ -81,7 +81,6 @@ const UserSetting = () => {
       const response = await fetch(
         `https://api-be.fieldy.online/api/User/getCurrentUser`,
         {
-          method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
             accept: "*/*",

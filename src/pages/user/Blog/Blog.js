@@ -5,7 +5,7 @@ import BreadCrumb from "../../../components/user/BreadCrumb/BreadCrumb";
 import BlogCard from "../../../components/user/BlogCard/BlogCard";
 import BlogTags from "../../../components/user/BlogTags/BlogTags";
 import "./Blog.css";
-// import Cookies from "js-cookie";
+import Cookies from "js-cookie";
 
 const Blog = () => {
   const [blogs, setBlogs] = useState([]);
@@ -14,9 +14,10 @@ const Blog = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
+  const [currentUser, setCurrentUser] = useState(true);
   const navigate = useNavigate();
 
-  // const token = Cookies.get("token");
+  const token = Cookies.get("token");
 
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -48,6 +49,31 @@ const Blog = () => {
     fetchBlogs();
   }, []);
 
+  useEffect(() => {
+    const fetchUser = async () => {
+      const response = await fetch(
+        `https://api-be.fieldy.online/api/User/getCurrentUser`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            accept: "*/*",
+          },
+        }
+      );
+
+      if (response.ok) {
+        const result = await response.json();
+
+        setCurrentUser(result);
+      } else {
+        console.log("Failed to fetch current user");
+      }
+    };
+
+    fetchUser();
+  }, [token]);
+
   const handleSearchChange = (event) => {
     const value = event.target.value;
     setSearchTerm(value);
@@ -64,7 +90,7 @@ const Blog = () => {
   // const getUserById = async (id) => {
   //   const response = await axios.get(
   //     `https://api-be.fieldy.online/api/User/getUserById/${id}`,
-
+  //     { token: token },
   //     {
   //       headers: {
   //         Authorization: `Bearer ${token}`,

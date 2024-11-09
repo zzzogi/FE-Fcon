@@ -2,6 +2,7 @@ import React from "react";
 import "./BlogCard.css";
 import MeetingImage from "../../../assets/images/meeting.jpg";
 import AvaPlaceholder from "../../../assets/images/avatar_placeholder.png";
+import Cookies from "js-cookie";
 
 function convertDate(dateStr) {
   // Create a Date object from the string
@@ -16,11 +17,22 @@ function convertDate(dateStr) {
   return `${day}/${month}/${year}`;
 }
 
+function getRandomNumber() {
+  return Math.floor(Math.random() * 100) + 1;
+}
+
 const BlogCard = ({ data }) => {
+  const userName = Cookies.get("username");
   return (
     <div className="BlogCard">
       <div className="image">
-        <img src={data?.imgUrl || MeetingImage} alt="blog-img" />
+        <img
+          src={
+            data?.imgUrl ||
+            `https://picsum.photos/id/${getRandomNumber()}/536/354`
+          }
+          alt="blog-img"
+        />
       </div>
       <div className="author">
         <div className="author-container">
@@ -28,9 +40,12 @@ const BlogCard = ({ data }) => {
             <img
               src={data.author ? data.author.avatar : AvaPlaceholder}
               alt="blog-author"
+              style={{
+                objectFit: "contain",
+              }}
             />
           </div>
-          <p className="name">{data.author ? data.author.name : "Guest"}</p>
+          <p className="name">{data.author ? data.author.name : userName}</p>
         </div>
         <p>
           <i className="bi bi-calendar-check-fill"></i>{" "}
