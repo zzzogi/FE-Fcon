@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import BreadCrumb from "../../../components/user/BreadCrumb/BreadCrumb";
 import BlogCard from "../../../components/user/BlogCard/BlogCard";
@@ -14,10 +14,28 @@ const Blog = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
-  const [currentUser, setCurrentUser] = useState(true);
+  const [userNames, setUserNames] = useState({});
   const navigate = useNavigate();
 
   const token = Cookies.get("token");
+
+  const getUserById = useCallback(
+    async (id) => {
+      const response = await axios.get(
+        `https://api-be.fieldy.online/api/User/getUserById/${id}`,
+
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            accept: "*/*",
+          },
+        }
+      );
+      console.log(response.data.data.username);
+      return response.data.data.username;
+    },
+    [token]
+  );
 
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -50,29 +68,18 @@ const Blog = () => {
   }, []);
 
   useEffect(() => {
-    const fetchUser = async () => {
-      const response = await fetch(
-        `https://api-be.fieldy.online/api/User/getCurrentUser`,
-        {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            accept: "*/*",
-          },
-        }
+    const fetchUserNames = async () => {
+      const names = {};
+      await Promise.all(
+        filteredBlogs.map(async (blog) => {
+          const username = await getUserById(blog.userId);
+          names[blog.userId] = username;
+        })
       );
-
-      if (response.ok) {
-        const result = await response.json();
-
-        setCurrentUser(result);
-      } else {
-        console.log("Failed to fetch current user");
-      }
+      setUserNames(names);
     };
-
-    fetchUser();
-  }, [token]);
+    fetchUserNames();
+  }, [filteredBlogs, getUserById]);
 
   const handleSearchChange = (event) => {
     const value = event.target.value;
@@ -86,19 +93,6 @@ const Blog = () => {
       setFilteredBlogs(blogs);
     }
   };
-
-  // const getUserById = async (id) => {
-  //   const response = await axios.get(
-  //     `https://api-be.fieldy.online/api/User/getUserById/${id}`,
-  //     { token: token },
-  //     {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //         accept: "*/*",
-  //       },
-  //     }
-  //   );
-  // };
 
   const onNavRoute = (endpoint) => {
     navigate(endpoint);
@@ -124,7 +118,7 @@ const Blog = () => {
               <div className="filter-sticky">
                 <div className="blog-tags">
                   <BlogTags tags={tags} />
-                  {/* <button
+                  <button
                     onClick={() => getUserById(51)}
                     style={{
                       width: 150,
@@ -132,7 +126,7 @@ const Blog = () => {
                     }}
                   >
                     Click me
-                  </button> */}
+                  </button>
                 </div>
               </div>
             </div>
@@ -160,7 +154,10 @@ const Blog = () => {
                       key={blog.name + "_" + index}
                       onClick={() => onNavRoute(`/blog/${blog.postId}`)}
                     >
-                      <BlogCard data={blog} />
+                      <BlogCard
+                        data={blog}
+                        userName={userNames[blog.userId] || "Loading..."}
+                      />
                     </div>
                   ))
                 ) : (

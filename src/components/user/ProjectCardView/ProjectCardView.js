@@ -39,15 +39,18 @@ const ProjectCardView = ({ infomation }) => {
           )}
         </div>
 
-        <div className="salary">
+        {/* <div className="salary">
           <h4>{infomation.salary} VND</h4>
-        </div>
+        </div> */}
         <div className="left">
           <span>{infomation.lastest}</span>
         </div>
         <button
           className="view-profile"
           onClick={() => navigate(`/projects/${infomation.id}`)} // Navigates to the project details page
+          style={{
+            marginTop: 12,
+          }}
         >
           View Post
         </button>

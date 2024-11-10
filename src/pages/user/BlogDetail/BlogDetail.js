@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import "./BlogDetail.css";
 import BreadCrumb from "../../../components/user/BreadCrumb/BreadCrumb";
 import BlogLatest from "../../../components/user/BlogLastest/BlogLatest";
@@ -31,12 +31,13 @@ const BlogDetail = () => {
   const location = useLocation();
   const postId = location.pathname.match(/\/blog\/(\d+)$/)[1];
 
-  const [blogs, setBlogs] = useState([]);
+  const [blogs, setBlogs] = useState();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
   const [tags, setTags] = useState([]);
+  const [userName, setUserName] = useState();
 
-  const userName = Cookies.get("username");
+  const token = Cookies.get("token");
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -64,6 +65,36 @@ const BlogDetail = () => {
     };
     fetchProjects();
   }, [postId]);
+
+  useEffect(() => {
+    const fetechUserName = async () => {
+      try {
+        const response = await axios.get(
+          `https://api-be.fieldy.online/api/User/getUserById/${
+            blogs?.userId || 1
+          }`,
+
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              accept: "*/*",
+            },
+          }
+        );
+
+        if (response.data.success) {
+          setUserName(response.data.data.username);
+        } else {
+          setError("Failed to load projects.");
+        }
+      } catch (err) {
+        setError("Error fetching data.");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetechUserName();
+  }, [token, blogs]);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
@@ -104,7 +135,9 @@ const BlogDetail = () => {
                   <div className="avatar">
                     <img src={AvaPlaceholder} alt="blog-author" />
                   </div>
-                  <p className="name">{blogs?.name || userName}</p>
+                  <p className="name">
+                    {blogs?.name || userName || "Loading..."}
+                  </p>
                 </div>
                 <div className="created-at item-flex">
                   <i class="bi bi-calendar"></i>{" "}

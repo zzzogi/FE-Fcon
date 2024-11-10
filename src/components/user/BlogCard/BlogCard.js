@@ -21,8 +21,7 @@ function getRandomNumber() {
   return Math.floor(Math.random() * 100) + 1;
 }
 
-const BlogCard = ({ data }) => {
-  const userName = Cookies.get("username");
+const BlogCard = ({ data, userName }) => {
   return (
     <div className="BlogCard">
       <div className="image">
@@ -45,7 +44,7 @@ const BlogCard = ({ data }) => {
               }}
             />
           </div>
-          <p className="name">{data.author ? data.author.name : userName}</p>
+          {userName}
         </div>
         <p>
           <i className="bi bi-calendar-check-fill"></i>{" "}

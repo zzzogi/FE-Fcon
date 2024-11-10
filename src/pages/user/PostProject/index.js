@@ -273,12 +273,9 @@
 // export default PostProject;
 
 // export default PostProject;
+import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
 import "./layout.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import CheckSuccess from "../../../assets/images/icon/check-success.svg";
-import Hourly from "../../../assets/images/icon/hourly.svg";
-import Fixed from "../../../assets/images/icon/fixed.svg";
 
 // Import useForm from react-hook-form
 import { useForm } from "react-hook-form";
@@ -335,6 +332,8 @@ const PostProject = () => {
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
       imgUrl: "",
+      contactInfo: data.contactInfo,
+      email: data.email,
     };
 
     try {
@@ -389,7 +388,11 @@ const PostProject = () => {
                     <div className="col-lg-12 mt-4">
                       <h4 style={{ fontWeight: 900 }}>Basic Details</h4>
                     </div>
-                    <div className="col-lg-12 col-md-12">
+                    <div
+                      className={`${
+                        userType === "freelancer" ? "col-lg-6" : "col-lg-4"
+                      }`}
+                    >
                       <div className="mb-3">
                         <label className="focus-label">Title</label>
                         <input
@@ -409,8 +412,32 @@ const PostProject = () => {
                       </div>
                     </div>
 
+                    <div
+                      className={`${
+                        userType === "freelancer" ? "col-lg-6" : "col-lg-4"
+                      }`}
+                    >
+                      <div className="mb-3">
+                        <label className="focus-label">Tags</label>
+                        <input
+                          type="text"
+                          className={`form-control ${
+                            errors.tags ? "is-invalid" : ""
+                          }`}
+                          {...register("tags", {
+                            required: "Tags are required",
+                          })}
+                        />
+                        {errors.tags && (
+                          <div className="invalid-feedback">
+                            {errors.tags.message}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
                     {userType !== "freelancer" ? (
-                      <div className="col-lg-4 col-md-6">
+                      <div className="col-lg-4">
                         <div className="mb-3">
                           <label className="focus-label">Deadline Date</label>
                           <div className="cal-icon">
@@ -431,26 +458,6 @@ const PostProject = () => {
                         </div>
                       </div>
                     ) : null}
-
-                    <div className="col-lg-12 col-md-12">
-                      <div className="mb-3">
-                        <label className="focus-label">Tags</label>
-                        <input
-                          type="text"
-                          className={`form-control ${
-                            errors.tags ? "is-invalid" : ""
-                          }`}
-                          {...register("tags", {
-                            required: "Tags are required",
-                          })}
-                        />
-                        {errors.tags && (
-                          <div className="invalid-feedback">
-                            {errors.tags.message}
-                          </div>
-                        )}
-                      </div>
-                    </div>
 
                     <div className="col-lg-12 col-md-12 mt-4">
                       <div className="title-content p-0">
@@ -485,6 +492,34 @@ const PostProject = () => {
                             </p>
                           </div>
                         </div>
+                      </div>
+                    </div>
+
+                    <div className="col-lg-12 mt-5">
+                      <h4 style={{ fontWeight: 900 }}>Contact</h4>
+                    </div>
+                    <div className="col-lg-6">
+                      <div className="mb-3">
+                        <label className="focus-label">Phone number</label>
+                        <input
+                          type="text"
+                          className={`form-control ${
+                            errors.contactInfo ? "is-invalid" : ""
+                          }`}
+                          {...register("contactInfo")}
+                        />
+                      </div>
+                    </div>
+                    <div className="col-lg-6">
+                      <div className="mb-3">
+                        <label className="focus-label">Email</label>
+                        <input
+                          type="text"
+                          className={`form-control ${
+                            errors.email ? "is-invalid" : ""
+                          }`}
+                          {...register("email")}
+                        />
                       </div>
                     </div>
 
