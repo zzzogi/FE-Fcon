@@ -7,6 +7,8 @@ import BlogCategories from "../../../components/user/BlogCategories/BlogCategori
 import BlogTags from "../../../components/user/BlogTags/BlogTags";
 import "./BlogDetail.css";
 import AvaPlaceholder from "../../../assets/images/avatar_placeholder.png";
+import Email from "../../../assets/images/evelop.svg";
+import Phone from "../../../assets/images/phone.svg";
 import { useLocation } from "react-router-dom";
 import Cookies from "js-cookie";
 
@@ -143,15 +145,23 @@ const BlogDetail = () => {
                   <i class="bi bi-calendar"></i>{" "}
                   {convertDate(blogs?.createdAt) || "A while ago"}
                 </div>
-                <div className="comments item-flex">
+                {/* <div className="comments item-flex">
                   <i class="bi bi-chat-square-dots"></i> {blogs.reviews.length}{" "}
                   Reviews
-                </div>
+                </div> */}
                 <div className="tips item-flex">
                   <i class="bi bi-tags-fill"></i> {blogs?.skills || "No tags"}
                 </div>
                 <div className="tips item-flex">
                   Budget: {blogs?.budgetOrSalary || "0"} VND
+                </div>
+                <div className="tips item-flex">
+                  <img src={Phone} alt="icons" className="icon" />
+                  {blogs.contactInfo || "No phone number"}
+                </div>
+                <div className="tips item-flex">
+                  <img src={Email} alt="icons" className="icon" />
+                  {blogs.email || "No email"}
                 </div>
               </div>
               <div className="blog-description">

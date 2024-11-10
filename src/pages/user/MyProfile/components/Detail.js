@@ -5,6 +5,8 @@ import Star from "../../../../assets/images/icon/star.svg";
 import Calendar from "../../../../assets/images/icon/calendar.svg";
 import Eye from "../../../../assets/images/icon/eye.svg";
 import Pen from "../../../../assets/images/icon/edit-2.svg";
+import Email from "../../../../assets/images/evelop.svg";
+import Phone from "../../../../assets/images/phone.svg";
 import ComputerLine from "../../../../assets/images/icon/computer-line.svg";
 import TimeLine from "../../../../assets/images/icon/time-line.svg";
 import UserHeartLine from "../../../../assets/images/icon/user-heart-line.svg";
@@ -50,9 +52,17 @@ const Detail = ({ data }) => {
               {info.status || "Status not available"}
             </li>
             <li>
-              <img src={Eye} alt="icons" className="icon" />
-              {reviews.length + " reviews"} {/* Safely accessing length */}
+              <img src={Phone} alt="icons" className="icon" />
+              {info.contactInfo || "No phone number"}
             </li>
+            <li>
+              <img src={Email} alt="icons" className="icon" />
+              {info.email || "No email"}
+            </li>
+            {/* <li>
+              <img src={Eye} alt="icons" className="icon" />
+              {reviews.length + " reviews"}
+            </li> */}
           </ul>
         </div>
         <div className="project-proposal-detail">

@@ -9,6 +9,7 @@ import Modal from "react-modal";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import DetailModal from "./DetailModal";
 
 const customStyles = {
   content: {
@@ -47,6 +48,7 @@ const PendingProjects = () => {
   }
 
   function closeModal() {
+    console.log("nice");
     setIsOpen(false);
   }
 
@@ -136,55 +138,62 @@ const PendingProjects = () => {
       <div class="row">
         {blogs.map((blog, index) => {
           return (
-            <div class="col-12 col-md-6 col-lg-4 d-flex">
-              <div class="card flex-fill">
-                <img
-                  alt="Card"
-                  src={blog?.imgurl || Image3}
-                  class="card-img-top"
-                  style={{
-                    maxWidth: "350px",
-                    maxHeight: "250px",
-                    marginLeft: "25px",
-                  }}
-                />
-                <div class="card-header">
-                  <h5 class="card-title mb-0">{blog.title}</h5>
-                </div>
-                <div class="card-body">
-                  <p class="card-text">{blog.description}</p>
-                  <p class="card-text">
-                    Ngày tạo: {convertDate(blog.createdAt)}
-                  </p>
-                  <div style={{ display: "flex", gap: "8px" }}>
-                    {/* <a class="btn btn-primary" href="#">
+            <>
+              <div class="col-12 col-md-6 col-lg-4 d-flex" onClick={openModal}>
+                <div class="card flex-fill">
+                  <img
+                    alt="Card"
+                    src={blog?.imgurl || Image3}
+                    class="card-img-top"
+                    style={{
+                      maxWidth: "350px",
+                      maxHeight: "250px",
+                      marginLeft: "25px",
+                    }}
+                  />
+                  <div class="card-header">
+                    <h5 class="card-title mb-0">{blog.title}</h5>
+                  </div>
+                  <div class="card-body">
+                    <p class="card-text">{blog.description}</p>
+                    <p class="card-text">
+                      Ngày tạo: {convertDate(blog.createdAt)}
+                    </p>
+                    <div style={{ display: "flex", gap: "8px" }}>
+                      {/* <a class="btn btn-primary" href="#">
                   See more
                 </a> */}
-                    <button
-                      class="btn bg-success"
-                      style={{ color: "#FFF" }}
-                      onClick={() => handleApprove(blog)}
-                    >
-                      Approve
-                    </button>
-                    <button
-                      class="btn bg-danger"
-                      style={{ color: "#FFF" }}
-                      onClick={() => handleReject(blog)}
-                    >
-                      Reject
-                    </button>
+                      <button
+                        class="btn bg-success"
+                        style={{ color: "#FFF" }}
+                        onClick={() => handleApprove(blog)}
+                      >
+                        Approve
+                      </button>
+                      <button
+                        class="btn bg-danger"
+                        style={{ color: "#FFF" }}
+                        onClick={() => handleReject(blog)}
+                      >
+                        Reject
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+              <DetailModal
+                modalIsOpen={modalIsOpen}
+                closeModal={closeModal}
+                data={blog}
+              />
+            </>
           );
         })}
       </div>
       {blogs.length === 0 ? (
         <div>No pending posts</div>
       ) : (
-        <div style={{ paddingBottom: "32px" }}>
+        <div style={{ paddingBottom: "32px", zIndex: -1 }}>
           <ul class="pagination mb-4">
             <li class="page-item disabled">
               <a class="page-link" href="#" tabindex="-1">
@@ -196,7 +205,7 @@ const PendingProjects = () => {
                 1
               </a>
             </li>
-            <li class="page-item active">
+            <li class="page-item ">
               <a class="page-link" href="#">
                 2 <span class="sr-only">(current)</span>
               </a>
@@ -214,77 +223,7 @@ const PendingProjects = () => {
           </ul>
         </div>
       )}
-      {/* <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        style={customStyles}
-        contentLabel="Example Modal"
-      >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            minHeight: "600px",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              borderBottom: "1px solid rgba(0, 0, 0, 0.4)",
-              marginBottom: "24px",
-            }}
-          >
-            <h3 class="section-title">Review project</h3>
-            <img
-              src={Close}
-              alt="icon"
-              onClick={() => closeModal()}
-              style={{
-                cursor: "pointer",
-              }}
-            />
-          </div>
-          <div
-            style={{
-              alignSelf: "flex-start",
-            }}
-          >
-            <h5 class="card-title mb-0">Card with image and button</h5>
 
-            <p class="card-text">
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </p>
-
-            <img
-              alt="Card"
-              src={Image3}
-              style={{
-                maxWidth: "350px",
-                maxHeight: "250px",
-              }}
-            />
-          </div>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            gap: "8px",
-
-            borderTop: "1px solid rgba(0, 0, 0, 0.4)",
-            padding: "6px",
-          }}
-        >
-          <a class="btn bg-success" style={{ color: "#FFF" }} href="#">
-            Approve
-          </a>
-          <a class="btn bg-danger" style={{ color: "#FFF" }} href="#">
-            Reject
-          </a>
-        </div>
-      </Modal> */}
       <ToastContainer />
     </div>
   );

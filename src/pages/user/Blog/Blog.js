@@ -118,7 +118,7 @@ const Blog = () => {
               <div className="filter-sticky">
                 <div className="blog-tags">
                   <BlogTags tags={tags} />
-                  <button
+                  {/* <button
                     onClick={() => getUserById(51)}
                     style={{
                       width: 150,
@@ -126,7 +126,7 @@ const Blog = () => {
                     }}
                   >
                     Click me
-                  </button>
+                  </button> */}
                 </div>
               </div>
             </div>

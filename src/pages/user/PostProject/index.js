@@ -446,7 +446,12 @@ const PostProject = () => {
                               className={`form-control ${
                                 errors.deadline ? "is-invalid" : ""
                               }`}
-                              {...register("deadline")}
+                              {...register("deadline", {
+                                required:
+                                  userType !== "freelancer"
+                                    ? "Deadline are required"
+                                    : false,
+                              })}
                               defaultValue={new Date().toDateString()}
                             />
                             {errors.deadline && (
@@ -506,8 +511,15 @@ const PostProject = () => {
                           className={`form-control ${
                             errors.contactInfo ? "is-invalid" : ""
                           }`}
-                          {...register("contactInfo")}
+                          {...register("contactInfo", {
+                            required: "Phone number is required",
+                          })}
                         />
+                        {errors.contactInfo && (
+                          <div className="invalid-feedback">
+                            {errors.contactInfo.message}
+                          </div>
+                        )}
                       </div>
                     </div>
                     <div className="col-lg-6">
@@ -518,8 +530,15 @@ const PostProject = () => {
                           className={`form-control ${
                             errors.email ? "is-invalid" : ""
                           }`}
-                          {...register("email")}
+                          {...register("email", {
+                            required: "Email is required",
+                          })}
                         />
+                        {errors.email && (
+                          <div className="invalid-feedback">
+                            {errors.email.message}
+                          </div>
+                        )}
                       </div>
                     </div>
 
@@ -540,7 +559,12 @@ const PostProject = () => {
                               errors.price ? "is-invalid" : ""
                             }`}
                             placeholder="15"
-                            {...register("price")}
+                            {...register("price", {
+                              required:
+                                userType !== "freelancer"
+                                  ? "Price are required"
+                                  : false,
+                            })}
                             defaultValue={0}
                           />
                           {errors.price && (
