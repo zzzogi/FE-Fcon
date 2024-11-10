@@ -81,7 +81,7 @@ const DetailModal = ({ modalIsOpen, closeModal, data }) => {
           </h3>
 
           <p class="card-text">
-            Nội dung:{" "}
+            Content:{" "}
             <span
               style={{
                 color: "blue",
@@ -122,7 +122,7 @@ const DetailModal = ({ modalIsOpen, closeModal, data }) => {
             </span>
           </p>
           <p class="card-text">
-            Ngày tạo:{" "}
+            Created Date:{" "}
             <span
               style={{
                 color: "blue",

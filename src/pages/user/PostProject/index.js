@@ -332,8 +332,8 @@ const PostProject = () => {
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
       imgUrl: "",
-      contactInfo: data.contactInfo,
-      email: data.email,
+      // contactInfo: data.contactInfo,
+      // email: data.email,
     };
 
     try {
@@ -500,7 +500,7 @@ const PostProject = () => {
                       </div>
                     </div>
 
-                    <div className="col-lg-12 mt-5">
+                    {/* <div className="col-lg-12 mt-5">
                       <h4 style={{ fontWeight: 900 }}>Contact</h4>
                     </div>
                     <div className="col-lg-6">
@@ -540,7 +540,7 @@ const PostProject = () => {
                           </div>
                         )}
                       </div>
-                    </div>
+                    </div> */}
 
                     <div className="col-lg-12 mt-5">
                       <h4 style={{ fontWeight: 900 }}>
@@ -577,7 +577,9 @@ const PostProject = () => {
                     ) : null}
                     <div className="col-lg-12 col-md-12">
                       <div className="mb-3">
-                        <label className="focus-label">Description</label>
+                        <label className="focus-label">
+                          Description and Contact
+                        </label>
                         <textarea
                           className={`form-control ${
                             errors.description ? "is-invalid" : ""

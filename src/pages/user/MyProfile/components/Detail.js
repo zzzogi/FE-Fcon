@@ -1,18 +1,11 @@
 import React from "react";
-import { convertMinsToHrsMins } from "../../../../utils/commonFunc";
-import MapPin from "../../../../assets/images/icon/map-pin.svg";
-import Star from "../../../../assets/images/icon/star.svg";
-import Calendar from "../../../../assets/images/icon/calendar.svg";
-import Eye from "../../../../assets/images/icon/eye.svg";
-import Pen from "../../../../assets/images/icon/edit-2.svg";
 import Email from "../../../../assets/images/evelop.svg";
-import Phone from "../../../../assets/images/phone.svg";
-import ComputerLine from "../../../../assets/images/icon/computer-line.svg";
-import TimeLine from "../../../../assets/images/icon/time-line.svg";
-import UserHeartLine from "../../../../assets/images/icon/user-heart-line.svg";
-import TranslateTwo from "../../../../assets/images/icon/translate-2.svg";
-import TranslateOne from "../../../../assets/images/icon/translate.svg";
 import PlaceholderImage from "../../../../assets/images/Fcon.jpg";
+import Calendar from "../../../../assets/images/icon/calendar.svg";
+import ComputerLine from "../../../../assets/images/icon/computer-line.svg";
+import Pen from "../../../../assets/images/icon/edit-2.svg";
+import MapPin from "../../../../assets/images/icon/map-pin.svg";
+import Phone from "../../../../assets/images/phone.svg";
 import "../layout.css";
 
 const Detail = ({ data }) => {
@@ -51,14 +44,14 @@ const Detail = ({ data }) => {
               <img src={Pen} alt="icons" className="icon" />
               {info.status || "Status not available"}
             </li>
-            <li>
+            {/* <li>
               <img src={Phone} alt="icons" className="icon" />
               {info.contactInfo || "No phone number"}
             </li>
             <li>
               <img src={Email} alt="icons" className="icon" />
               {info.email || "No email"}
-            </li>
+            </li> */}
             {/* <li>
               <img src={Eye} alt="icons" className="icon" />
               {reviews.length + " reviews"}

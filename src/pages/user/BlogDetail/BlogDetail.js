@@ -155,14 +155,14 @@ const BlogDetail = () => {
                 <div className="tips item-flex">
                   Budget: {blogs?.budgetOrSalary || "0"} VND
                 </div>
-                <div className="tips item-flex">
+                {/* <div className="tips item-flex">
                   <img src={Phone} alt="icons" className="icon" />
                   {blogs.contactInfo || "No phone number"}
                 </div>
                 <div className="tips item-flex">
                   <img src={Email} alt="icons" className="icon" />
                   {blogs.email || "No email"}
-                </div>
+                </div> */}
               </div>
               <div className="blog-description">
                 <p>{blogs.description}</p>
