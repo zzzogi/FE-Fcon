@@ -74,7 +74,7 @@ const PendingProjects = () => {
       }
     };
     fetchBlogs();
-  }, []);
+  }, [blogs.length]);
 
   const handleApprove = async (postInfo) => {
     try {
