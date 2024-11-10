@@ -16,39 +16,40 @@ import {
 // Sample data for the area chart
 const data = [
   {
-    name: "27/10/2024",
-    "Membership Plan 2": 3,
-  },
-  {
     name: "29/10/2024",
-    "Membership Plan 2": 2,
+    "Membership Plan 2": 3,
   },
   {
     name: "31/10/2024",
+    "Membership Plan 2": 2,
+  },
+  {
+    name: "02/10/2024",
     "Membership Plan 2": 3,
   },
   {
-    name: "02/11/2024",
+    name: "04/11/2024",
     "Membership Plan 2": 3,
   },
   {
-    name: "4/11/2024",
+    name: "06/11/2024",
     "Membership Plan 2": 4,
   },
   {
-    name: "6/11/2024",
+    name: "08/11/2024",
     "Membership Plan 2": 3,
   },
   {
-    name: "08/11/2024",
-    "Membership Plan 2": 2,
+    name: "10/11/2024",
+    "Membership Plan 2": 1,
+    "Membership Plan 3": 1,
   },
 ];
 
 // Sample data for the table
 const getRandomDate = () => {
-  const start = new Date("2024-10-27");
-  const end = new Date("2024-11-08");
+  const start = new Date("2024-10-29");
+  const end = new Date("2024-11-10");
   const randomTime =
     start.getTime() + Math.random() * (end.getTime() - start.getTime());
   const randomDate = new Date(randomTime);
@@ -61,12 +62,21 @@ const getRandomDate = () => {
   return `${day}/${month}/${year}`;
 };
 
+const getTodayDate = () => {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, "0"); // Months are zero-indexed
+  const day = String(today.getDate()).padStart(2, "0");
+
+  return `${day}/${month}/${year}`;
+};
+
 const tableData = [
   {
     username: "thanhhoang93",
-    deposit: "+25,000",
-    date: getRandomDate(),
-    plan: "2",
+    deposit: "+50,000",
+    date: getTodayDate(),
+    plan: "3",
   }, // plan=2
   {
     username: "baongoc_87",
@@ -110,12 +120,12 @@ const tableData = [
     date: getRandomDate(),
     plan: "2",
   }, // plan=2
-  { 
-    username: "lebao92", 
-    deposit: "+25,000", 
-    date: getRandomDate(), 
-    plan: "2" 
-  }, 
+  {
+    username: "lebao92",
+    deposit: "+25,000",
+    date: getRandomDate(),
+    plan: "2",
+  },
   {
     username: "minhthu2304",
     deposit: "+25,000",
@@ -239,14 +249,14 @@ const RevenueReport = () => {
                 <Area
                   type="monotone"
                   dataKey="Membership Plan 2"
-                  stackId="1"
+                  stackId="2"
                   stroke="#82ca9d"
                   fill="#82ca9d"
                 />
                 <Area
                   type="monotone"
                   dataKey="Membership Plan 3"
-                  stackId="1"
+                  stackId="3"
                   stroke="#ffc658"
                   fill="#ffc658"
                 />
@@ -268,7 +278,7 @@ const RevenueReport = () => {
                     style={{ display: "flex", justifyContent: "space-between" }}
                   >
                     <h5>Total</h5>
-                    <h5 style={{ fontWeight: 700 }}>500,000</h5>
+                    <h5 style={{ fontWeight: 700 }}>525,000 VND</h5>
                   </li>
                 </ul>
               </div>
